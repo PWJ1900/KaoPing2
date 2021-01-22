@@ -10,12 +10,12 @@ import mingzhupingce from '@/pages/Home/Aside/mingzhupingce'
 import mingzhutuijian from '@/pages/Home/Aside/mingzhutuijian'
 import xitongguanli from '@/pages/Home/Aside/xitongguanli'
 //以下为基础信息显示的路由，在main中显示
-import danweixingxi from '@/pages/Home/Main/jichuxinxi/danweixingxi'
-import bumengxingxi from '@/pages/Home/Main/jichuxinxi/bumengxingxi'
+import danweixinxi from '@/pages/Home/Main/jichuxinxi/danweixinxi'
+import bumengxinxi from '@/pages/Home/Main/jichuxinxi/bumengxinxi'
 import shengfengleixing from '@/pages/Home/Main/jichuxinxi/shengfengleixing'
-import zhijixingxi from '@/pages/Home/Main/jichuxinxi/zhijixingxi'
-import ganbuxingxi from '@/pages/Home/Main/jichuxinxi/ganbuxingxi'
-import banzixingxi from '@/pages/Home/Main/jichuxinxi/banzixingxi'
+import zhijixinxi from '@/pages/Home/Main/jichuxinxi/zhijixinxi'
+import ganbuxinxi from '@/pages/Home/Main/jichuxinxi/ganbuxinxi'
+import banzixinxi from '@/pages/Home/Main/jichuxinxi/banzixinxi'
 import yijizhibiao from '@/pages/Home/Main/jichuxinxi/yijizhibiao'
 import erjizhibiao from '@/pages/Home/Main/jichuxinxi/erjizhibiao'
 import canpingqunti from '@/pages/Home/Main/jichuxinxi/canpingqunti'
@@ -89,24 +89,24 @@ Vue.use(Router)
         name:'jichuxinxi',
         component:jichuxinxi,
         children:[
-          {path:'/danweixingxi',
-          name:'danweixingxi',
-          component:danweixingxi},
-          {path:'/bumengxingxi',
-          name:'bumengxingxi',
-          component:bumengxingxi},
+          {path:'/danweixinxi',
+          name:'danweixinxi',
+          component:danweixinxi},
+          {path:'/bumengxinxi',
+          name:'bumengxinxi',
+          component:bumengxinxi},
           {path:'/shengfengleixing',
           name:'shengfengleixing',
           component:shengfengleixing},
-          {path:'/zhijixingxi',
-          name:'zhijixingxi',
-          component:zhijixingxi},
-          {path:'/ganbuxingxi',
-          name:'ganbuxingxi',
-          component:ganbuxingxi},
-          {path:'/banzixingxi',
-          name:'banzixingxi',
-          component:banzixingxi},
+          {path:'/zhijixinxi',
+          name:'zhijixinxi',
+          component:zhijixinxi},
+          {path:'/ganbuxinxi',
+          name:'ganbuxinxi',
+          component:ganbuxinxi},
+          {path:'/banzixinxi',
+          name:'banzixinxi',
+          component:banzixinxi},
           {path:'/yijizhibiao',
           name:'yijizhibiao',
           component:yijizhibiao},
@@ -246,19 +246,19 @@ Vue.use(Router)
     }
   ]
 })
-// router.beforeEach((to, from,next)=>{
-//   if(to.name=='Login'){
-//   next()}
-//   else if(to.name=='home'){
-//     if(from.name=='Login'){
-//       next()
-//     }else{
-//       next({name:'Login'})
-//     }
-//   }else{
-//     next()
-//   }
+router.beforeEach((to, from,next)=>{
+  let vtf = sessionStorage.getItem('vtf')
+  if(to.name == "Login"){
+    next()
+  }
+  else if(vtf == '1'){
+    next()
+  }
+  else{
+    next({name:"Login"})
+  }
+
   
   
-// });
+});
 export default router

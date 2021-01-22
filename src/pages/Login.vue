@@ -111,6 +111,7 @@ export default {
         if (this.loginForm.password === "123123")
           if (this.yzm.toLowerCase() === this.imgCode.toLowerCase()) {
             this.$router.push({ name: "home" });
+            sessionStorage.setItem("vtf", "1")
           } else {
             alert("验证码输入错误！");
             this.imgCode = this.$refs.vueImgVerify.draw();
