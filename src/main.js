@@ -6,12 +6,16 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from '@/store/store.js'
+import axios from 'axios'
+import qs from 'qs'
 
-import Resource from 'vue-resource'
-Vue.use(Resource)
+
+
+Vue.prototype.$axios = axios    //全局注册，使用方法为:this.$axios
+axios.defaults.baseURL = 'https://449ff5f7-3bf6-4d59-a0ae-cfa8267584f2.mock.pstmn.io/';
+Vue.prototype.qs = qs      //全局注册，使用方法为:this.qs
 Vue.use(ElementUI)
 Vue.config.productionTip = false
-Vue.http.options.emulateJSON = true
 
 /* eslint-disable no-new */
 new Vue({

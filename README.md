@@ -3,17 +3,20 @@
 > A Vue.js project
 
 # 开发其布置
-  1、页面放在pages下<br>
-	2、有公共数据或方法可放在store文件夹下配合vuex使用<br>
-	3、使用较多的js代码放在utils文件夹里复用<br>
-	4、有公用的组件自定义显示的放在components下<br>
-	5、静态文件可以放在assets下<br>
-	6、页面及其效果文件放在css里
 
-	总之先自己吧对应页面功能做一下
+Vue：2.9.6
+1、页面放在 pages 下<br>
+2、有公共数据或方法可放在 store 文件夹下配合 vuex 使用<br>
+3、使用较多的 js 代码放在 utils 文件夹里复用<br>
+4、有公用的组件自定义显示的放在 components 下<br>
+5、静态文件可以放在 assets 下<br>
+6、页面及其效果文件放在 css 里
+
+    总之先自己吧对应页面功能做一下
+
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
