@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-aside width="200px">
+      <el-aside style="width:auto">
         <!-- Aside -->
         <el-scrollbar style="width:100%">
           <el-menu background-color="#545c64"
