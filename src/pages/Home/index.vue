@@ -69,7 +69,7 @@ body,
 #iconUse {
   position: absolute;
   top: 30%;
-  left: 90%;
+  left: 80%;
 }
 i {
   width: 30px;

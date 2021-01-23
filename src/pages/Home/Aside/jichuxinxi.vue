@@ -17,6 +17,7 @@
             <el-menu-item v-for="(item,index) in this.use"
                           :key="index"
                           :index="item">
+              <!-- 这里的:index定义的是跳转的路由 -->
               <i class="el-icon-circle-plus"
                  @click="change"></i>
               <span slot="title">{{index}}</span>
