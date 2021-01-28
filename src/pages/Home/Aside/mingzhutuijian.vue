@@ -20,7 +20,6 @@
                  @click="change"></i>
               <span slot="title">{{index}}</span>
             </el-menu-item>
-
             <el-menu-item>
             </el-menu-item>
             <el-menu-item>

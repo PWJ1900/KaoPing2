@@ -13,6 +13,7 @@ import qs from 'qs'
 
 Vue.prototype.$axios = axios    //全局注册，使用方法为:this.$axios
 axios.defaults.baseURL = 'https://449ff5f7-3bf6-4d59-a0ae-cfa8267584f2.mock.pstmn.io/';
+// axios.defaults.baseURL = 'http://127.0.0.1:8000/'
 Vue.prototype.qs = qs      //全局注册，使用方法为:this.qs
 Vue.use(ElementUI)
 Vue.config.productionTip = false

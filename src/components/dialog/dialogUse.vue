@@ -1,12 +1,10 @@
 
 <template>
   <el-row>
-
-    <el-button @click="addUse">新增</el-button>
     <el-dialog title="提示"
                :modal='false'
                width="70%"
-               v-if="showDialog"
+               v-if="form!=undefined"
                :close-on-click-modal='false'
                :visible.sync="dialogVisible"
                :before-close="handleClose">
@@ -14,7 +12,7 @@
 
       <el-form ref="form"
                :model="form"
-               label-width="80px">
+               label-width="100px">
         <el-form-item v-for="item in headerUse"
                       :label="item.label"
                       :key="item.key">
@@ -25,9 +23,9 @@
       </el-form>
       <span slot="footer"
             class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button @click="cancel">取 消</el-button>
         <el-button type="primary"
-                   @click="dialogVisible = false">确 定</el-button>
+                   @click="confirmit">确 定</el-button>
       </span>
     </el-dialog>
   </el-row>
@@ -38,24 +36,33 @@
 export default {
   props: {
     headerUse: Array,
-    form: Object
+    form: Object,
+    showDialog: Boolean,
+
 
   },
   data () {
     return {
-      dialogVisible: false,
-      showDialog: false
+      dialogVisible: true
     };
   },
   methods: {
-    addUse () {
-      this.dialogVisible = true
-      this.showDialog = true
+    cancel () {
+      this.dialogVisible = false
+      this.$emit("func", this.dialogVisible)
+
+
+    },
+    confirmit () {
+      this.dialogVisible = false
+      this.$emit("func", this.dialogVisible)
 
     },
     handleClose (done) {
       this.$confirm('确认关闭？')
         .then(_ => {
+          this.dialogVisible = false
+          this.$emit("func", this.dialogVisible)
           done();
         })
         .catch(_ => { });
