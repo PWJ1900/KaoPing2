@@ -78,6 +78,8 @@ i {
   height: 7vh;
   background: url('../../assets/loginbg1.jpg');
 }
+
+/*  此处设置页面最初头部的image */
 </style>
 <script>
 export default {

@@ -100,17 +100,24 @@ export default {
 
     },
     searchinfoUse (datasearch) {
+      let keyUse = []
+      //把tableData的一组key取出来，从而做
+      for (let i in this.tableData[0]) {
+        keyUse.push(i)
+
+      }
+      this.tableDataUse = this.tableData
       if (datasearch != '') {
         this.tableDataUse = this.tableDataUse.filter(//便编写的查询过滤器考虑把次放出去因为每个的页面需要的过滤属性不一样
           (data) =>
             !datasearch ||
-            (data.a + "")
+            (data[keyUse[0]] + "")
               .toLowerCase()
               .includes(datasearch.toLowerCase()) ||
-            (data.b + "")
+            (data[keyUse[1]] + "")
               .toLowerCase()
               .includes(datasearch.toLowerCase()) ||
-            data.c
+            (data[keyUse[2]] + "")
               .toLowerCase()
               .includes(datasearch.toLowerCase())
         );
