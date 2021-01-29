@@ -56,6 +56,7 @@ export default {
     confirmit () {
       this.dialogVisible = false
       this.$emit("func", this.dialogVisible)
+      //这里面写后端的edit，delete，create接口
 
     },
     handleClose (done) {

@@ -2,7 +2,7 @@
   <el-row>
     <el-button @click="addUse">新增</el-button>
     <el-button>全部</el-button>
-    <el-button>批量删除</el-button>
+    <el-button @click="groupDelete">批量删除</el-button>
     <el-button>单位信息</el-button>
     请输入查询条件：<el-input style="width:15%"
               v-model="searchinfo"></el-input>
@@ -14,11 +14,9 @@
                @func="getifshow" />
     <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
               border
+              @selection-change="selectionLineChangeHandle"
               stripe>
       <el-table-column type="selection">
-        <!-- <template slot-scope="scope">
-          <el-checkbox @click="checkUse(scope.row)"></el-checkbox>
-        </template> -->
       </el-table-column>
       <el-table-column v-for="info in headerUse"
                        :key="info.key"
@@ -32,10 +30,6 @@
         <template slot-scope="scope">
           <el-button @click="editUse(scope.row)">编辑</el-button>
           <el-button @click="deleteUse(scope.row)">删除</el-button>
-          <!-- <el-switch v-model="scope.row.ifUse"
-                     :active-color="ACT_COLOR"
-                     :inactive-color="INACT_COLOR">
-          </el-switch> -->
         </template>
       </el-table-column>
     </el-table>
@@ -61,7 +55,6 @@ export default {
   watch: {
     tableData (newVal, oldVal) {
       this.tableDataUse = newVal;  //newVal即是chartData
-
     }
   },
   methods: {
@@ -69,6 +62,13 @@ export default {
 
 
     // },
+    groupDelete () {
+
+    },
+    selectionLineChangeHandle (val) {
+      console.log(val)//把此值交给后groupDelete处理然后交给后端分配处理，交给后端接口
+
+    },
     handleSizeChange (val) {
       // console.log(`每页 ${val} 条`);
       this.pagesize = val
@@ -87,12 +87,12 @@ export default {
     editUse (value) {
       this.showDialog = true
       this.form = value
-      alert(value.a)
+      alert(value.a)//把此次修改的值交给后端处理，写后端删除接口，可以设置一个值传入到dialog里面来判断是删除还是修改
 
     },
     deleteUse (value) {
       this.showDialog = true
-      this.form = value
+      this.form = value//把此次修改的值交给后端处理
 
     },
     getifshow (data) {
@@ -101,7 +101,7 @@ export default {
     },
     searchinfoUse (datasearch) {
       if (datasearch != '') {
-        this.tableDataUse = this.tableDataUse.filter(//便编写的查询过滤器
+        this.tableDataUse = this.tableDataUse.filter(//便编写的查询过滤器考虑把次放出去因为每个的页面需要的过滤属性不一样
           (data) =>
             !datasearch ||
             (data.a + "")

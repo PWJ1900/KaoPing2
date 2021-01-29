@@ -22,14 +22,6 @@
                  @click="change"></i>
               <span slot="title">{{index}}</span>
             </el-menu-item>
-            <el-menu-item>
-            </el-menu-item>
-            <el-menu-item>
-            </el-menu-item>
-            <el-menu-item>
-            </el-menu-item>
-            <el-menu-item>
-            </el-menu-item>
 
           </el-menu>
         </el-scrollbar>
@@ -86,3 +78,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.el-menu {
+  height: 93vh;
+}
+</style>

@@ -2,7 +2,7 @@
   <el-row>
     <el-container>
 
-      <el-header>
+      <el-header style="height:7vh">
         <h3>管理系统</h3>
         <div id="headerUse">
 
@@ -42,6 +42,7 @@ h3 {
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
+  height: 100px;
 }
 .el-menu {
   background-color: transparent;

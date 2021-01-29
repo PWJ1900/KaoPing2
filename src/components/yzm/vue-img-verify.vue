@@ -1,12 +1,15 @@
 <template>
   <div class="img-verify">
-    <canvas ref="verify" :width="width" :height="height" @click="handleDraw"></canvas>
+    <canvas ref="verify"
+            :width="width"
+            :height="height"
+            @click="handleDraw"></canvas>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
-  data() {
+  data () {
     return {
       pool: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', // 字符串
       width: 120,
@@ -14,28 +17,28 @@ export default {
       imgCode: ''
     }
   },
-  mounted() {
+  mounted () {
     // 绘制图片验证码
     this.draw()
   },
   methods: {
     // 点击图片重新绘制
-    handleDraw() {
+    handleDraw () {
       this.$emit('getImgCode', this.draw())
     },
     // 1.随机数
-    randomNum(min, max) {
+    randomNum (min, max) {
       return parseInt(Math.random() * (max - min) + min)
     },
     // 2.随机颜色
-    randomColor(min, max) {
+    randomColor (min, max) {
       const r = this.randomNum(min, max)
       const g = this.randomNum(min, max)
       const b = this.randomNum(min, max)
       return `rgb(${r},${g},${b})`
     },
     // 绘制图片
-    draw() {
+    draw () {
       // 3.填充背景颜色，背景颜色要浅一点
       const ctx = this.$refs.verify.getContext('2d')
       // 填充颜色

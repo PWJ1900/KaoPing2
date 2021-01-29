@@ -21,14 +21,6 @@
               <span slot="title">{{index}}</span>
             </el-menu-item>
 
-            <!-- 此处暂时如此布局以观测，后面还得拉升满 -->
-            <el-menu-item> </el-menu-item>
-            <el-menu-item> </el-menu-item>
-            <el-menu-item> </el-menu-item>
-            <el-menu-item> </el-menu-item>
-            <el-menu-item> </el-menu-item>
-            <el-menu-item> </el-menu-item>
-            <el-menu-item> </el-menu-item>
           </el-menu>
         </el-scrollbar>
       </el-aside>
@@ -74,3 +66,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.el-menu {
+  height: 93vh;
+}
+</style>
