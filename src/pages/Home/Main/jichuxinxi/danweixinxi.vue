@@ -1,11 +1,18 @@
 <template>
 
   <div>
-    <el-row>
-      <useTable :headerUse="this.headerUse"
-                :tableData="this.tableData" />
+    <el-container>
+      <el-header>
+        单位信息
+      </el-header>
+      <el-main>
+        <el-row>
+          <useTable :headerUse="this.headerUse"
+                    :tableData="this.tableData" />
 
-    </el-row>
+        </el-row>
+      </el-main>
+    </el-container>
   </div>
 </template>
 <script>
@@ -54,3 +61,11 @@ export default {
 
 }
 </script>
+<style scoped>
+@import '../../../../css/headermain2.css';
+</style>
+<style>
+.el-main {
+  padding: 0;
+}
+</style>

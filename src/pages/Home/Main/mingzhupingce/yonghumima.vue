@@ -1,9 +1,14 @@
 <template>
 
   <div>
-    <el-row>
-      <el-button>用户密码</el-button>
-    </el-row>
+    <el-container>
+      <el-header>
+        用户密码
+      </el-header>
+      <el-main>
+        这是main
+      </el-main>
+    </el-container>
 
   </div>
 </template>
@@ -12,3 +17,11 @@ export default {
 
 }
 </script>
+<style scoped>
+@import '../../../../css/headermain2.css';
+</style>
+<style>
+.el-main {
+  padding: 0;
+}
+</style>

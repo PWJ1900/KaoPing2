@@ -12,3 +12,11 @@ export default {
 
 }
 </script>
+<style scoped>
+@import '../../../../css/headermain2.css';
+</style>
+<style>
+.el-main {
+  padding: 0;
+}
+</style>

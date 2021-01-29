@@ -2,7 +2,7 @@
   <el-row>
     <el-container>
 
-      <el-header style="height:7vh">
+      <el-header id="useHeader">
         <h3>管理系统</h3>
         <div id="headerUse">
 
@@ -50,9 +50,6 @@ h3 {
 #headerUse {
   margin-left: 30%;
 }
-.el-header {
-  background: url('../../assets/loginbg1.jpg');
-}
 html,
 body,
 #app,
@@ -74,6 +71,12 @@ body,
 }
 i {
   width: 30px;
+}
+</style>
+<style scoped>
+#useHeader {
+  height: 7vh;
+  background: url('../../assets/loginbg1.jpg');
 }
 </style>
 <script>

@@ -71,7 +71,5 @@ export default {
 }
 </script>
 <style scoped>
-.el-menu {
-  height: 93vh;
-}
+@import '../../../css/headerasidemain1.css';
 </style>

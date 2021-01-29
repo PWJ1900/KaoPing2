@@ -1,250 +1,255 @@
 <template>
 
   <div>
-    <el-row>
-      <el-button>干部信息</el-button>
-      <el-button type="text"
-                 @click="dialogVisible = true">新增</el-button>
-      <el-dialog title="提示"
-                 :visible.sync="dialogVisible"
-                 width="80%"
-                 :before-close="handleClose">
-        <span>这是一段信息</span>
-        <table cellspacing="0">
-          <tbody>
-            <tr>
-              <td>姓名：</td>
-              <td>
-                <el-input id="useheight"></el-input>
-              </td>
-              <td>代码：</td>
-              <td>
-                <el-input id="useheight2"></el-input>
-              </td>
+    <el-container>
+      <el-header>
+        干部信息
+      </el-header>
+      <el-main>
+        <el-row>
+          <el-button type="text"
+                     @click="dialogVisible = true">新增</el-button>
+          <el-dialog title="提示"
+                     :visible.sync="dialogVisible"
+                     width="80%"
+                     :before-close="handleClose">
+            <span>这是一段信息</span>
+            <table cellspacing="0">
+              <tbody>
+                <tr>
+                  <td>姓名：</td>
+                  <td>
+                    <el-input id="useheight"></el-input>
+                  </td>
+                  <td>代码：</td>
+                  <td>
+                    <el-input id="useheight2"></el-input>
+                  </td>
 
-            </tr>
-            <tr>
-              <td> 单位：</td>
-              <td>
-                <el-select v-model="value1"
-                           placeholder="请选择单位"
-                           id="el-selectUse">
-                  <el-option v-for="item in options"
-                             :key="item.value"
-                             :label="item.label"
-                             :value="item.value">
-                  </el-option>
-                </el-select>
-              </td>
-              <td>部门：</td>
-              <td>
-                <el-select v-model="value2"
-                           placeholder="请选择部门"
-                           id="el-selectUse">
-                  <el-option v-for="item in options5"
-                             :key="item.value"
-                             :label="item.label"
-                             :value="item.value">
-                  </el-option>
-                </el-select>
-              </td>
+                </tr>
+                <tr>
+                  <td> 单位：</td>
+                  <td>
+                    <el-select v-model="value1"
+                               placeholder="请选择单位"
+                               id="el-selectUse">
+                      <el-option v-for="item in options"
+                                 :key="item.value"
+                                 :label="item.label"
+                                 :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </td>
+                  <td>部门：</td>
+                  <td>
+                    <el-select v-model="value2"
+                               placeholder="请选择部门"
+                               id="el-selectUse">
+                      <el-option v-for="item in options5"
+                                 :key="item.value"
+                                 :label="item.label"
+                                 :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </td>
 
-            </tr>
-            <tr>
-              <td>性别：</td>
-              <td>
-                <el-select v-model="value3"
-                           placeholder="请选择"
-                           id="el-selectUse">
-                  <el-option v-for="item in options2"
-                             :key="item.value"
-                             :label="item.label"
-                             :value="item.value">
-                  </el-option>
-                </el-select>
-              </td>
-              <td>现任职务：</td>
-              <td>
-                <el-input id="useheight3"></el-input>
-              </td>
+                </tr>
+                <tr>
+                  <td>性别：</td>
+                  <td>
+                    <el-select v-model="value3"
+                               placeholder="请选择"
+                               id="el-selectUse">
+                      <el-option v-for="item in options2"
+                                 :key="item.value"
+                                 :label="item.label"
+                                 :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </td>
+                  <td>现任职务：</td>
+                  <td>
+                    <el-input id="useheight3"></el-input>
+                  </td>
 
-            </tr>
-            <tr>
-              <td>出生年月：</td>
-              <td>
-                <div class="block">
-                  <span class="demonstration"></span>
-                  <el-date-picker v-model="csny"
-                                  type="month"
-                                  placeholder="选择年月">
-                  </el-date-picker>
-                </div>
-              </td>
-              <td>原任职务：</td>
-              <td>
-                <el-input id="useheight4"></el-input>
-              </td>
+                </tr>
+                <tr>
+                  <td>出生年月：</td>
+                  <td>
+                    <div class="block">
+                      <span class="demonstration"></span>
+                      <el-date-picker v-model="csny"
+                                      type="month"
+                                      placeholder="选择年月">
+                      </el-date-picker>
+                    </div>
+                  </td>
+                  <td>原任职务：</td>
+                  <td>
+                    <el-input id="useheight4"></el-input>
+                  </td>
 
-            </tr>
-            <tr>
-              <td>任职时间：</td>
-              <td>
-                <div class="block">
-                  <span class="demonstration"></span>
-                  <el-date-picker v-model="rzsj"
-                                  type="date"
-                                  placeholder="选择日期">
-                  </el-date-picker>
-                </div>
-              </td>
-              <td>职级：</td>
-              <td>
-                <!-- 这里的value后续要改为绑定传入数据库的键值对 -->
-                <el-select v-model="value5"
-                           placeholder="请选择"
-                           id="el-selectUse">
-                  <el-option v-for="item1 in options3"
-                             :key="item1.value"
-                             :label="item1.label"
-                             :value="item1.value">
-                  </el-option>
-                </el-select>
-              </td>
+                </tr>
+                <tr>
+                  <td>任职时间：</td>
+                  <td>
+                    <div class="block">
+                      <span class="demonstration"></span>
+                      <el-date-picker v-model="rzsj"
+                                      type="date"
+                                      placeholder="选择日期">
+                      </el-date-picker>
+                    </div>
+                  </td>
+                  <td>职级：</td>
+                  <td>
+                    <!-- 这里的value后续要改为绑定传入数据库的键值对 -->
+                    <el-select v-model="value5"
+                               placeholder="请选择"
+                               id="el-selectUse">
+                      <el-option v-for="item1 in options3"
+                                 :key="item1.value"
+                                 :label="item1.label"
+                                 :value="item1.value">
+                      </el-option>
+                    </el-select>
+                  </td>
 
-            </tr>
-            <tr>
-              <td>职级时间：</td>
-              <td>
-                <div class="block">
-                  <span class="demonstration"></span>
-                  <el-date-picker v-model="zjsj"
-                                  type="date"
-                                  placeholder="选择日期">
-                  </el-date-picker>
-                </div>
-              </td>
-              <td>12</td>
-              <td>12</td>
+                </tr>
+                <tr>
+                  <td>职级时间：</td>
+                  <td>
+                    <div class="block">
+                      <span class="demonstration"></span>
+                      <el-date-picker v-model="zjsj"
+                                      type="date"
+                                      placeholder="选择日期">
+                      </el-date-picker>
+                    </div>
+                  </td>
+                  <td>12</td>
+                  <td>12</td>
 
-            </tr>
-            <tr>
-              <td>身份：</td>
-              <td>
-                <el-select v-model="value4"
-                           placeholder="请选择身份"
-                           id="el-selectUse">
-                  <el-option v-for="item in options4"
-                             :key="item.value"
-                             :label="item.label"
-                             :value="item.value">
-                  </el-option>
-                </el-select>
-              </td>
-              <td rowspan="2">照片：</td>
-              <td rowspan="2">
-                <el-upload action="#"
-                           :multiple="false"
-                           :limit="1"
-                           :on-exceed="handleExceed"
-                           accept="image/jpg, image/png,image/jpeg"
-                           ref="uploadImage"
-                           list-type="picture-card"
-                           :http-request="httpRequest"
-                           :auto-upload="false">
-                  <i slot="default"
-                     class="el-icon-plus"></i>
-                  <div slot="file"
-                       slot-scope="{file}">
-                    <img class="el-upload-list__item-thumbnail"
-                         :src="file.url"
-                         alt="">
-                    <span class="el-upload-list__item-actions">
-                      <span class="el-upload-list__item-preview"
-                            @click="handlePictureCardPreview(file)">
-                        <i class="el-icon-zoom-in"></i>
-                      </span>
-                      <span v-if="!disabled"
-                            class="el-upload-list__item-delete"
-                            @click="handleDownload(file)">
-                        <i class="el-icon-download"></i>
-                      </span>
-                      <span v-if="!disabled"
-                            class="el-upload-list__item-delete"
-                            @click="handleRemove(file)">
-                        <i class="el-icon-delete"></i>
-                      </span>
-                    </span>
-                  </div>
-                </el-upload>
-                <!-- 显示照片的dialog -->
-                <el-dialog :visible.sync="dialogVisible2"
-                           append-to-body>
-                  <img width="100%"
-                       :src="dialogImageUrl"
-                       alt="">
-                </el-dialog>
-              </td>
+                </tr>
+                <tr>
+                  <td>身份：</td>
+                  <td>
+                    <el-select v-model="value4"
+                               placeholder="请选择身份"
+                               id="el-selectUse">
+                      <el-option v-for="item in options4"
+                                 :key="item.value"
+                                 :label="item.label"
+                                 :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </td>
+                  <td rowspan="2">照片：</td>
+                  <td rowspan="2">
+                    <el-upload action="#"
+                               :multiple="false"
+                               :limit="1"
+                               :on-exceed="handleExceed"
+                               accept="image/jpg, image/png,image/jpeg"
+                               ref="uploadImage"
+                               list-type="picture-card"
+                               :http-request="httpRequest"
+                               :auto-upload="false">
+                      <i slot="default"
+                         class="el-icon-plus"></i>
+                      <div slot="file"
+                           slot-scope="{file}">
+                        <img class="el-upload-list__item-thumbnail"
+                             :src="file.url"
+                             alt="">
+                        <span class="el-upload-list__item-actions">
+                          <span class="el-upload-list__item-preview"
+                                @click="handlePictureCardPreview(file)">
+                            <i class="el-icon-zoom-in"></i>
+                          </span>
+                          <span v-if="!disabled"
+                                class="el-upload-list__item-delete"
+                                @click="handleDownload(file)">
+                            <i class="el-icon-download"></i>
+                          </span>
+                          <span v-if="!disabled"
+                                class="el-upload-list__item-delete"
+                                @click="handleRemove(file)">
+                            <i class="el-icon-delete"></i>
+                          </span>
+                        </span>
+                      </div>
+                    </el-upload>
+                    <!-- 显示照片的dialog -->
+                    <el-dialog :visible.sync="dialogVisible2"
+                               append-to-body>
+                      <img width="100%"
+                           :src="dialogImageUrl"
+                           alt="">
+                    </el-dialog>
+                  </td>
 
-            </tr>
-            <tr>
-              <td>备注：<br>（自设条件）</td>
-              <td>
-                <el-input type="textarea"
-                          :rows="4"></el-input>
-              </td>
-            <tr>
-              <td>简介名称：</td>
-              <td colspan="3">
-                <el-input id="useheight5"></el-input>
-              </td>
+                </tr>
+                <tr>
+                  <td>备注：<br>（自设条件）</td>
+                  <td>
+                    <el-input type="textarea"
+                              :rows="4"></el-input>
+                  </td>
+                <tr>
+                  <td>简介名称：</td>
+                  <td colspan="3">
+                    <el-input id="useheight5"></el-input>
+                  </td>
 
-            </tr>
-            <tr>
-              <td>个人附件：<br>(PDF、DOC、DOCX）：</td>
-              <td colspan="3">
+                </tr>
+                <tr>
+                  <td>个人附件：<br>(PDF、DOC、DOCX）：</td>
+                  <td colspan="3">
 
-                <el-upload ref="uploadFJ"
-                           action=""
-                           :auto-upload="false"
-                           :limit="1"
-                           :on-exceed="exceedUseFJ"
-                           :multiple="false"
-                           accept=".pdf,.doc,.docx"
-                           :http-request="httpRequestFJ">
-                  <el-button slot="trigger"
-                             size="mini"
-                             type="success">选取文件</el-button>
-                </el-upload>
-              </td>
+                    <el-upload ref="uploadFJ"
+                               action=""
+                               :auto-upload="false"
+                               :limit="1"
+                               :on-exceed="exceedUseFJ"
+                               :multiple="false"
+                               accept=".pdf,.doc,.docx"
+                               :http-request="httpRequestFJ">
+                      <el-button slot="trigger"
+                                 size="mini"
+                                 type="success">选取文件</el-button>
+                    </el-upload>
+                  </td>
 
-            </tr>
-            <tr>
-              <td>简介内容：</td>
-              <td colspan="3">
-                <fwbUse />
-              </td>
+                </tr>
+                <tr>
+                  <td>简介内容：</td>
+                  <td colspan="3">
+                    <fwbUse />
+                  </td>
 
-            </tr>
-            <tr>
-              <td colspan="4">
-                <el-button type="success"
-                           @click="uploadUse">修改</el-button>
-                <el-button type="success">返回</el-button>
-              </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <el-button type="success"
+                               @click="uploadUse">修改</el-button>
+                    <el-button type="success">返回</el-button>
+                  </td>
 
-            </tr>
-          </tbody>
-        </table>
+                </tr>
+              </tbody>
+            </table>
 
-        <span slot="footer"
-              class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary"
-                     @click="dialogVisible = false">确 定</el-button>
-        </span>
-      </el-dialog>
-    </el-row>
-
+            <span slot="footer"
+                  class="dialog-footer">
+              <el-button @click="dialogVisible = false">取 消</el-button>
+              <el-button type="primary"
+                         @click="dialogVisible = false">确 定</el-button>
+            </span>
+          </el-dialog>
+        </el-row>
+      </el-main>
+    </el-container>
   </div>
 </template>
 <script>
@@ -544,5 +549,13 @@ table td {
 #el-selectUse {
   width: 180px;
   height: 35px;
+}
+</style>
+<style scoped>
+@import '../../../../css/headermain2.css';
+</style>
+<style>
+.el-main {
+  padding: 0;
 }
 </style>
