@@ -37,7 +37,7 @@ export default {
   props: {
     headerUse: Array,
     form: Object,
-    showDialog: Boolean,
+    // showDialog: Boolean,
 
 
   },

@@ -479,7 +479,7 @@ export default {
       let formdata = new FormData()
       formdata.append("fj", param.file)
       this.$axios.post("usetranto/useit", formdata).then((response) => {
-      }).catch((error) => {
+      }).catch((error) => {//这里是提交附件的request
         console.log(error)
       })
 

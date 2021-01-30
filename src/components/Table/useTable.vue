@@ -8,10 +8,32 @@
               v-model="searchinfo"></el-input>
 
     <el-button @click="searchinfoUse(searchinfo)">查询</el-button>
+    <!-- 以下是通用dialog -->
     <useDialog v-if="this.showDialogNormal&&this.showDialog"
                :headerUse="headerUse"
                :form="form"
                @func="getifshow" />
+    <!-- 此处为分别不同类型的页面使用不同的dialog -->
+    <!-- 以下是部门信息dialog -->
+    <bmxxDialog v-if="this.showDialogBmxx&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcBmxx="getifshow" />
+    <!-- 以下是 一级指标dialog-->
+    <yjzbDialog v-if="this.showDialogYjzb&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcYjzb="getifshow" />
+    <!-- 以下是二级指标 -->
+    <ejzbDialog v-if="this.showDialogEjzb&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcEjzb="getifshow" />
+    <!-- 以下是参评群体的dialog -->
+    <cpqtDialog v-if="this.showDialogCpqt&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcCpqt="getifshow" />
     <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
               border
               @selection-change="selectionLineChangeHandle"
@@ -47,11 +69,19 @@
 </template>
 <script>
 import useDialog from '@/components/dialog/dialogUse'
+import bmxxDialog from '@/components/dialog/bmxxDialog'
+import yjzbDialog from '@/components/dialog/yjzbDialog'
+import ejzbDialog from '@/components/dialog/ejzbDialog'
+import cpqtDialog from '@/components/dialog/cpqtDialog'
 export default {
   props: {
     headerUse: Array,//此处为传入label的参数
     tableData: Array,//此处为传入的表单数据
-    showDialogNormal: Boolean//此处设置的传入值是来判断使用什么dialog，因为很多dialog不一样
+    showDialogNormal: Boolean,//此处设置的传入值是来判断使用什么dialog，因为很多dialog不一样
+    showDialogBmxx: Boolean,//这个为部门信息的dialog
+    showDialogYjzb: Boolean,//这个为一级指标的dialog
+    showDialogEjzb: Boolean,//这个为二级指标dialog
+    showDialogCpqt: Boolean//这个对应的是参评群体的dialog
   },
   watch: {
     tableData (newVal, oldVal) {
@@ -102,7 +132,7 @@ export default {
     },
     searchinfoUse (datasearch) {
       let keyUse = []
-      //把tableData的一组key取出来，从而做
+      //把tableData的一组key取出来，从而做下面对应属性的过滤
       for (let i in this.tableData[0]) {
         keyUse.push(i)
 
@@ -134,7 +164,11 @@ export default {
 
   },
   components: {
-    useDialog
+    useDialog,
+    bmxxDialog,
+    yjzbDialog,
+    ejzbDialog,
+    cpqtDialog
 
   },
   data () {
