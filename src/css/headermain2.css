@@ -1,4 +1,5 @@
 .el-header {
   background: aquamarine;
+  height: 3vh !important;
 }
 /* 此处设置页面内置头部的image */

@@ -8,7 +8,7 @@
               v-model="searchinfo"></el-input>
 
     <el-button @click="searchinfoUse(searchinfo)">查询</el-button>
-    <useDialog v-if="this.showDialog"
+    <useDialog v-if="this.showDialogNormal&&this.showDialog"
                :headerUse="headerUse"
                :form="form"
                @func="getifshow" />
@@ -50,7 +50,8 @@ import useDialog from '@/components/dialog/dialogUse'
 export default {
   props: {
     headerUse: Array,//此处为传入label的参数
-    tableData: Array//此处为传入的表单数据
+    tableData: Array,//此处为传入的表单数据
+    showDialogNormal: Boolean//此处设置的传入值是来判断使用什么dialog，因为很多dialog不一样
   },
   watch: {
     tableData (newVal, oldVal) {

@@ -8,7 +8,8 @@
       <el-main>
         <el-row>
           <useTable :headerUse="this.headerUse"
-                    :tableData="this.tableData" />
+                    :tableData="this.tableData"
+                    :showDialogNormal="true" />
 
         </el-row>
       </el-main>
