@@ -3,28 +3,26 @@
     <el-container>
       <el-aside style="width:auto">
         <!-- Aside -->
-        <el-scrollbar style="width:100%">
-          <el-menu background-color="#545c64"
-                   text-color="#fff"
-                   active-text-color="#ffd04b"
-                   default-active="1-4-1"
-                   class="el-menu-vertical-demo"
-                   @open="handleOpen"
-                   @close="handleClose"
-                   :collapse="isCollapse"
-                   router>
+        <el-menu background-color="#545c64"
+                 text-color="#fff"
+                 active-text-color="#ffd04b"
+                 default-active="1-4-1"
+                 class="el-menu-vertical-demo"
+                 @open="handleOpen"
+                 @close="handleClose"
+                 :collapse="isCollapse"
+                 router>
 
-            <el-menu-item v-for="(item,index) in this.use"
-                          :key="index"
-                          :index="item">
-              <!-- 这里的:index定义的是跳转的路由 -->
-              <i class="el-icon-circle-plus"
-                 @click="change"></i>
-              <span slot="title">{{index}}</span>
-            </el-menu-item>
+          <el-menu-item v-for="(item,index) in this.use"
+                        :key="index"
+                        :index="item">
+            <!-- 这里的:index定义的是跳转的路由 -->
+            <i class="el-icon-circle-plus"
+               @click="change"></i>
+            <span slot="title">{{index}}</span>
+          </el-menu-item>
 
-          </el-menu>
-        </el-scrollbar>
+        </el-menu>
       </el-aside>
       <el-main>
         <keep-alive>

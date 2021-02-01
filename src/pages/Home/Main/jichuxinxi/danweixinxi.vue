@@ -6,7 +6,7 @@
         <!-- 单位信息 -->
         <headerUse />
       </el-header>
-      <el-main id="dwxxMain">
+      <el-main>
         <el-row>
           <useTable :headerUse="this.headerUse"
                     :tableData="this.tableData"

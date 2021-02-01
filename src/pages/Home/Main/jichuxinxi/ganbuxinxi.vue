@@ -277,14 +277,10 @@
   </div>
 </template>
 <script>
-import fwbUse from "@/components/editor/fwbUse"
+
 import { base64Use } from "@/utils/base64use.js"
 export default {
-  components: {
-    fwbUse
 
-
-  },
   data () {
     return {
       rzsj: '',

@@ -2,10 +2,10 @@
 
   <div>
     <el-row>
-      <el-button>
-        <!-- 测评序号 -->
-        <headerUse />
-      </el-button>
+
+      <!-- 测评序号 -->
+      <headerUse />
+
     </el-row>
 
   </div>

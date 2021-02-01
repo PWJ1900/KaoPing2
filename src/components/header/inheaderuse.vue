@@ -54,10 +54,10 @@ export default {
           }
         });
       }
-      this.editableTabsValue = this.getRouter//获取其长度当进入是自动点击进去
+
     }
 
-
+    this.editableTabsValue = this.getRouter//获取其长度当进入是自动点击进去
   },
   updated () {
 
@@ -90,5 +90,9 @@ export default {
 }
 .el-tabs--card > .el-tabs__header {
   border-bottom: 1px solid #c3c7d0;
+}
+.el-tags_item {
+  width: 11vw;
+  text-align: center;
 }
 </style>

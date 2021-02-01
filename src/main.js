@@ -9,6 +9,14 @@ import store from '@/store/store.js'
 import axios from 'axios'
 import qs from 'qs'
 // import GetTable from '@/api/tablePostGet';
+import Router from 'vue-router'
+
+
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+// 这条语句防止重复点击路由出错
 
 
 

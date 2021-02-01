@@ -3,26 +3,24 @@
     <el-container>
       <el-aside style="width:auto">
         <!-- Aside -->
-        <el-scrollbar>
-          <el-menu background-color="#545c64"
-                   text-color="#fff"
-                   active-text-color="#ffd04b"
-                   default-active="1-4-1"
-                   class="el-menu-vertical-demo"
-                   @open="handleOpen"
-                   @close="handleClose"
-                   :collapse="isCollapse"
-                   router>
-            <el-menu-item v-for="(item,index) in this.useXiTong"
-                          :index="item"
-                          :key="index">
-              <i class="el-icon-circle-plus"
-                 @click="change"></i>
-              <span slot="title">{{index}}</span>
-            </el-menu-item>
+        <el-menu background-color="#545c64"
+                 text-color="#fff"
+                 active-text-color="#ffd04b"
+                 default-active="1-4-1"
+                 class="el-menu-vertical-demo"
+                 @open="handleOpen"
+                 @close="handleClose"
+                 :collapse="isCollapse"
+                 router>
+          <el-menu-item v-for="(item,index) in this.useXiTong"
+                        :index="item"
+                        :key="index">
+            <i class="el-icon-circle-plus"
+               @click="change"></i>
+            <span slot="title">{{index}}</span>
+          </el-menu-item>
 
-          </el-menu>
-        </el-scrollbar>
+        </el-menu>
       </el-aside>
       <el-main>
         <!-- 系统管理 -->

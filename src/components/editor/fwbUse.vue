@@ -1,10 +1,9 @@
 <template>
   <div class="home">
-    <h3>wangEditor with vue</h3>
     <div id="demo1"></div>
-    <button type="button"
+    <!-- <button type="button"
             class="btn"
-            @click="getEditorData">获取当前内容</button>
+            @click="getEditorData">获取当前内容</button> -->
     <!-- <h3>内容预览</h3> -->
     <!-- <textarea name=""
               id=""
@@ -18,13 +17,18 @@
 // 引入 wangEditor
 import wangEditor from 'wangeditor'
 export default {
+  props: {
+    useHtml: String
+  },
   data () {
     return {
       editor: null,
       editorData: ''
     }
   },
-
+  activated () {
+    
+  },
   mounted () {
     const editor = new wangEditor(`#demo1`)
     console.log(editor)
@@ -39,10 +43,19 @@ export default {
       this.editorData = newHtml
     }
     // 创建编辑器
-
+    editor.config.height = 460
     editor.create()
     this.editor = editor
 
+    this.editor.txt.html(this.useHtml)//此处为初始化文本内容
+  },
+  watch: {
+    useHtml: {
+      handler (newVal, oldVal) {
+        console.log(newVal)
+        this.editor.txt.html(this.useHtml)//此处为初始化文本内容
+      }
+    }
   },
   methods: {
     getEditorData () {
