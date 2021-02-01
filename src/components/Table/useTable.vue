@@ -1,14 +1,16 @@
 <template>
   <el-row>
-    <el-button @click="addUse">新增</el-button>
-    <el-button>全部</el-button>
-    <el-button @click="groupDelete">批量删除</el-button>
-    <el-button>单位信息</el-button>
+    <el-button @click="addUse"
+               type="success">新增</el-button>
+    <el-button type="danger"
+               @click="groupDelete"
+               plain>批量删除</el-button>
     请输入查询条件：<el-input style="width:15%"
               v-model="searchinfo"></el-input>
 
     <el-button @click="searchinfoUse(searchinfo)">查询</el-button>
     <!-- 以下是通用dialog -->
+
     <useDialog v-if="this.showDialogNormal&&this.showDialog"
                :headerUse="headerUse"
                :form="form"
@@ -34,24 +36,33 @@
                 :headerUse="headerUse"
                 :form="form"
                 @funcCpqt="getifshow" />
+
     <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
               border
+              v-loading="loading"
+              height="75vh"
               @selection-change="selectionLineChangeHandle"
               stripe>
       <el-table-column type="selection">
       </el-table-column>
-      <el-table-column v-for="info in headerUse"
-                       :key="info.key"
-                       :property="info.key"
-                       :label="info.label">
-        <template slot-scope="scope">
-          {{ scope.row[scope.column.property] }}
-        </template>
-      </el-table-column>
+      <template v-for="info in headerUse">
+        <el-table-column :key="info.key"
+                         :property="info.key"
+                         v-if="ifshow(info.label)"
+                         :label="info.label">
+          <template slot-scope="scope">
+            {{ scope.row[scope.column.property] }}
+          </template>
+        </el-table-column>
+      </template>
       <el-table-column label="拉选框">
         <template slot-scope="scope">
-          <el-button @click="editUse(scope.row)">编辑</el-button>
-          <el-button @click="deleteUse(scope.row)">删除</el-button>
+          <el-button type="info"
+                     icon="el-icon-edit"
+                     @click="editUse(scope.row)">编辑</el-button>
+          <el-button type="danger"
+                     icon="el-icon-delete"
+                     @click="deleteUse(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -86,6 +97,7 @@ export default {
   watch: {
     tableData (newVal, oldVal) {
       this.tableDataUse = newVal;  //newVal即是chartData
+      this.loading = false
     }
   },
   methods: {
@@ -93,6 +105,14 @@ export default {
 
 
     // },
+    ifshow (data) {
+      console.log(data)
+      if (data == '单位代码') {//此处添加要隐藏的列
+        return false
+      } else {
+        return true
+      }
+    },
     groupDelete () {
 
     },
@@ -118,6 +138,8 @@ export default {
     editUse (value) {
       this.showDialog = true
       this.form = value
+
+
       alert(value.a)//把此次修改的值交给后端处理，写后端删除接口，可以设置一个值传入到dialog里面来判断是删除还是修改
 
     },
@@ -181,10 +203,18 @@ export default {
       tableUse: [],
       searchinfo: '',
       restoretableData: [],
-      tableDataUse: []
+      tableDataUse: [],
+      noshow: true,
+      loading: true
 
     }
   }
 
 }
 </script>
+
+<style scoped>
+.block {
+  text-align: center;
+}
+</style>

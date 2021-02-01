@@ -5,6 +5,7 @@
                width="70%"
                v-if="form!=undefined"
                :close-on-click-modal='false'
+               :modal-append-to-body="true"
                :visible.sync="dialogVisible"
                :before-close="handleClose">
       <!--  判断undefined就不显示    v-if="form!=undefined"-->
@@ -90,12 +91,12 @@
           </tr>
         </tbody>
       </table>
-      <span slot="footer"
+      <!-- <span slot="footer"
             class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
         <el-button type="primary"
                    @click="confirmit">确 定</el-button>
-      </span>
+      </span> -->
     </el-dialog>
   </el-row>
 
@@ -202,4 +203,8 @@ table td {
 #buttonUse {
   text-align: center;
 }
+
+</style>
+<style scoped>
+@import '../../css/tableuse.css';
 </style>

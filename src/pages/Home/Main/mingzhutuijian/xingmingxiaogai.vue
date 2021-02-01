@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        姓名校改
+        <!-- 姓名校改 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

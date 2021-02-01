@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        数据删除
+        <!-- 数据删除 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        A~D分值
+        <!-- A~D分值 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

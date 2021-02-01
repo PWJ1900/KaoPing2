@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        测评结果
+        <!-- 测评结果 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

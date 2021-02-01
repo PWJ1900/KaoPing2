@@ -3,9 +3,10 @@
   <div>
     <el-container>
       <el-header>
-        单位信息
+        <!-- 单位信息 -->
+        <headerUse />
       </el-header>
-      <el-main>
+      <el-main id="dwxxMain">
         <el-row>
           <useTable :headerUse="this.headerUse"
                     :tableData="this.tableData"
@@ -17,31 +18,24 @@
   </div>
 </template>
 <script>
-import { talePostGet } from '@/api/tablePostGet'
-import useTable from '@/components/Table/useTable'
+import { tablePostGet } from '@/api/tablePostGet'
+
 
 export default {
   async created () {
-    talePostGet(this, "test")//根据postman的Api获取数据来测试
+    tablePostGet(this, "dwxx")//根据postman的Api获取数据来测试
 
-  },
-  components: {
-    useTable
   },
   data () {
     return {//下面的headerUse写的是属性字段//tableData则为调用的json值
       headerUse: [
         {
           label: "单位信息代码",
-          key: "a"
+          key: "dwxxdm"
         },
         {
           label: "单位信息名称",
-          key: "b"
-        },
-        {
-          label: "调用",
-          key: "c"
+          key: "dwxxmc"
         }
 
 
@@ -50,6 +44,10 @@ export default {
       tableData: [],
       searchinfo: '',
       restoretableData: []
+      ,
+
+
+
 
 
 
@@ -57,9 +55,7 @@ export default {
   },
   methods: {
 
-
   }
-
 }
 </script>
 <style scoped>

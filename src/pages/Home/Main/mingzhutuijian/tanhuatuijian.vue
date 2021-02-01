@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        谈话推荐
+        <!-- 谈话推荐 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

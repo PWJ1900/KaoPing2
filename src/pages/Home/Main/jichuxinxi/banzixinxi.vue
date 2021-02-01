@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        班子信息
+        <!-- 班子信息 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

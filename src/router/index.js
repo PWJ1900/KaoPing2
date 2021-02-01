@@ -57,6 +57,9 @@ import mimaxiugai from '@/pages/Home/Main/xitongguanli/mimaxiugai'
 import bianmaguizeshuoming from '@/pages/Home/Main/xitongguanli/bianmaguizeshuoming'
 import bangquanyuyewulianxi from '@/pages/Home/Main/xitongguanli/bangquanyuyewulianxi'
 
+// header导航栏组建
+import headerUse from '@/components/header/inheaderuse'
+import useTable from '@/components/Table/useTable'
 
 
 
@@ -260,5 +263,10 @@ router.beforeEach((to, from,next)=>{
 
   
   
+  
 });
 export default router
+
+//全局使用组建
+Vue.component("headerUse",headerUse)
+Vue.component("useTable",useTable)

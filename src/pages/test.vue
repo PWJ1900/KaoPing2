@@ -28,10 +28,10 @@
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex'
-import { talePostGet } from '@/api/tablePostGet'
+import { tablePostGet } from '@/api/tablePostGet'
 export default {
   created () {
-    talePostGet(this, "test")
+    tablePostGet(this, "test")
 
   },
   computed: {

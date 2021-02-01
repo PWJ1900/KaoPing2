@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        密码修改
+        <!-- 密码修改 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

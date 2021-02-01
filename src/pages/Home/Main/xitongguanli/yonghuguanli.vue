@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        用户管理
+        <!-- 用户管理 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

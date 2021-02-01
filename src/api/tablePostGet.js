@@ -1,4 +1,6 @@
-const talePostGet = (the,addUrl)=>{
+
+
+const tablePostGet = (the,addUrl)=>{
 	// the.$axios({
 	// 	method: 'post',
 	// 	url: addUrl,
@@ -13,11 +15,14 @@ const talePostGet = (the,addUrl)=>{
 			addUrl,
 			the.qs.stringify({ nihao: "fdsa" })
 		).then((response) => {
-			the.tableData = JSON.parse(JSON.stringify(response.data))
+			console.log(response)
+			// the.tableData = JSON.parse(JSON.stringify(response.data))
+			the.tableData = response.data
 			// console.log( the.tableData[0,2])
 	
 		}).catch((error) => {
 			console.log(error)
 		})
+		
 }
-export {talePostGet}
+export {tablePostGet}

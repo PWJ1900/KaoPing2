@@ -24,8 +24,11 @@
           </el-menu>
         </el-scrollbar>
       </el-aside>
-      <el-main>Main
-        <router-view></router-view>
+      <el-main>
+        <!-- 系统管理 -->
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </el-main>
     </el-container>
   </div>

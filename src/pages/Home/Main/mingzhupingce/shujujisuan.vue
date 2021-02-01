@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        数据计算
+        <!-- 数据计算 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

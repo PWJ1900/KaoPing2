@@ -60,12 +60,12 @@
           </tr>
         </tbody>
       </table>
-      <span slot="footer"
+      <!-- <span slot="footer"
             class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
         <el-button type="primary"
                    @click="confirmit">确 定</el-button>
-      </span>
+      </span> -->
     </el-dialog>
   </el-row>
 
@@ -134,4 +134,8 @@ table td {
 #buttonUse {
   text-align: center;
 }
+</style>
+
+<style scoped>
+@import '../../css/tableuse.css';
 </style>

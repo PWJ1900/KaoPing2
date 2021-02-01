@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        数据上报
+        <!-- 数据上报 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

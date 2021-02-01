@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        推荐序号
+        <!-- 推荐序号 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        编码规则说明
+        <!-- 编码规则说明 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

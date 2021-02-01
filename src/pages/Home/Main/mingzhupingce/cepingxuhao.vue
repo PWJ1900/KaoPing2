@@ -2,7 +2,10 @@
 
   <div>
     <el-row>
-      <el-button>测评序号</el-button>
+      <el-button>
+        <!-- 测评序号 -->
+        <headerUse />
+      </el-button>
     </el-row>
 
   </div>

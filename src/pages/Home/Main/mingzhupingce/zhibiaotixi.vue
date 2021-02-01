@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        指标体系
+        <!-- 指标体系 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        系统初始化
+        <!-- 系统初始化 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

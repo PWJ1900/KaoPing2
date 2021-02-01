@@ -1,9 +1,10 @@
 <template>
   <el-row>
-    <el-dialog title="提示"
+    <el-dialog title="一级指标信息更改"
                :modal='false'
                width="70%"
                v-if="form!=undefined"
+               :modal-append-to-body="true"
                :close-on-click-modal='false'
                :visible.sync="dialogVisible"
                :before-close="handleClose">
@@ -45,19 +46,19 @@
           <tr>
             <td colspan="3"
                 id="buttonUse">
-              <el-button>复制</el-button>
-              <el-button>修改</el-button>
-              <el-button>返回</el-button>
+              <el-button type="info">复制</el-button>
+              <el-button type="success">修改</el-button>
+              <el-button type="warning">返回</el-button>
             </td>
           </tr>
         </tbody>
       </table>
-      <span slot="footer"
+      <!-- <span slot="footer"
             class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
         <el-button type="primary"
                    @click="confirmit">确 定</el-button>
-      </span>
+      </span> -->
     </el-dialog>
   </el-row>
 
@@ -125,4 +126,15 @@ table td {
 #buttonUse {
   text-align: center;
 }
+
+table tbody {
+  position: relative;
+  display: block;
+  height: 78vh;
+  overflow-y: scroll;
+}
+</style>
+
+<style scoped>
+@import '../../css/tableuse.css';
 </style>

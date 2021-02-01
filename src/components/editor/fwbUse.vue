@@ -59,20 +59,36 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="css">
+/* .home {
+//   width: 500px;
+//   margin: auto;
+//   position: relative;
+//   .btn {
+//     position: absolute;
+//     right: 0;
+//     top: 0;
+//     padding: 5px 10px;
+     cursor: pointer;
+//   }
+//   h3 {
+//     margin: 30px 0 15px;
+//   }
+// } */
+
 .home {
   width: 500px;
   margin: auto;
   position: relative;
-  .btn {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  h3 {
-    margin: 30px 0 15px;
-  }
+}
+.home .btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.home h3 {
+  margin: 30px 0 15px;
 }
 </style>

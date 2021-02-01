@@ -28,7 +28,9 @@
         </div>
       </el-header>
       <!-- 下句是放aside和main布局 -->
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
 
     </el-container>
   </el-row>
@@ -40,7 +42,7 @@ h3 {
   left: 10%;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
+  width: 11vw;
   min-height: 400px;
   height: 100px;
 }

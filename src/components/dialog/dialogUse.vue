@@ -4,19 +4,19 @@
     <el-dialog title="提示"
                :modal='false'
                width="70%"
+               :destroy-on-close='true'
                v-if="form!=undefined"
-               :close-on-click-modal='false'
                :visible.sync="dialogVisible"
                :before-close="handleClose">
       <!--  判断undefined就不显示    v-if="form!=undefined"-->
 
       <el-form ref="form"
-               :model="form"
+               :model="formUse"
                label-width="100px">
         <el-form-item v-for="item in headerUse"
-                      :label="item.label"
+                      :label="item.label+':'"
                       :key="item.key">
-          <el-input v-model="form[item.key]"
+          <el-input v-model="formUse[item.key]"
                     style="width:30%"></el-input>
         </el-form-item>
 
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { tablePostUpdate } from '@/api/tablePostUpdate'
 export default {
   props: {
     headerUse: Array,
@@ -43,9 +44,28 @@ export default {
   },
   data () {
     return {
-      dialogVisible: true
+      dialogVisible: true,
+      formUse: {}
     };
   },
+  watch: {
+    form: {//子组建向其第一次传值的判断
+      handler (newName, oldName) {
+        let copy = JSON.parse(JSON.stringify(newName))//深复制避免获取同一个地址直接绑定到表上
+        this.formUse = copy
+        // ...
+      },
+      immediate: true
+
+
+
+
+    }
+
+
+
+  },
+
   methods: {
     cancel () {
       this.dialogVisible = false
@@ -54,6 +74,7 @@ export default {
 
     },
     confirmit () {
+      tablePostUpdate(this, "xgdwxx", this.formUse)
       this.dialogVisible = false
       this.$emit("func", this.dialogVisible)
       //这里面写后端的edit，delete，create接口

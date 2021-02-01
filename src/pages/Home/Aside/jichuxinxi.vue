@@ -27,8 +27,10 @@
         </el-scrollbar>
       </el-aside>
       <el-main>
-        <router-view></router-view>
-        <span>main</span>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+        <span>基础信息</span>
 
       </el-main>
     </el-container>
@@ -65,7 +67,7 @@ export default {
   },
   methods: {
     handleOpen (key, keyPath) {
-      console.log(key, keyPath);
+
     },
     handleClose (key, keyPath) {
       console.log(key, keyPath);

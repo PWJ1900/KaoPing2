@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        二级指标
+        <!-- 二级指标 -->
+        <headerUse />
       </el-header>
       <el-main>
         <el-row>
@@ -17,16 +18,12 @@
   </div>
 </template>
 <script>
-import { talePostGet } from '@/api/tablePostGet'
-import useTable from '@/components/Table/useTable'
+import { tablePostGet } from '@/api/tablePostGet'
 
 export default {
   async created () {
-    talePostGet(this, "test")//根据postman的Api获取数据来测试
+    tablePostGet(this, "test")//根据postman的Api获取数据来测试
 
-  },
-  components: {
-    useTable
   },
   data () {
     return {//下面的headerUse写的是属性字段//tableData则为调用的json值

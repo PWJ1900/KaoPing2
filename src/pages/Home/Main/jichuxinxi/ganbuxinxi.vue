@@ -3,17 +3,36 @@
   <div>
     <el-container>
       <el-header>
-        干部信息
+        <!-- 干部信息 -->
+        <headerUse />
       </el-header>
       <el-main>
         <el-row>
+          <el-dialog title="提示"
+                     :modal-append-to-body="false"
+                     v-if="dialogVisibleShowFile"
+                     :close-on-click-modal="false"
+                     append-to-body="false"
+                     :visible.sync="dialogVisibleShowFile"
+                     width="auto"
+                     :before-close="handleCloseShowFile">
+            <div style="height: 1200px">
+              <embed :src="showFile"
+                     type="application/pdf"
+                     width="100%"
+                     height="100%">
+            </div>
+            <!-- 这是展示查看文件 -->
+          </el-dialog>
           <el-button type="text"
                      @click="dialogVisible = true">新增</el-button>
-          <el-dialog title="提示"
-                     :visible.sync="dialogVisible"
+
+          <el-dialog :visible.sync="dialogVisible"
                      width="80%"
+                     :modal='false'
+                     :modal-append-to-body='false'
                      :before-close="handleClose">
-            <span>这是一段信息</span>
+
             <table cellspacing="0">
               <tbody>
                 <tr>
@@ -206,19 +225,22 @@
                 <tr>
                   <td>个人附件：<br>(PDF、DOC、DOCX）：</td>
                   <td colspan="3">
-
                     <el-upload ref="uploadFJ"
                                action=""
                                :auto-upload="false"
                                :limit="1"
                                :on-exceed="exceedUseFJ"
                                :multiple="false"
+                               :on-preview="handlePreviewFile"
                                accept=".pdf,.doc,.docx"
                                :http-request="httpRequestFJ">
                       <el-button slot="trigger"
                                  size="mini"
                                  type="success">选取文件</el-button>
+                      <el-button size="mini"
+                                 style="margin-left:30vw">打开附件</el-button>
                     </el-upload>
+
                   </td>
 
                 </tr>
@@ -230,7 +252,8 @@
 
                 </tr>
                 <tr>
-                  <td colspan="4">
+                  <td colspan="4"
+                      style="text-align:center">
                     <el-button type="success"
                                @click="uploadUse">修改</el-button>
                     <el-button type="success">返回</el-button>
@@ -247,6 +270,7 @@
                          @click="dialogVisible = false">确 定</el-button>
             </span> -->
           </el-dialog>
+
         </el-row>
       </el-main>
     </el-container>
@@ -254,6 +278,7 @@
 </template>
 <script>
 import fwbUse from "@/components/editor/fwbUse"
+import { base64Use } from "@/utils/base64use.js"
 export default {
   components: {
     fwbUse
@@ -456,10 +481,27 @@ export default {
       },
 
 
-      ]
+      ],
+      dialogVisibleShowFile: false,
+      showFile: ''
+
     }
   },
   methods: {
+    handleCloseShowFile () {
+      this.dialogVisibleShowFile = false
+    },
+    handlePreviewFile (file) {
+      console.log(file.raw)
+      base64Use(file.raw).then((data) => {
+
+        this.showFile = data.result
+      });
+
+      this.dialogVisibleShowFile = true
+
+
+    },
     httpRequest (param) {//思考如何把这两个请求写在一个请求里面
       let formdata = new FormData()
       formdata.append("image", param.file)
@@ -525,8 +567,14 @@ table td {
 table td {
   padding: 10px 30px;
 }
+table tbody {
+  position: relative;
+  display: block;
+  height: 78vh;
+  overflow-y: scroll;
+}
 #useheight {
-  width: 200px;
+  width: 120vw !important;
   height: 30px;
 }
 #useheight2 {
@@ -554,6 +602,7 @@ table td {
 <style scoped>
 @import '../../../../css/headermain2.css';
 </style>
+
 <style>
 .el-main {
   padding: 0;

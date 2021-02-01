@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        人数设置
+        <!-- 人数设置 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

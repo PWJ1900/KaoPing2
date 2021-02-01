@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        部门信息
+        <!-- 部门信息 -->
+        <headerUse />
       </el-header>
       <el-main>
         <el-row>
@@ -17,36 +18,33 @@
   </div>
 </template>
 <script>
-import { talePostGet } from '@/api/tablePostGet'
-import useTable from '@/components/Table/useTable'
+import { tablePostGet } from '@/api/tablePostGet'
 
 export default {
   async created () {
-    talePostGet(this, "test")//根据postman的Api获取数据来测试
+    tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
 
-  },
-  components: {
-    useTable
   },
   data () {
     return {//下面的headerUse写的是属性字段//tableData则为调用的json值
       headerUse: [
         {
-          label: "单位信息代码",
-          key: "a"
+          label: "部门代码",
+          key: "bmdm"
         },
         {
-          label: "单位信息名称",
-          key: "b"
+          label: "部门名称",
+          key: "bmmc"
         },
         {
-          label: "调用",
-          key: "c"
+          label: "单位代码",
+          key: "bmxx"//这边写错了应该是单位代码为dwdm
         },
         {
-          label: "调用2",
-          key: "d"
-        }
+          label: "单位名称",
+          key: "dwmc"
+        },
+
 
 
 

@@ -3,17 +3,55 @@
   <div>
     <el-container>
       <el-header>
-        职级信息
+        <!-- 单位信息 -->
+        <headerUse />
       </el-header>
       <el-main>
-        这是main
+        <el-row>
+          <useTable :headerUse="this.headerUse"
+                    :tableData="this.tableData"
+                    :showDialogNormal="true" />
+
+        </el-row>
       </el-main>
     </el-container>
-
   </div>
 </template>
 <script>
+import { tablePostGet } from '@/api/tablePostGet'
+
 export default {
+  async created () {
+    tablePostGet(this, "dwxx")//根据postman的Api获取数据来测试
+
+  },
+  data () {
+    return {//下面的headerUse写的是属性字段//tableData则为调用的json值
+      headerUse: [
+        {
+          label: "单位信息代码",
+          key: "dwxxdm"
+        },
+        {
+          label: "单位信息名称",
+          key: "dwxxmc"
+        }
+
+
+
+      ],
+      tableData: [],
+      searchinfo: '',
+      restoretableData: []
+
+
+
+    }
+  },
+  methods: {
+
+
+  }
 
 }
 </script>

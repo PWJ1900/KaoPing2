@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        等级统计
+        <!-- 等级统计 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

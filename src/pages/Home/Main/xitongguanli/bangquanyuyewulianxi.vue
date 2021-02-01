@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        版权与业务联系
+        <!-- 版权与业务联系 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main

@@ -23,9 +23,11 @@
           </el-menu>
         </el-scrollbar>
       </el-aside>
-      <el-main>Main
-        <router-view></router-view>
-
+      <el-main>
+        <!-- 民主评测 -->
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </el-main>
     </el-container>
   </div>

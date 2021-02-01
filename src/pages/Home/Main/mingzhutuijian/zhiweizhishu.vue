@@ -3,7 +3,8 @@
   <div>
     <el-container>
       <el-header>
-        职位职数
+        <!-- 职位职数 -->
+        <headerUse />
       </el-header>
       <el-main>
         这是main
