@@ -17,7 +17,7 @@
                       :label="item.label+':'"
                       :key="item.key">
           <el-input v-model="formUse[item.key]"
-                    style="width:30%"></el-input>
+                    style=""></el-input>
         </el-form-item>
 
       </el-form>
@@ -69,7 +69,7 @@ export default {
   methods: {
     cancel () {
       this.dialogVisible = false
-      this.$emit("func", this.dialogVisible)
+      this.$emit("func", this.dialogVisible)//设置返回值，然关闭后状态停止无法再次打开
 
 
     },

@@ -7,74 +7,35 @@
         <headerUse />
       </el-header>
       <el-main>
-        这是main
+        <!-- 这是main -->
         <el-tabs type="border-card"
                  @tab-click="clickUse">
+          <table>
+            <tr>
+              <td>
+                登录信息：</td>
+              <td>
+                <el-input type="text"
+                          v-model="useInput"
+                          style="width:20vw"></el-input>
+              </td>
+            </tr>
+            <tr>
+              <td>提示信息:</td>
+              <td>
+                <fwbUse style="width:40vw"
+                        :useHtml='useText'
+                        v-if="true" />
+              </td>
+            </tr>
+          </table>
 
           <el-tab-pane>
             <span slot="label"><i class="el-icon-date"></i> 测评</span>
-            <table align="center">
-              <tr>
-                <td>
-                  登录信息：
-                </td>
-                <td>
-                  <el-input type="text"
-                            v-model="useCpInput"
-                            style="width:20vw"></el-input>
-                </td>
-              </tr>
-
-              <tr>
-                <td>提示信息：</td>
-                <td>
-                  <fwbUse style="width:40vw"
-                          :useHtml='useCpFirst'
-                          v-if="cpUse" />
-                </td>
-              </tr>
-            </table>
           </el-tab-pane>
           <el-tab-pane label="推荐">
-            <table align="center">
-              <tr>
-                <td>
-                  登录信息：</td>
-                <td>
-                  <el-input type="text"
-                            v-model="useTjInput"
-                            style="width:20vw"></el-input>
-                </td>
-              </tr>
-              <tr>
-                <td>提示信息:</td>
-                <td>
-                  <fwbUse style="width:40vw"
-                          :useHtml='useTjFirst'
-                          v-if="tjUse" />
-                </td>
-              </tr>
-            </table>
           </el-tab-pane>
           <el-tab-pane label="后台管理">
-            <table align="center">
-              <tr>
-                <td>登录信息</td>
-                <td>
-                  <el-input type="text"
-                            v-model="useHtglInput"
-                            style="width:20vw"></el-input>
-                </td>
-              </tr>
-              <tr>
-                <td>提示信息:</td>
-                <td>
-                  <fwbUse style="width:40vw"
-                          :useHtml='useHtglFirst'
-                          v-if="htglUse" />
-                </td>
-              </tr>
-            </table>
           </el-tab-pane>
 
         </el-tabs>
@@ -89,10 +50,15 @@
 </template>
 <script>
 export default {
+  created () {
+    this.useInput = this.useCpInput
+    this.useText = this.useCpFirst
+
+  },
   data () {
     return {
-      cpUse: true,
-      tjUse: false,
+      useText: '',
+      useInput: '',
       useCpInput: '扬子江投资发展集团领导班子及领导干部年终考核',
       useTjInput: '模拟高校领导班子换届民主推荐',
       useHtglInput: '欢迎使用后台管理系统，请在插好密钥盘后输入用户名和密码登录系统',
@@ -148,20 +114,17 @@ export default {
     clickUse (data) {
       console.log(data.index)
       if (data.index == "0") {
-        this.cpUse = true,
-          this.tjUse = false,
-          this.htglUse = false
+        this.useText = this.useCpFirst
+        this.useInput = this.useCpInput
       }
       else if (data.index == "1") {
-        this.cpUse = false,
-          this.tjUse = true,
-          this.htglUse = false
+        this.useText = this.useTjFirst
+        this.useInput = this.useTjInput
 
       }
       else if (data.index == "2") {
-        this.cpUse = false,
-          this.tjUse = false,
-          this.htglUse = true
+        this.useText = this.useHtglFirst
+        this.useInput = this.useHtglInput
       }
 
     }

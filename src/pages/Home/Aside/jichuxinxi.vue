@@ -28,7 +28,7 @@
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
-        <span>基础信息</span>
+        <!-- <span>基础信息</span> -->
 
       </el-main>
     </el-container>

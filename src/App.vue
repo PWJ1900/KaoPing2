@@ -25,6 +25,16 @@ export default {
   margin-top: 11vh;
 }
 .el-dialog {
+  margin-top: 0vh !important;
+  width: auto;
+}
+.el-dialog .el-dialog__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0;
+}
+/* .el-dialog {
   position: relative;
   left: 0vw;
   bottom: 4vh;
@@ -34,23 +44,23 @@ export default {
   height: 85vh;
 
   /* height: 80vh !important; */
-}
-.el-dialog__body {
+/* }  */
+/* .el-dialog__body {
   margin-top: 0;
   padding-left: 2vw;
   margin: 0;
   left: 20vw;
-}
-.el-dialog__header {
+} */
+/* .el-dialog__header {
   padding: 0;
-}
-.el-dialog .el-dialog__body {
+} */
+/* .el-dialog .el-dialog__body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.el-dialog__footer {
+/* .el-dialog__footer {
   padding: 0;
-}
+} */
 </style>

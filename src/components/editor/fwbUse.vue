@@ -26,15 +26,19 @@ export default {
       editorData: ''
     }
   },
-  activated () {
-    
-  },
   mounted () {
     const editor = new wangEditor(`#demo1`)
     console.log(editor)
-    editor.config.uploadImgServer = "/hjk"//这个地方呢写后端获取图片的请求一定要在create之前设置
+    editor.config.uploadImgServer = 'http://localhost:8080' + "/upload"//这个地方呢写后端获取图片的请求一定要在create之前设置
     editor.config.uploadVideoServer = "/hkk"//这个地方写后端的获取video
     editor.config.uploadImgShowBase64 = false
+    editor.config.uploadFileName = 'myFileName'
+    editor.config.uploadImgHooks = {
+      customInsert: function (insertImg, result, editor) {
+        var url = result.data;//获取后台返回的url
+        insertImg(url);
+      }
+    };
     console.log(editor)//此处可改属性
     // editor.customConfig.uploadImgServer = 'upload.php'
     // editor.customConfig.uploadImgServer = 'upload.php'
@@ -43,18 +47,15 @@ export default {
       this.editorData = newHtml
     }
     // 创建编辑器
-    editor.config.height = 460
+    editor.config.height = 420
     editor.create()
     this.editor = editor
 
     this.editor.txt.html(this.useHtml)//此处为初始化文本内容
   },
-  watch: {
-    useHtml: {
-      handler (newVal, oldVal) {
-        console.log(newVal)
-        this.editor.txt.html(this.useHtml)//此处为初始化文本内容
-      }
+  watch: {//监视其变化
+    useHtml (newVal, oldVal) {
+      this.editor.txt.html(newVal)
     }
   },
   methods: {

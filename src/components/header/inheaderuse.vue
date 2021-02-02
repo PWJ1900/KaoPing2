@@ -6,6 +6,7 @@
              closable
              @tab-click="tabClick"
              @tab-remove="removeTab">
+      <!-- 此处获取点击的vuex中的路由 -->
       <el-tab-pane v-for="(item, index) in routerUse"
                    :key="index"
                    :label="item"
@@ -67,12 +68,14 @@ export default {
   methods: {
     removeTab (targetName) {
       console.log(targetName)
+      let beforeRouter
       this.routerUse.forEach((element, index) => {
         if (targetName === element) {
+          beforeRouter = this.routerUse[index - 1]
           this.routerUse.splice(index, 1)
         }
       });
-      // this.$router.go(1)
+      this.$router.push({ name: beforeRouter })
 
     },
     tabClick (targetName) {

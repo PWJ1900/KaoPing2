@@ -36,6 +36,13 @@
                 :headerUse="headerUse"
                 :form="form"
                 @funcCpqt="getifshow" />
+    <!-- 以下是班子信息和干部信息的复用 -->
+    <gbxxbzxxDialog v-if="this.showDialoggbxxbzxx&&this.showDialog"
+                    :headerUse="headerUse"
+                    :form="form"
+                    :isBZXX="isBZXX"
+                    :useTitle="useTitle"
+                    @funcgbxxbzxx="getifshow" />
 
     <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
               border
@@ -60,9 +67,12 @@
           <el-button type="info"
                      icon="el-icon-edit"
                      @click="editUse(scope.row)">编辑</el-button>
-          <el-button type="danger"
-                     icon="el-icon-delete"
-                     @click="deleteUse(scope.row)">删除</el-button>
+          <el-popconfirm title="您确定要将此行信息删除吗"
+                         @confirm="deleteUse(scope.row)">
+            <el-button type="danger"
+                       slot="reference"
+                       icon="el-icon-delete">删除</el-button>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -84,6 +94,7 @@ import bmxxDialog from '@/components/dialog/bmxxDialog'
 import yjzbDialog from '@/components/dialog/yjzbDialog'
 import ejzbDialog from '@/components/dialog/ejzbDialog'
 import cpqtDialog from '@/components/dialog/cpqtDialog'
+import gbxxbzxxDialog from '@/components/dialog/gbxxbzxxDialog'
 export default {
   props: {
     headerUse: Array,//此处为传入label的参数
@@ -92,13 +103,17 @@ export default {
     showDialogBmxx: Boolean,//这个为部门信息的dialog
     showDialogYjzb: Boolean,//这个为一级指标的dialog
     showDialogEjzb: Boolean,//这个为二级指标dialog
-    showDialogCpqt: Boolean//这个对应的是参评群体的dialog
+    showDialogCpqt: Boolean,//这个对应的是参评群体的dialog
+    showDialoggbxxbzxx: Boolean,
+    isBZXX: Boolean,
+    useTitle: String
   },
   watch: {
     tableData (newVal, oldVal) {
       this.tableDataUse = newVal;  //newVal即是chartData
       this.loading = false
-    }
+    },
+
   },
   methods: {
     // changeTri(){
@@ -140,12 +155,13 @@ export default {
       this.form = value
 
 
-      alert(value.a)//把此次修改的值交给后端处理，写后端删除接口，可以设置一个值传入到dialog里面来判断是删除还是修改
+      //把此次修改的值交给后端处理，写后端删除接口，可以设置一个值传入到dialog里面来判断是删除还是修改
 
     },
     deleteUse (value) {
-      this.showDialog = true
+      // this.showDialog = true
       this.form = value//把此次修改的值交给后端处理
+      console.log(value.dwxxdm)
 
     },
     getifshow (data) {
@@ -190,7 +206,8 @@ export default {
     bmxxDialog,
     yjzbDialog,
     ejzbDialog,
-    cpqtDialog
+    cpqtDialog,
+    gbxxbzxxDialog
 
   },
   data () {

@@ -126,13 +126,6 @@ table td {
 #buttonUse {
   text-align: center;
 }
-
-table tbody {
-  position: relative;
-  display: block;
-  height: 78vh;
-  overflow-y: scroll;
-}
 </style>
 
 <style scoped>

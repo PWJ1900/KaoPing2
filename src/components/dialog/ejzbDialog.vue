@@ -203,7 +203,6 @@ table td {
 #buttonUse {
   text-align: center;
 }
-
 </style>
 <style scoped>
 @import '../../css/tableuse.css';

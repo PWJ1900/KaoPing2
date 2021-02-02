@@ -1,7 +1,7 @@
 table tbody {
   position: relative;
   display: block;
-  height: 78vh;
+  height: auto;
   overflow-y: scroll;
 }
 table {
