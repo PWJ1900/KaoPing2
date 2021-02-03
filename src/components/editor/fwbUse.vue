@@ -48,6 +48,7 @@ export default {
     }
     // 创建编辑器
     editor.config.height = 420
+    editor.config.zIndex = 10
     editor.create()
     this.editor = editor
 
