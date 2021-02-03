@@ -15,7 +15,7 @@
           <el-menu-item v-for="(item,index) in this.useCeping"
                         :index="item"
                         :key="index">
-            <i class="el-icon-circle-plus"
+            <i :class="useIcon"
                @click="change"></i>
             <span slot="title">{{index}}</span>
           </el-menu-item>
@@ -40,6 +40,7 @@ export default {
       activeIndex: '1',
       activeIndex2: '1',
       isCollapse: false,
+      useIcon: "el-icon-d-arrow-right",
       useCeping: {
         "测评序号": "cepingxuhao",
         "指标体系": "zhibiaotixi",
@@ -61,13 +62,19 @@ export default {
     handleOpen (key, keyPath) {
       console.log(key, keyPath);
     },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath);
-    },
     change () {
       this.isCollapse = !this.isCollapse
-    }
+      if (this.isCollapse == false) {
+        this.useIcon = "el-icon-d-arrow-right"
+      }
+      else {
+        this.useIcon = "el-icon-d-arrow-left"
+      }
 
+    },
+    handleClose (key, keyPath) {
+      console.log(key, keyPath);
+    }
   }
 }
 </script>

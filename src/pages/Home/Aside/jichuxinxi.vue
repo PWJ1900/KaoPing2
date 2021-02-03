@@ -2,9 +2,9 @@
   <div>
     <el-container>
       <el-aside style="width:auto">
-        <!-- Aside -->
-        <el-menu background-color="#545c64"
-                 text-color="#fff"
+        <!-- Aside background-color="#545c64"-->
+        <el-menu text-color="#fff"
+                 background-color="#303133"
                  active-text-color="#ffd04b"
                  default-active="1-4-1"
                  class="el-menu-vertical-demo"
@@ -12,12 +12,11 @@
                  @close="handleClose"
                  :collapse="isCollapse"
                  router>
-
           <el-menu-item v-for="(item,index) in this.use"
                         :key="index"
                         :index="item">
             <!-- 这里的:index定义的是跳转的路由 -->
-            <i class="el-icon-circle-plus"
+            <i :class="useIcon"
                @click="change"></i>
             <span slot="title">{{index}}</span>
           </el-menu-item>
@@ -47,6 +46,7 @@ export default {
       activeIndex2: '1',
       isCollapse: false,
       title: "title",
+      useIcon: "el-icon-d-arrow-right",
       use: {
         "单位信息": "danweixinxi",
         "部门信息": "bumengxinxi",
@@ -72,6 +72,12 @@ export default {
     },
     change () {
       this.isCollapse = !this.isCollapse
+      if (this.isCollapse == false) {
+        this.useIcon = "el-icon-d-arrow-right"
+      }
+      else {
+        this.useIcon = "el-icon-d-arrow-left"
+      }
 
     }
 

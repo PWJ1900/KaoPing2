@@ -15,7 +15,7 @@
           <el-menu-item v-for="(item,index) in this.useXiTong"
                         :index="item"
                         :key="index">
-            <i class="el-icon-circle-plus"
+            <i :class="useIcon"
                @click="change"></i>
             <span slot="title">{{index}}</span>
           </el-menu-item>
@@ -40,6 +40,7 @@ export default {
       activeIndex: "1",
       activeIndex2: "1",
       isCollapse: false,
+      useIcon: "el-icon-d-arrow-right",
       useXiTong: {
         "用户管理": "yonghuguanli",
         "密钥管理": "miyaoguangli",
@@ -63,6 +64,13 @@ export default {
     },
     change () {
       this.isCollapse = !this.isCollapse
+      if (this.isCollapse == false) {
+        this.useIcon = "el-icon-d-arrow-right"
+      }
+      else {
+        this.useIcon = "el-icon-d-arrow-left"
+      }
+
     }
   },
 };

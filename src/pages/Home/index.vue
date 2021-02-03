@@ -89,6 +89,7 @@ export default {
     return {
       activeIndex: '1',
       activeIndex2: '1',
+      useProcess: '20',
       isCollapse: false,
       headerUseR: {
         "基础信息": "jichuxinxi",
@@ -117,8 +118,9 @@ export default {
     },
     exitTo () {
       this.$router.push({ name: "Login" })
-    }
+    },
 
-  }
+
+  },
 }
 </script>

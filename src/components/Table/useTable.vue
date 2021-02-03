@@ -1,15 +1,17 @@
 <template>
   <el-row>
-    <el-button @click="addUse"
-               type="success">新增</el-button>
-    <el-button type="danger"
-               @click="groupDelete"
-               plain>批量删除</el-button>
-    请输入查询条件：<el-input style="width:15%"
-              v-model="searchinfo"></el-input>
+    <el-card style="margin:1%">
+      <el-button @click="addUse"
+                 type="success">新增</el-button>
+      <el-button type="danger"
+                 @click="groupDelete"
+                 plain>批量删除</el-button>
+      请输入查询条件：<el-input style="width:15%"
+                v-model="searchinfo"></el-input>
 
-    <el-button @click="searchinfoUse(searchinfo)">查询</el-button>
-    <!-- 以下是通用dialog -->
+      <el-button @click="searchinfoUse(searchinfo)">查询</el-button>
+      <!-- 以下是通用dialog -->
+    </el-card>
 
     <useDialog v-if="this.showDialogNormal&&this.showDialog"
                :headerUse="headerUse"
@@ -44,38 +46,43 @@
                     :useTitle="useTitle"
                     @funcgbxxbzxx="getifshow" />
 
-    <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-              border
-              v-loading="loading"
-              height="75vh"
-              @selection-change="selectionLineChangeHandle"
-              stripe>
-      <el-table-column type="selection">
-      </el-table-column>
-      <template v-for="info in headerUse">
-        <el-table-column :key="info.key"
-                         :property="info.key"
-                         v-if="ifshow(info.label)"
-                         :label="info.label">
-          <template slot-scope="scope">
-            {{ scope.row[scope.column.property] }}
+    <el-card style="margin:1%;">
+      <el-scrollbar>
+        <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                  border
+                  :max-height="useTableHeight"
+                  v-loading="loading"
+                  @selection-change="selectionLineChangeHandle"
+                  stripe>
+          <el-table-column type="selection">
+          </el-table-column>
+          <template v-for="info in headerUse">
+            <el-table-column :key="info.key"
+                             :property="info.key"
+                             v-if="ifshow(info.label)"
+                             :label="info.label">
+              <template slot-scope="scope">
+                {{ scope.row[scope.column.property] }}
+              </template>
+            </el-table-column>
           </template>
-        </el-table-column>
-      </template>
-      <el-table-column label="拉选框">
-        <template slot-scope="scope">
-          <el-button type="info"
-                     icon="el-icon-edit"
-                     @click="editUse(scope.row)">编辑</el-button>
-          <el-popconfirm title="您确定要将此行信息删除吗"
-                         @confirm="deleteUse(scope.row)">
-            <el-button type="danger"
-                       slot="reference"
-                       icon="el-icon-delete">删除</el-button>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
+          <el-table-column label="拉选框">
+            <template slot-scope="scope">
+              <el-button type="info"
+                         icon="el-icon-edit"
+                         @click="editUse(scope.row)">编辑</el-button>
+              <el-popconfirm title="您确定要将此行信息删除吗"
+                             @confirm="deleteUse(scope.row)">
+                <el-button type="danger"
+                           slot="reference"
+                           icon="el-icon-delete">删除</el-button>
+              </el-popconfirm>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-scrollbar>
+    </el-card>
+
     <div class="block">
       <el-pagination @size-change="handleSizeChange"
                      @current-change="handleCurrentChange"
@@ -107,6 +114,12 @@ export default {
     showDialoggbxxbzxx: Boolean,
     isBZXX: Boolean,
     useTitle: String
+  },
+  computed: {
+    useTableHeight () {
+      return (window.innerHeight * 3 / 5)
+    }
+
   },
   watch: {
     tableData (newVal, oldVal) {
@@ -235,3 +248,4 @@ export default {
   text-align: center;
 }
 </style>
+<style>

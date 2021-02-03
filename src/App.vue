@@ -34,6 +34,9 @@ export default {
   align-items: center;
   padding-top: 0;
 }
+.el-main {
+  background-color: rgb(246, 252, 252);
+}
 /* .el-dialog {
   position: relative;
   left: 0vw;

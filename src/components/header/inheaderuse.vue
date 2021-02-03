@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tabs v-model="editableTabsValue"
-             style="margin-left:-2vw;height:3vh !important"
+             style="margin-left:-1vw;height:3vh !important"
              type="card"
              closable
              @tab-click="tabClick"
@@ -97,5 +97,8 @@ export default {
 .el-tags_item {
   width: 11vw;
   text-align: center;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
+  border-bottom-color: #22adff;
 }
 </style>
