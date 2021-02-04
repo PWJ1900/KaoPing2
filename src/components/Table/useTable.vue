@@ -51,6 +51,8 @@
         <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                   border
                   :max-height="useTableHeight"
+                  :row-style="{height: '0'}"
+                  :cell-style="{padding: '1px'}"
                   v-loading="loading"
                   @selection-change="selectionLineChangeHandle"
                   stripe>

@@ -25,6 +25,8 @@
             <el-table :data="
                   this.tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                       :max-height="useTableHeight"
+                      :row-style="{height: '0'}"
+                      :cell-style="{padding: '1px'}"
                       border
                       key=1
                       @selection-change="selectionLineChangeHandle"
@@ -614,7 +616,7 @@ export default {
   },
   computed: {
     useTableHeight () {
-      return (window.innerHeight * 4 / 6)
+      return (window.innerHeight * 5 / 8)
     }
 
   },
