@@ -58,12 +58,12 @@
           </el-table-column>
           <template v-for="info in headerUse">
             <el-table-column :key="info.key"
-                             :property="info.key"
+                             :prop="info.key"
                              v-if="ifshow(info.label)"
                              :label="info.label">
-              <template slot-scope="scope">
+              <!-- <template slot-scope="scope">
                 {{ scope.row[scope.column.property] }}
-              </template>
+              </template> -->
             </el-table-column>
           </template>
           <el-table-column label="拉选框">
