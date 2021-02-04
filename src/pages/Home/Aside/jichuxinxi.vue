@@ -46,7 +46,7 @@ export default {
       activeIndex2: '1',
       isCollapse: false,
       title: "title",
-      useIcon: "el-icon-d-arrow-right",
+      useIcon: "el-icon-d-arrow-left",
       use: {
         "单位信息": "danweixinxi",
         "部门信息": "bumengxinxi",

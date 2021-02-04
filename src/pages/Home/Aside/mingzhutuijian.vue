@@ -38,7 +38,7 @@ export default {
       activeIndex: '1',
       activeIndex2: '1',
       isCollapse: false,
-      useIcon: "el-icon-d-arrow-right",
+      useIcon: "el-icon-d-arrow-left",
       useMingzhu: {
         "推荐序号": "tuijianxuhao",
         "职位职数": "zhiweizhishu",
