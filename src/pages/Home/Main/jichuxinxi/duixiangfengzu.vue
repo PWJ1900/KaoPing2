@@ -1,14 +1,244 @@
 <template>
-
   <div>
+
     <el-container>
       <el-header>
         <!-- 对象分组 -->
         <headerUse />
       </el-header>
       <el-main>
+        <div v-if="showPage">
+          <el-card style="margin:1%;">
+            <div>
+              <el-button @click="addUse"
+                         type="success">新增</el-button>
+              <el-button type="danger"
+                         @click="groupDelete"
+                         plain>批量删除</el-button>
+              请输入分组名称和代号：<el-input type="text"
+                        style="width:20%"
+                        v-model="fzOrdh"></el-input>
+              <el-button @click="search">查询</el-button>
+            </div>
+          </el-card>
+          <el-card style="margin:1%;">
+            <el-table :data="
+                  this.tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                      :max-height="useTableHeight"
+                      border
+                      key=1
+                      @selection-change="selectionLineChangeHandle"
+                      style="width: 100%">
+              <el-table-column type="selection">
+
+              </el-table-column>
+              <el-table-column prop="dm"
+                               label="代码"
+                               width="180">
+              </el-table-column>
+              <el-table-column prop="mc"
+                               label="名称"
+                               width="180">
+              </el-table-column>
+              <el-table-column prop="gbxm"
+                               label="干部姓名"
+                               width="180">
+              </el-table-column>
+              <el-table-column prop="gbdm"
+                               label="干部代码">
+              </el-table-column>
+              <el-table-column label="拉选框">
+                <template slot-scope="scope">
+                  <el-button type="info"
+                             icon="el-icon-edit"
+                             @click="editUse(scope.row)">编辑</el-button>
+                  <el-popconfirm title="您确定要将此行信息删除吗"
+                                 @confirm="deleteUse(scope.row)">
+                    <el-button type="danger"
+                               slot="reference"
+                               icon="el-icon-delete">删除</el-button>
+                  </el-popconfirm>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-card>
+          <div class="block">
+            <el-pagination @size-change="handleSizeChange"
+                           @current-change="handleCurrentChange"
+                           :current-page="currentPage"
+                           :page-sizes="[5, 10, 15, 20]"
+                           :page-size="5"
+                           layout="total, sizes, prev, pager, next, jumper"
+                           :total="tableData.length">
+            </el-pagination>
+          </div>
+        </div>
+        <div v-if="!showPage">
+          <el-row>
+            <el-col :span="8">
+              <el-card style="width:28vw;margin:1%;"
+                       shadow="hover">
+                修改被测对象组
+                <table cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td>选中的干部:</td>
+                      <td>分组操作:</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="7">2</td>
+
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-button size="mini">删除当前干部</el-button>
+                        <el-button size="mini">根据姓名更改代码</el-button>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <td>分组名称:</td>
+
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-input type="text"></el-input>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <td>分组代码:</td>
+
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-input type="text"></el-input>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-button size="mini">修改</el-button>
+                        <el-button size="mini">复制</el-button>
+                        <el-button size="mini"
+                                   @click="returnTo">返回</el-button>
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </el-card>
+            </el-col>
+            <el-col :span="14">
+
+              <el-card style="margin:1%;width:55vw"
+                       shadow="hover">
+                <el-button size="mini">将选中的干部加入组</el-button>
+                姓名或编号：<el-input type="text"
+                          style="width:8vw"
+                          v-model="xmOrbh"></el-input>
+                单位：<el-select v-model="formUse.dw"
+                           style="width:8vw"
+                           placeholder="请选择单位"
+                           id="el-selectUse">
+                  <el-option v-for="item in options"
+                             :key="item.value"
+                             :label="item.label"
+                             :value="item.label">
+                  </el-option>
+                </el-select>
+                部门：<el-select v-model="formUse.bm"
+                           style="width:8vw"
+                           placeholder="请选择部门"
+                           id="el-selectUse">
+                  <el-option v-for="item in options2"
+                             :key="item.value"
+                             :label="item.label"
+                             :value="item.label">
+                  </el-option>
+                </el-select>
+                <el-button size="mini">查询</el-button>
+                <el-button size="mini">全部</el-button>
+                <el-button size="mini">组合查询</el-button>
+
+                <el-table :data="
+                  this.tableData2.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                          :max-height="useTableHeight"
+                          key=2
+                          :row-style="{height: '0'}"
+                          :cell-style="{padding: '1px'}"
+                          @selection-change="selectionLineChangeHandle"
+                          style="width:52vw"
+                          border
+                          :default-sort="{prop: 'date', order: 'descending'}">
+                  <el-table-column type="selection"></el-table-column>
+                  <el-table-column prop="dm"
+                                   label="代码"
+                                   :sortable="true"
+                                   width="80">
+                  </el-table-column>
+                  <el-table-column prop="xm"
+                                   label="姓名"
+                                   sortable
+                                   width="80">
+                  </el-table-column>
+                  <el-table-column prop="sf"
+                                   label="身份"
+                                   width="80"
+                                   :sortable="true">
+                    <!-- :formatter="formatter" -->
+                  </el-table-column>
+                  <el-table-column prop="xb"
+                                   label="性别"
+                                   :sortable="true"
+                                   width="80">
+                  </el-table-column>
+                  <el-table-column prop="zw"
+                                   label="职位"
+                                   :sortable="true"
+                                   width="80">
+                  </el-table-column>
+                  <el-table-column prop="zj"
+                                   label="职级"
+                                   :sortable="true"
+                                   width="80">
+                  </el-table-column>
+                  <el-table-column prop="csny"
+                                   label="出生年月"
+                                   :sortable="true"
+                                   width="120">
+                  </el-table-column>
+                  <el-table-column prop="dw"
+                                   label="单位"
+                                   :sortable="true"
+                                   width="80">
+                  </el-table-column>
+                  <el-table-column prop="bm"
+                                   label="部门"
+                                   :sortable="true"
+                                   width="80">
+                  </el-table-column>
+                </el-table>
+                <!-- </el-card> -->
+
+                <div class="block">
+                  <el-pagination @size-change="handleSizeChange"
+                                 @current-change="handleCurrentChange"
+                                 :current-page="currentPage"
+                                 :page-sizes="[5, 10, 15, 20]"
+                                 :page-size="15"
+                                 layout="total, sizes, prev, pager, next, jumper"
+                                 :total="tableData2.length">
+                  </el-pagination>
+
+                </div>
+
+              </el-card>
+            </el-col>
+          </el-row>
+        </div>
         <!-- 这是main -->
-        <el-card class="box-card">
+        <!-- <el-card class="box-card">
           <div slot="header"
                class="clearfix">
             <span>卡片名称</span>
@@ -21,23 +251,419 @@
                class="text item">
             {{'列表内容 ' + o }}
           </div>
-        </el-card>
+        </el-card> -->
       </el-main>
     </el-container>
 
   </div>
+
 </template>
 <script>
+import index from '../../index.vue'
 export default {
+  components: { index },
   data () {
     return {
-      peopleNumber: []
+      // peopleNumber: []
+      fzOrdh: '',
+      showPage: true,
+      currentPage: 1,
+      pagesize: 5,
+      xmOrbh: '',
+      formUse: {
+        dw: '',
+        bm: ''
+      },
+      options2: [{
+        value: "选项1",
+        label: "全部"
+      }],
+      options: [{
+        value: "选项1",
+        label: '全部'
+      }, {
+        value: "选项2",
+        label: '测试单位'
+      },],
+      tableData: [{
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      }, {
+
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      }, {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      }, {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      },
+      {
+        dm: '1',
+        mc: '王小虎',
+        gbxm: 'xadf',
+        gbdm: '341'
+      }],
+      tableData2: [{
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '男',
+        zw: 'da1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '男',
+        zw: 'da2',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '男',
+        zw: '3',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '男',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+      {
+        dm: '2016',
+        xm: '王小虎1',
+        sf: '1518 弄',
+        xb: '女',
+        zw: '1',
+        zj: '1',
+        csny: '1',
+        dw: '1',
+        bm: '1'
+      },
+
+      ]
+
     }
   },
-  methods: {
-    AddUser () {
-      this.peopleNumber.push("")
+  computed: {
+    useTableHeight () {
+      return (window.innerHeight * 4 / 6)
+    }
 
+  },
+  methods: {
+    // AddUser () {
+    //   this.peopleNumber.push("")
+
+    // }
+    search () {
+      //对this.fzOrdh进行过滤器操作
+    },
+    handleSizeChange (val) {
+      // console.log(`每页 ${val} 条`);
+      this.pagesize = val
+      // console.log(this.sizeChange)
+    },
+    handleCurrentChange (val) {
+      this.currentPage = val
+
+
+    },
+    selectionLineChangeHandle (val) {
+      console.log(val)//把此值交给后groupDelete处理然后交给后端分配处理，交给后端接口
+
+    },
+    groupDelete () {
+
+    },
+    addUse () {
+      this.showPage = false
+      this.pagesize = 15
+      this.currentPage = 1
+
+
+    },
+    returnTo () {
+      this.showPage = true
+      this.pagesize = 5
+      this.currentPage = 1
+
+    },
+    editUse () {
+      this.showPage = true
+      this.pagesize = 5
+      this.currentPage = 1
+
+    },
+    formatter (row, column) {
+      return row.address//格式化指定列的值
     }
   }
 }
@@ -71,5 +697,19 @@ export default {
 
 .box-card {
   width: 480px;
+}
+</style>
+<style scoped>
+.block {
+  text-align: center;
+}
+.el-divider--horizontal {
+}
+table,
+table td {
+  border: 0.5px solid rgba(124, 141, 141, 0.925);
+}
+table td {
+  padding: 10px 30px;
 }
 </style>

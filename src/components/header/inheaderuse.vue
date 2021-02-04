@@ -69,13 +69,18 @@ export default {
     removeTab (targetName) {
       console.log(targetName)
       let beforeRouter
-      this.routerUse.forEach((element, index) => {
-        if (targetName === element) {
-          beforeRouter = this.routerUse[index - 1]
-          this.routerUse.splice(index, 1)
-        }
-      });
-      this.$router.push({ name: beforeRouter })
+      if (this.routerUse.length - 1 == 0) {
+        this.$router.push({ name: "home" })
+      } else {
+        this.routerUse.forEach((element, index) => {
+          if (targetName === element) {
+
+            beforeRouter = this.routerUse[index - 1]
+            this.routerUse.splice(index, 1)
+          }
+        });
+        this.$router.push({ name: beforeRouter })
+      }
 
     },
     tabClick (targetName) {
