@@ -40,7 +40,7 @@ export default {
       activeIndex: '1',
       activeIndex2: '1',
       isCollapse: false,
-      useIcon: "el-icon-d-arrow-right",
+      useIcon: "el-icon-d-arrow-left",
       useCeping: {
         "测评序号": "cepingxuhao",
         "指标体系": "zhibiaotixi",

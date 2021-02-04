@@ -40,7 +40,7 @@ export default {
       activeIndex: "1",
       activeIndex2: "1",
       isCollapse: false,
-      useIcon: "el-icon-d-arrow-right",
+      useIcon: "el-icon-d-arrow-left",
       useXiTong: {
         "用户管理": "yonghuguanli",
         "密钥管理": "miyaoguangli",
