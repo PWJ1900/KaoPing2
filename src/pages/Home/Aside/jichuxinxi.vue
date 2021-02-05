@@ -36,9 +36,13 @@
 <style scoped>
 </style>
 <script>
+import { listenWindow } from '@/utils/listenWindow'
 export default {
   mounted () {
     console.log(this.use)
+    listenWindow(this)
+
+
   },
   data () {
     return {
@@ -73,10 +77,10 @@ export default {
     change () {
       this.isCollapse = !this.isCollapse
       if (this.isCollapse == false) {
-        this.useIcon = "el-icon-d-arrow-right"
+        this.useIcon = "el-icon-d-arrow-left"
       }
       else {
-        this.useIcon = "el-icon-d-arrow-left"
+        this.useIcon = "el-icon-d-arrow-right"
       }
 
     }

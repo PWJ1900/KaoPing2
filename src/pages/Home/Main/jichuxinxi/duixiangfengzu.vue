@@ -89,13 +89,33 @@
                       <td>分组操作:</td>
                     </tr>
                     <tr>
-                      <td rowspan="7">2</td>
+                      <td rowspan="7">
+                        <!-- <div v-for="(i,index) in addPeopleData"
+                             :key="index">
+                          <el-tag>{{i.xm}}</el-tag>
+                        </div> -->
+                        <el-checkbox-group v-model="checkListUse"
+                                           @change="useTry">
+                          <el-checkbox v-for="(i,index) in addPeopleData"
+                                       :label="i"
+                                       :key="index"></el-checkbox>
+                          <!-- 此处获取checkbox的框来add过去 -->
+                        </el-checkbox-group>
+                      </td>
 
                     </tr>
                     <tr>
                       <td>
-                        <el-button size="mini">删除当前干部</el-button>
-                        <el-button size="mini">根据姓名更改代码</el-button>
+                        <el-button size="mini"
+                                   class="buttonUse"
+                                   type="danger"
+                                   @click="deleteCheck"
+                                   plain>删除当前干部</el-button>
+                        <el-button size="mini"
+                                   type="info"
+                                   style="margin-left:0"
+                                   class="buttonUse"
+                                   plain>根据姓名更改代码</el-button>
                       </td>
 
                     </tr>
@@ -121,10 +141,16 @@
                     </tr>
                     <tr>
                       <td>
-                        <el-button size="mini">修改</el-button>
-                        <el-button size="mini">复制</el-button>
                         <el-button size="mini"
-                                   @click="returnTo">返回</el-button>
+                                   type="primary"
+                                   plain>修改</el-button>
+                        <el-button size="mini"
+                                   type="success"
+                                   plain>复制</el-button>
+                        <el-button size="mini"
+                                   type="warning"
+                                   @click="returnTo"
+                                   plain>返回</el-button>
                       </td>
 
                     </tr>
@@ -136,7 +162,9 @@
 
               <el-card style="margin:1%;width:55vw"
                        shadow="hover">
-                <el-button size="mini">将选中的干部加入组</el-button>
+                <el-button size="mini"
+                           type="success"
+                           @click="addPeople">将选中的干部加入组</el-button>
                 姓名或编号：<el-input type="text"
                           style="width:8vw"
                           v-model="xmOrbh"></el-input>
@@ -241,21 +269,6 @@
             </el-col>
           </el-row>
         </div>
-        <!-- 这是main -->
-        <!-- <el-card class="box-card">
-          <div slot="header"
-               class="clearfix">
-            <span>卡片名称</span>
-            <el-button style="float: right; padding: 3px 0"
-                       type="text"
-                       @click="AddUser">添加操作</el-button>
-          </div>
-          <div v-for="o in peopleNumber"
-               :key="o"
-               class="text item">
-            {{'列表内容 ' + o }}
-          </div>
-        </el-card> -->
       </el-main>
     </el-container>
 
@@ -269,11 +282,16 @@ export default {
   data () {
     return {
       // peopleNumber: []
+      checkListUse: [],
+
       fzOrdh: '',
       showPage: true,
       currentPage: 1,
       pagesize: 5,
       xmOrbh: '',
+      addPeopleData: [],
+      addPeopleDataReturn: [],
+      deleteCheckData: [],
       formUse: {
         dw: '',
         bm: ''
@@ -426,7 +444,7 @@ export default {
       },
       {
         dm: '2016',
-        xm: '王小虎1',
+        xm: '王小虎2',
         sf: '1518 弄',
         xb: '男',
         zw: 'da2',
@@ -437,7 +455,7 @@ export default {
       },
       {
         dm: '2016',
-        xm: '王小虎1',
+        xm: '王小虎3',
         sf: '1518 弄',
         xb: '男',
         zw: '3',
@@ -448,7 +466,7 @@ export default {
       },
       {
         dm: '2016',
-        xm: '王小虎1',
+        xm: '王小虎4',
         sf: '1518 弄',
         xb: '男',
         zw: '1',
@@ -459,7 +477,7 @@ export default {
       },
       {
         dm: '2016',
-        xm: '王小虎1',
+        xm: '王小虎5',
         sf: '1518 弄',
         xb: '女',
         zw: '1',
@@ -642,9 +660,55 @@ export default {
     },
     async selectionLineChangeHandle (val) {
       console.log(val)//把此值交给后groupDelete处理然后交给后端分配处理，交给后端接口
+      this.addPeopleDataReturn = val
 
     },
     groupDelete () {
+
+    },
+    async addPeople () {
+      let def = true
+      this.addPeopleDataReturn.forEach((element, index) => {
+        this.addPeopleData.forEach(element2 => {
+          console.log(element2)
+          if (element.xm == element2) {
+            def = false
+          }
+
+        });
+        if (def == true) {
+          this.addPeopleData.push(element.xm)
+
+        }
+        def = true
+
+
+      });
+
+
+
+
+    },
+    async deleteCheck () {
+      let re = []
+      // for (let i in this.addPeopleData) {
+      //   for (let j in this.deleteCheckData) {
+      //     if (this.addPeopleData[i] == this.deleteCheckData[j]) {
+      //       re.push(i)
+      //       // this.addPeopleData.splice(i, 1)
+      //     }
+      //   }
+      // }
+      // console.log(re)
+      for (let j in this.deleteCheckData) {
+        this.addPeopleData = this.addPeopleData.filter((item) => item !== this.deleteCheckData[j])
+      }
+    },
+    useTry (data) {
+      console.log(data)
+      // 获取表格中复选框值
+      this.deleteCheckData = data
+
 
     },
     async addUse () {
@@ -674,6 +738,12 @@ export default {
 </script>
 <style scoped>
 @import '../../../../css/headermain2.css';
+</style>
+<style scoped>
+.buttonUse {
+  width: 110px;
+  padding: 2px;
+}
 </style>
 <style>
 .el-main {

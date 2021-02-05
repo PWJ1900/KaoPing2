@@ -187,10 +187,7 @@ export default {
 
   },
   methods: {
-
     // changeTri(){
-
-
     // },
     ifshow (data) {
       console.log(data)

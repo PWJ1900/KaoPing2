@@ -3,7 +3,7 @@
     <el-container>
       <el-aside style="width:auto">
         <!-- Aside -->
-        <el-menu background-color="#545c64"
+        <el-menu background-color="#303133"
                  text-color="#fff"
                  active-text-color="#ffd04b"
                  default-active="1-4-1"
@@ -65,10 +65,10 @@ export default {
     change () {
       this.isCollapse = !this.isCollapse
       if (this.isCollapse == false) {
-        this.useIcon = "el-icon-d-arrow-right"
+        this.useIcon = "el-icon-d-arrow-left"
       }
       else {
-        this.useIcon = "el-icon-d-arrow-left"
+        this.useIcon = "el-icon-d-arrow-right"
       }
 
     },
