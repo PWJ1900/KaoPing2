@@ -1,17 +1,59 @@
 <template>
   <el-row>
     <el-card style="margin:1%">
-      <el-button @click="addUse"
-                 type="success">新增</el-button>
-      <el-button type="danger"
-                 @click="groupDelete"
-                 plain>批量删除</el-button>
-      请输入查询条件：<el-input style="width:15%"
-                v-model="searchinfo"></el-input>
+      <el-row>
+        <el-col :span="5">
+          <el-button @click="addUse"
+                     type="success">新增</el-button>
+          <el-button type="danger"
+                     @click="groupDelete"
+                     plain>批量删除</el-button>
+        </el-col>
+        <el-col :span="14">
+          请输入查询条件：<el-input style="width:15vw"
+                    v-model="searchinfo"></el-input>
 
-      <el-button @click="searchinfoUse(searchinfo)">查询</el-button>
+          <el-button @click="searchinfoUse(searchinfo)">查询</el-button>
+        </el-col>
+        <el-col :span="2">
+          <el-button type="info"
+                     @click="dialogVisibledr=true"
+                     size="small">导入excel</el-button>
+        </el-col>
+        <el-col :span="3">
+          <download-excel :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                          style="margin:0"
+                          :fields="json_fields"
+                          name="导出的表格名称.xls">
+
+            <!--      header="这是个excel的头部"  这里还有个动态绑定的问题没解决-->
+            <el-button type="primary"
+                       size="small">导出EXCEL</el-button>
+
+          </download-excel>
+        </el-col>
+      </el-row>
       <!-- 以下是通用dialog -->
     </el-card>
+
+    <!-- 这个是导入excel的dialog -->
+    <el-dialog title="导入操作"
+               :visible.sync="dialogVisibledr"
+               width="30%"
+               :before-close="handleClosedr">
+      <span>
+        <input type="file"
+               ref="upload"
+               accept=".xls, .xlsx"
+               class="outputlist_upload" />
+      </span>
+      <span slot="footer"
+            class="dialog-footer">
+        <el-button @click="dialogVisibledr = false">取 消</el-button>
+        <el-button type="primary"
+                   @click="usedr">确 定</el-button>
+      </span>
+    </el-dialog>
 
     <useDialog v-if="this.showDialogNormal&&this.showDialog"
                :headerUse="headerUse"
@@ -104,6 +146,9 @@ import yjzbDialog from '@/components/dialog/yjzbDialog'
 import ejzbDialog from '@/components/dialog/ejzbDialog'
 import cpqtDialog from '@/components/dialog/cpqtDialog'
 import gbxxbzxxDialog from '@/components/dialog/gbxxbzxxDialog'
+
+import XLSX from 'xlsx'//对excel导入操作
+
 export default {
   props: {
     headerUse: Array,//此处为传入label的参数
@@ -127,10 +172,22 @@ export default {
     tableData (newVal, oldVal) {
       this.tableDataUse = newVal;  //newVal即是chartData
       this.loading = false
+      for (let i in this.headerUse) {//顺便把表格对应的字段映射起来
+        this.json_fields[this.headerUse[i].label] = this.headerUse[i].key
+      }
+      // console.log(this.json_fields)
     },
 
   },
+  mounted () {
+    // this.$refs.upload.addEventListener("change", e => {
+    //   //绑定监听表格导入事件
+    //   this.readExcel(e);
+    // });
+
+  },
   methods: {
+
     // changeTri(){
 
 
@@ -183,6 +240,13 @@ export default {
       this.showDialog = data//得到子组建的传值来点击关闭
 
     },
+    handleClosedr (done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done();
+        })
+        .catch(_ => { });
+    },
     searchinfoUse (datasearch) {
       let keyUse = []
       //把tableData的一组key取出来，从而做下面对应属性的过滤
@@ -214,6 +278,62 @@ export default {
         this.pagesize = 5
       }
     },
+    readExcel (e) {
+      //表格导入
+      let that = this;
+      const files = e.target.files;
+      console.log(files);
+      if (files.length <= 0) {
+        //如果没有文件名
+        return false;
+      } else if (!/\.(xls|xlsx)$/.test(files[0].name.toLowerCase())) {
+        this.$Message.error("上传格式不正确，请上传xls或者xlsx格式");
+        return false;
+      }
+
+      const fileReader = new FileReader();
+      fileReader.onload = ev => {
+        try {
+          const data = ev.target.result;
+          const workbook = XLSX.read(data, {
+            type: "binary"
+          });
+          const wsname = workbook.SheetNames[0]; //取第一张表
+          const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]); //生成json表格内容
+          console.log(ws, 111111111)
+          for (let i in ws) {
+            console.log(ws[i])
+            for (let j in ws[i]) {
+              console.log(this.headerUse[j].key)
+              ws[i][j] = this.headerUse[j].key
+            }
+          }
+
+          this.tableDataUse = ws
+
+          // that.outputs = []; //清空接收数据
+          //编辑数据
+          // for (let i = 0; i < ws.length; i++) {
+          //   let sheetData = {
+          //     address: ws[i].addr,
+          //     value: ws[i].value
+
+          //   };
+          //   console.log(sheetData)
+          //   that.outputs.push(sheetData);
+
+          // }
+          this.$refs.upload.value = "";
+        } catch (e) {
+          return false;
+        }
+      };
+      fileReader.readAsBinaryString(files[0]);
+    },
+
+    usedr () {
+      this.dialogVisibledr = false//这里面接下来写获取到的ws来确定判断表格传入值
+    }
 
   },
   components: {
@@ -237,7 +357,19 @@ export default {
       restoretableData: [],
       tableDataUse: [],
       noshow: true,
-      loading: true
+      loading: true,
+      dialogVisibledr: false,//导入的dialog
+      json_meta: [//定义导出表格
+        [
+          {
+            " key ": " charset ",
+            " value ": " utf- 8 "
+          }
+        ]
+      ],
+      json_fields: {
+
+      }
 
     }
   }

@@ -66,10 +66,11 @@
           </el-card>
           <div class="block">
             <el-pagination @size-change="handleSizeChange"
+                           key="11"
                            @current-change="handleCurrentChange"
                            :current-page="currentPage"
                            :page-sizes="[5, 10, 15, 20]"
-                           :page-size="5"
+                           :page-size="pagesize"
                            layout="total, sizes, prev, pager, next, jumper"
                            :total="tableData.length">
             </el-pagination>
@@ -225,10 +226,11 @@
 
                 <div class="block">
                   <el-pagination @size-change="handleSizeChange"
+                                 key="12"
                                  @current-change="handleCurrentChange"
                                  :current-page="currentPage"
                                  :page-sizes="[5, 10, 15, 20]"
-                                 :page-size="15"
+                                 :page-size="pagesize"
                                  layout="total, sizes, prev, pager, next, jumper"
                                  :total="tableData2.length">
                   </el-pagination>
@@ -628,43 +630,43 @@ export default {
     search () {
       //对this.fzOrdh进行过滤器操作
     },
-    handleSizeChange (val) {
+    async handleSizeChange (val) {
       // console.log(`每页 ${val} 条`);
       this.pagesize = val
       // console.log(this.sizeChange)
     },
-    handleCurrentChange (val) {
+    async handleCurrentChange (val) {
       this.currentPage = val
 
 
     },
-    selectionLineChangeHandle (val) {
+    async selectionLineChangeHandle (val) {
       console.log(val)//把此值交给后groupDelete处理然后交给后端分配处理，交给后端接口
 
     },
     groupDelete () {
 
     },
-    addUse () {
+    async addUse () {
       this.showPage = false
       this.pagesize = 15
       this.currentPage = 1
 
 
     },
-    returnTo () {
+    async returnTo () {
       this.showPage = true
       this.pagesize = 5
       this.currentPage = 1
 
     },
-    editUse () {
+    async editUse () {
       this.showPage = true
-      this.pagesize = 5
+      // this.pagesize = 5
       this.currentPage = 1
 
     },
-    formatter (row, column) {
+    async formatter (row, column) {
       return row.address//格式化指定列的值
     }
   }
