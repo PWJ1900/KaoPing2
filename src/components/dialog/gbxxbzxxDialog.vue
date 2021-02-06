@@ -6,7 +6,9 @@
                :close-on-click-modal="false"
                :visible.sync="dialogVisibleShowFile"
                width="auto"
-               :before-close="handleCloseShowFile">
+               :before-close="handleCloseShowFile"
+               :fullscreen="true"
+               :center="true">
       <div style="height: 80vh">
         <embed :src="showFile"
                type="application/pdf"

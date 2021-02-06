@@ -35,6 +35,9 @@
 </style>
 <script>
 export default {
+  beforeMounted () {
+    console.log("您点击了系统管理")
+  },
   data () {
     return {
       activeIndex: "1",

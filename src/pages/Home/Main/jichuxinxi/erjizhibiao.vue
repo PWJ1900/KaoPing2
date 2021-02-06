@@ -19,7 +19,7 @@
 </template>
 <script>
 import { tablePostGet } from '@/api/tablePostGet'
-
+import useTable from '@/components/Table/useTable'
 export default {
   async created () {
     tablePostGet(this, "test")//根据postman的Api获取数据来测试
@@ -53,6 +53,9 @@ export default {
 
 
     }
+  },
+  components : {
+    useTable
   },
   methods: {
 

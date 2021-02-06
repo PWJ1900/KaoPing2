@@ -7,7 +7,9 @@
                :destroy-on-close='true'
                v-if="form!=undefined"
                :visible.sync="dialogVisible"
-               :before-close="handleClose">
+               :before-close="handleClose"
+               :fullscreen="true"
+               :center="true">
       <!--  判断undefined就不显示    v-if="form!=undefined"-->
 
       <el-form ref="form"

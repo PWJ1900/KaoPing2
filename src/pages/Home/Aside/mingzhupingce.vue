@@ -20,8 +20,8 @@
             <span slot="title">{{index}}</span>
           </el-menu-item>
         </el-menu>
-
       </el-aside>
+      <!-- main -->
       <el-main>
         <!-- 民主评测 -->
         <keep-alive>
@@ -35,6 +35,9 @@
 </style>
 <script>
 export default {
+  beforeMounted () {
+    console.log("您点击了民主评测")
+  },
   data () {
     return {
       activeIndex: '1',

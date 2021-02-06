@@ -37,8 +37,8 @@
 </style>
 <script>
 export default {
-  mounted () {
-    console.log(this.use)
+  beforeMounted () {
+    console.log("您点击了基础信息")
   },
   data () {
     return {
