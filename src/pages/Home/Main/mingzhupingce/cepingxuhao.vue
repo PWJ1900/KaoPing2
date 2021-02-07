@@ -2,15 +2,15 @@
 
   <div>
     <el-header>
-        <!-- 测评结果 -->
-        <headerUse />
-      </el-header>
-      <el-main>
+      <!-- 测评结果 -->
+      <headerUse />
+    </el-header>
+    <el-main>
       <!-- 测评序号 -->
-      <useTable   :headerUse="this.headerUse"
-                  :tableData="this.tableData"
-                  :useTitle="测评序号"/>
-      </el-main>
+      <useTable :headerUse="this.headerUse"
+                :tableData="this.tableData"
+                :useTitle="测评序号" />
+    </el-main>
   </div>
 </template>
 <script>
@@ -49,21 +49,21 @@ export default {
       ],
       tableData: [
         {
-          cpxh : 'a',
-          cpmc : 'b',
-          kssj : 'c',
-          jssj : 'd'
+          cpxh: 'a',
+          cpmc: 'b',
+          kssj: 'c',
+          jssj: 'd'
         },
         {
-          cpxh : 'aa',
-          cpmc : 'bb',
-          kssj : 'cc',
-          jssj : 'dd'
+          cpxh: 'aa',
+          cpmc: 'bb',
+          kssj: 'cc',
+          jssj: 'dd'
         }
       ],
     }
   },
-  components : {
+  components: {
     useTable
   },
   methods: {

@@ -7,6 +7,9 @@
         <headerUse />
       </el-header>
       <el-main>
+<<<<<<< HEAD
+        <!-- 这是main -->
+=======
         <!-- 第一部分： -->
         <div>
           测评序号：
@@ -83,6 +86,7 @@
             </tr>
           </table>
         </div>
+>>>>>>> master
       </el-main>
     </el-container>
 

@@ -13,7 +13,11 @@
                     :tableData="this.tableData"
                     :isBZXX='true'
                     useTitle="干部信息"
-                    :showDialoggbxxbzxx="true" />
+                    :showDialoggbxxbzxx="true"
+                    :showAddorDelete="true"
+                    :showdaoru="true"
+                    :showdaochu="true" />
+          <!-- 查询自己写 -->
 
         </el-row>
       </el-main>

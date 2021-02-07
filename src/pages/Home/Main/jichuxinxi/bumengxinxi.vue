@@ -10,7 +10,12 @@
         <el-row>
           <useTable :headerUse="this.headerUse"
                     :tableData="this.tableData"
-                    :showDialogBmxx="true" />
+                    :showDialogBmxx="true"
+                    :showAddorDelete="true"
+                    :showdaoru="true"
+                    :useSearch="true"
+                    :showdaochu="true" />
+          <!-- 这个里面的查询功能另外写 -->
 
         </el-row>
       </el-main>

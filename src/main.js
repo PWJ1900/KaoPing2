@@ -11,6 +11,10 @@ import qs from 'qs'
 // import GetTable from '@/api/tablePostGet';
 import Router from 'vue-router'
 
+// 导出excel表格插件
+
+import JsonExcel from 'vue-json-excel'
+Vue.component('downloadExcel', JsonExcel)
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
