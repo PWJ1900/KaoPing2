@@ -7,7 +7,9 @@
                :modal-append-to-body="true"
                :close-on-click-modal='false'
                :visible.sync="dialogVisible"
-               :before-close="handleClose">
+               :before-close="handleClose"
+               :fullscreen="true"
+               :center="true">
       <!--  判断undefined就不显示    v-if="form!=undefined"-->
 
       <table cellspacing="0">

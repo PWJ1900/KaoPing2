@@ -7,11 +7,81 @@
         <headerUse />
       </el-header>
       <el-main>
-        这是main
-        <useTable :headerUse="this.headerUse"
-                  :tableData="this.tableData"
-                  useTitle="班子信息"
-                  :showDialogNormal="true" />
+        <el-table :data="tableData" border>
+          <el-table-column prop="cpdj" label="测评等级"></el-table-column>
+          <el-table-column prop="zdf" label=">=最低分"></el-table-column>
+          <el-table-column prop="zgf" label="<最高分"></el-table-column>
+          <el-table-column>
+            <template slot-scope="scope">
+              <el-button @click="editUse(scope.row)">编辑</el-button>
+              <el-button @click="deleteUse(scope.row)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-button type="primary" @click="cpdjDialogVisible = true">新建测评等级</el-button>
+        <el-button type="primary" @click="zfpmDialogVisible = true">显示总分及排名</el-button>
+        <!-- 3个dialog ：修改、新建测评等级、显示总分及排名  -->
+        <!-- 1.修改 -->
+        <el-dialog title="修改" :center="true" width="50%" :visible.sync="editDialogVisible" :before-close="handleClose">
+          <div>
+            测评等级:<input v-model="editData.cpdj" type="text"/>
+          </div>
+          <div>
+            最低分:<input v-model="editData.zdf" type="number"/>
+          </div>
+          <div>
+            最高分:<input v-model="editData.zgf" type="number"/>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="editDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="edit">保存</el-button>
+          </span>
+        </el-dialog>
+        <!-- 2.新建测评等级的dialog -->
+        <el-dialog title="新建测评等级" :visible.sync="cpdjDialogVisible" 
+          :before-close="handleClose" :fullscreen="true">
+          <el-form ref="form" :model="form" label-width="80px">
+            <el-form-item label="测评等级">
+              <el-input v-model="form.cpdj" type="text"></el-input>
+            </el-form-item>
+            <el-form-item label=">=最低分">
+              <el-input v-model="form.zdf" type="number"></el-input>
+            </el-form-item>
+            <el-form-item label="<最高分">
+              <el-input v-model="form.zgf" type="number"></el-input>
+            </el-form-item>
+          </el-form>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="cpdjDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="add">保存</el-button>
+          </span>
+        </el-dialog>
+
+        <!-- 3.显示总分及排名的dialog -->
+        <el-dialog title="总分及排名" :visible.sync="zfpmDialogVisible" 
+          :before-close="handleClose" :fullscreen="true" :center="true">
+          <div>
+            <p><b>请注意：一定要先 采集数据计算，再获取最新的总评分</b></p>
+        
+            测评序号：<el-select v-model="cepingxuhaotemp" placeholder="请选择测评序号">
+              <el-option v-for="item in data" :label="item.cepingxuhao+'('+item.cepingmingcheng+')'" 
+                :key="item.cepingxuhao" 
+                value='i.cepingxuhao'>
+              </el-option>
+            </el-select>
+            <br>
+            总分前:<input v-model="zfq" placeholder="10"/>%
+      
+       
+            <!-- 显示查询结果 -->
+            <h1>查询结果： {{result}}</h1>
+     
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="zfpmDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="search">查询</el-button>
+          </span>
+        </el-dialog>
       </el-main>
     </el-container>
 
@@ -19,39 +89,122 @@
 </template>
 <script>
 import { tablePostGet } from '@/api/tablePostGet'
+import index from '../../index.vue'
 export default {
-  created () {
-    tablePostGet(this, "bmxx")
-
+  components: { index },
+  async created () {
+    console.log("测评等级组件-加载完成")
+    tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
   },
   data () {
     return {
-      tableData: [],
-      headerUse: [
+      /**修改的dialog
+       * editData : 需要修改的数据
+       */
+      editDialogVisible : false,
+      editData : '',
+
+      /**新建测评等级的dialog
+       * cpdjDialogVisible : dialog切换开关
+       * form : 表单信息 
+       * */
+      cpdjDialogVisible: false,
+      form : {
+        cpdj : '',
+        zdf : '',
+        zgf : ''
+      },
+
+      /**显示分数及排名的dialog
+      * zfpmDialogVisible : dialog切换开关
+      * data : 测评序号、测评名称信息
+      * cepingxuhaotemp : 记录想查看信息的测评序号
+      * zfq ：总分前
+      * result ： 查询结果
+      */
+      zfpmDialogVisible: false,
+      data : [
         {
-          label: "测评等级",
-          key: "bmdm"
+          cepingxuhao : '202002',
+          cepingmingcheng : '测试用1'
         },
         {
-          label: "最低分",
-          key: "bmmc"
-        },
-        {
-          label: "最高分",
-          key: "zgf"
-        },
-      ]
+          cepingxuhao : '202101',
+          cepingmingcheng : '测试用2'
+        }
+      ],
+      cepingxuhaotemp : '',
+      zfq : '',
+      result : 'jieguo',
+
+      /**表格数据
+       * 
+       *  */ 
+      tableData : [
+      {
+        cpdj : '优秀',
+        zdf : 99,
+        zgf: 100
+      },
+      {
+        cpdj : '良好',
+        zdf : 88,
+        zgf : 99
+      },
+      {
+        cpdj : '一般',
+        zdf : 70,
+        zgf : 79
+      },
+      {
+        cpdj : '改进',
+        zdf : 60,
+        zgf : 69
+      }
+    ]
     }
+  },
+  methods : {
+    // 编辑 ，传入当前行数据（scope.row）
+    editUse (value) {
+      this.editData = value
+      console.log(value)
+      console.log('修改的是' + value.cepingdengji)
+      this.editDialogVisible = true
+    },
+    // 删除，传入当前行数据（scope.row）
+    deleteUse (value) {
+      console.log('删除的是' + value.cepingdengji)
+    },
+    handleClose (done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    },
+    // 修改dialog的修改请求
+    edit () {
+      console.log(this.editData)
+    },
+    // 查看dialog的查看请求
+    search () {
+    },
+    // 新增dialog的新增请求
+    add () {
 
+    }
   }
-
 }
 </script>
 <style scoped>
 @import '../../../../css/headermain2.css';
-</style>
-<style>
+
 .el-main {
   padding: 0;
+}
+.el-table {
+  width: 80%;
+  height: 60%;
 }
 </style>

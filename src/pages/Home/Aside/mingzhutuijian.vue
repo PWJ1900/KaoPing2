@@ -33,6 +33,9 @@
 </style>
 <script>
 export default {
+  beforeMounted () {
+    console.log("您点击了民主推荐")
+  },
   data () {
     return {
       activeIndex: '1',

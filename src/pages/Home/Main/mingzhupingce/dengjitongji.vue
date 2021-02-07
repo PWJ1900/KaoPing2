@@ -15,7 +15,8 @@
 </template>
 <script>
 export default {
-
+  async created () {
+  }
 }
 </script>
 <style scoped>
