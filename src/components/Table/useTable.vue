@@ -55,8 +55,13 @@
 
     <!-- 这个是导入excel的dialog -->
     <el-dialog title="导入操作"
-               :visible.sync="dialogVisibledr"
+               :visible.sync="syncUse"
+               v-show="dialogVisibledr"
+               :modal="useModal"
                width="30%"
+               :modal-append-to-body="true"
+               :close-on-click-modal='false'
+               ref="uploadDialog"
                :before-close="handleClosedr">
       <span>
         <input type="file"
@@ -298,15 +303,24 @@ export default {
         // console.log(this.json_fields)
       },
       immediate: true
-    }
-
+    },
 
   },
   mounted () {
-    this.$refs.upload.addEventListener("change", e => {
-      //绑定监听表格导入事件
-      this.readExcel(e);
+    this.$nextTick(() => {
+      this.$refs.upload.addEventListener("change", e => {
+        this.readExcel(e)
+      })
     });
+
+    // let el = this.$refs.uploadDialog//
+    // // console.log(el)
+    // if (el) {
+    //   el.$refs.upload.addEventListener("change", e => {
+    //     //绑定监听表格导入事件
+    //     this.readExcel(e);
+    //   });
+    // }
 
   },
   methods: {
@@ -450,7 +464,7 @@ export default {
           //   that.outputs.push(sheetData);
 
           // }
-          this.$refs.upload.value = "";
+          // this.$refs.upload.value = "";//此处是给upload清空
         } catch (e) {
           return false;
         }
@@ -586,6 +600,8 @@ export default {
       noshow: true,
       loading: true,
       dialogVisibledr: false,//导入的dialog
+      syncUse: true,
+      useModal: false,
 
 
       options2: ['等于', '不等于', '相似于', '不相似于'],
