@@ -38,16 +38,15 @@
 <script>
 import { listenWindow } from '@/utils/listenWindow'
 export default {
-<<<<<<< HEAD
+
   mounted () {
     console.log(this.use)
     listenWindow(this)
+  },
 
-
-=======
   beforeMounted () {
     console.log("您点击了基础信息")
->>>>>>> master
+
   },
   data () {
     return {

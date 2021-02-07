@@ -7,26 +7,30 @@
         <headerUse />
       </el-header>
       <el-main>
-<<<<<<< HEAD
+
         <!-- 这是main -->
-=======
+
         <!-- 第一部分： -->
         <div>
           测评序号：
-          <el-select v-model="cepingxuhaotemp" placeholder="请选择测评序号">
-            <el-option v-for="item in data" :label="item.cepingxuhao+'('+item.cepingmingcheng+')'" 
-              :key="item.cepingxuhao" 
-              value='i.cepingxuhao'>
+          <el-select v-model="cepingxuhaotemp"
+                     placeholder="请选择测评序号">
+            <el-option v-for="item in data"
+                       :label="item.cepingxuhao+'('+item.cepingmingcheng+')'"
+                       :key="item.cepingxuhao"
+                       value='i.cepingxuhao'>
             </el-option>
           </el-select>
-    
+
           单位：
-          <el-select v-model="cepingxuhaotemp" placeholder="请选择测评序号">
+          <el-select v-model="cepingxuhaotemp"
+                     placeholder="请选择测评序号">
           </el-select>
         </div>
         <!-- 第二部分：表格1 -->
         <div>
-          <table width="500px" border="2">
+          <table width="500px"
+                 border="2">
             <caption>用户密码分配与使用情况统计</caption>
             <tr>
               <th>按测评对象</th>
@@ -62,7 +66,8 @@
         </div>
         <!-- 第三部分：表格2 -->
         <div>
-          <table width="500px" border="2">
+          <table width="500px"
+                 border="2">
             <caption>被测对象测评数据采集情况统计</caption>
             <tr>
               <th>按被测评对象</th>
@@ -86,7 +91,8 @@
             </tr>
           </table>
         </div>
->>>>>>> master
+
+        <!-- 这是main -->
       </el-main>
     </el-container>
 
@@ -101,10 +107,10 @@ export default {
     return {
       /**第一部分的数据：记录所选的测评序号、单位的值
        */
-      danweitemp : '',
-      cepingxuhaotemp : '',
-      data : [],
-      danwei : []
+      danweitemp: '',
+      cepingxuhaotemp: '',
+      data: [],
+      danwei: []
     }
   }
 }
