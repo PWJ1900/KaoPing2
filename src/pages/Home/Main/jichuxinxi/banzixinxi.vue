@@ -8,13 +8,14 @@
       </el-header>
       <el-main>
         <el-row>
-
           <useTable :headerUse="this.headerUse"
                     :tableData="this.tableData"
                     :isBZXX="false"
                     useTitle="班子信息"
-                    :showDialoggbxxbzxx="true" />
-
+                    :showDialoggbxxbzxx="true"
+                    :showAddorDelete="true"
+                    :showdaoru="true"
+                    :showdaochu="true" />
         </el-row>
       </el-main>
     </el-container>

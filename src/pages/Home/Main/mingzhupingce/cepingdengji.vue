@@ -7,7 +7,7 @@
         <headerUse />
       </el-header>
       <el-main>
-        这是main
+        <!-- 这是main -->
         <useTable :headerUse="this.headerUse"
                   :tableData="this.tableData"
                   useTitle="班子信息"

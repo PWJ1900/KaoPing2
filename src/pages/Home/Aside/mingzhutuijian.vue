@@ -21,7 +21,8 @@
           </el-menu-item>
         </el-menu>
       </el-aside>
-      <el-main>民主推荐
+      <el-main>
+        <!-- 民主推荐 -->
         <keep-alive>
           <router-view></router-view>
         </keep-alive>

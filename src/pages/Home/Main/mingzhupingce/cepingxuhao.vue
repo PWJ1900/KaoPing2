@@ -3,11 +3,16 @@
   <div>
     <el-row>
 
-      <!-- 测评序号 -->
-      <headerUse />
-
+      <el-container>
+        <el-header>
+          <!-- 测评序号 -->
+          <headerUse />
+        </el-header>
+        <el-main>
+          <!-- 这是main -->
+        </el-main>
+      </el-container>
     </el-row>
-
   </div>
 </template>
 <script>

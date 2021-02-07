@@ -2,25 +2,42 @@
   <el-row>
     <el-card style="margin:1%">
       <el-row>
-        <el-col :span="5">
+        <!-- 以下分别分为showAddorDelete显示新增和批量删除 
+           showSearch显示查询 
+           showdaoru显示导入
+           showdaochu显示导出默认值都为false
+           showCheckbox为复选框默认值为true-->
+        <el-col :span="5"
+                v-show="showAddorDelete">
           <el-button @click="addUse"
-                     type="success">新增</el-button>
+                     type="success"
+                     size="small">新增</el-button>
           <el-button type="danger"
                      @click="groupDelete"
+                     size="small"
                      plain>批量删除</el-button>
         </el-col>
-        <el-col :span="14">
+        <el-col :span="10"
+                v-show="showSearch">
           请输入查询条件：<el-input style="width:15vw"
                     v-model="searchinfo"></el-input>
 
           <el-button @click="searchinfoUse(searchinfo)">查询</el-button>
         </el-col>
-        <el-col :span="2">
+        <el-col :span="2"
+                v-show="useSearch">
+
+          <el-button size="small"
+                     @click="dialogVisibleZhcx=true">查询</el-button>
+        </el-col>
+        <el-col :span="2"
+                v-show="showdaoru">
           <el-button type="info"
                      @click="dialogVisibledr=true"
                      size="small">导入excel</el-button>
         </el-col>
-        <el-col :span="3">
+        <el-col :span="3"
+                v-show="showdaochu">
           <download-excel :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                           style="margin:0"
                           :fields="json_fields"
@@ -33,7 +50,7 @@
           </download-excel>
         </el-col>
       </el-row>
-      <!-- 以下是通用dialog -->
+
     </el-card>
 
     <!-- 这个是导入excel的dialog -->
@@ -54,7 +71,79 @@
                    @click="usedr">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 这是组合查询的dialog -->
+    <el-dialog title="组合查询"
+               :visible.sync="dialogVisibleZhcx"
+               width="auto"
+               :before-close="handleClose">
+      <span>
+        <div style="text-align:center">
+          <el-button size="small"
+                     @click="isSearchSure">确定</el-button>
+          <el-button size="small">全部</el-button>
+          <el-button size="small">取消</el-button>
+        </div><br>
+        <table cellspacing="0">
+          <tbody v-for="j in i"
+                 :key="j">
+            <tr>
+              <td>
+                <el-select v-model="value1[j]"
+                           placeholder="请选择属性"
+                           id="el-selectUse">
+                  <el-option v-for="(item,index) in headerUse"
+                             :key="index"
+                             :label="item.label"
+                             :value="item.key">
+                  </el-option>
+                </el-select>
+              </td>
+              <td>
+                <el-select v-model="value2[j]"
+                           placeholder="关联方式"
+                           id="el-selectUse">
+                  <el-option v-for="(item,index) in options2"
+                             :key="index"
+                             :label="item"
+                             :value="item">
+                  </el-option>
+                </el-select>
+              </td>
+              <td>
+                <el-input type="text"
+                          v-model="valueInput[j]"></el-input>
+              </td>
+              <td>
+                <el-select v-model="value3[j]"
+                           placeholder="组合方式"
+                           id="el-selectUse">
+                  <el-option v-for="(item,index) in options3"
+                             :key="index"
+                             :label="item"
+                             :value="item">
+                  </el-option>
+                </el-select>
+              </td>
+              <td>
+                <el-button @click="deleteSearch">删除</el-button>
+              </td>
+              <td>
+                <el-button @click="addSearch">新增</el-button>
+              </td>
+            </tr>
 
+          </tbody>
+        </table>
+      </span>
+      <span slot="footer"
+            class="dialog-footer">
+        <el-button @click="dialogVisibleZhcx = false">取 消</el-button>
+        <el-button type="primary"
+                   @click="dialogVisibleZhcx = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 以下是通用dialog -->
     <useDialog v-if="this.showDialogNormal&&this.showDialog"
                :headerUse="headerUse"
                :form="form"
@@ -98,7 +187,8 @@
                   v-loading="loading"
                   @selection-change="selectionLineChangeHandle"
                   stripe>
-          <el-table-column type="selection">
+          <el-table-column type="selection"
+                           v-if="showCheckbox">
           </el-table-column>
           <template v-for="info in headerUse">
             <el-table-column :key="info.key"
@@ -160,7 +250,36 @@ export default {
     showDialogCpqt: Boolean,//这个对应的是参评群体的dialog
     showDialoggbxxbzxx: Boolean,
     isBZXX: Boolean,
-    useTitle: String
+    useTitle: String,
+    showAddorDelete: {
+      type: Boolean,
+      default: false//default也可以写成函数形式default: () => {return []}
+    },
+    showSearch: {
+      type: Boolean,
+      default: false
+    },
+    showdaoru: {
+      type: Boolean,
+      default: false
+    },
+    showdaochu: {
+      type: Boolean,
+      default: false
+    },
+    showCheckbox: {
+      type: Boolean,
+      default: true
+    },
+    useSearch: {
+      type: Boolean,
+      default: false
+
+    }
+    //dialogVisibleZhcx: {
+    //   type: Boolean,
+    //   default: true
+    // }
   },
   computed: {
     useTableHeight () {
@@ -169,21 +288,25 @@ export default {
 
   },
   watch: {
-    tableData (newVal, oldVal) {
-      this.tableDataUse = newVal;  //newVal即是chartData
-      this.loading = false
-      for (let i in this.headerUse) {//顺便把表格对应的字段映射起来
-        this.json_fields[this.headerUse[i].label] = this.headerUse[i].key
-      }
-      // console.log(this.json_fields)
-    },
+    tableData: {
+      handler (newVal, oldVal) {
+        this.tableDataUse = newVal;  //newVal即是chartData
+        this.loading = false
+        for (let i in this.headerUse) {//顺便把表格对应的字段映射起来
+          this.json_fields[this.headerUse[i].label] = this.headerUse[i].key
+        }
+        // console.log(this.json_fields)
+      },
+      immediate: true
+    }
+
 
   },
   mounted () {
-    // this.$refs.upload.addEventListener("change", e => {
-    //   //绑定监听表格导入事件
-    //   this.readExcel(e);
-    // });
+    this.$refs.upload.addEventListener("change", e => {
+      //绑定监听表格导入事件
+      this.readExcel(e);
+    });
 
   },
   methods: {
@@ -277,7 +400,11 @@ export default {
     },
     readExcel (e) {
       //表格导入
-      let that = this;
+      let that = this
+      let transSum = []
+      let transRow = {}
+      let num = 0
+
       const files = e.target.files;
       console.log(files);
       if (files.length <= 0) {
@@ -298,15 +425,18 @@ export default {
           const wsname = workbook.SheetNames[0]; //取第一张表
           const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]); //生成json表格内容
           console.log(ws, 111111111)
-          for (let i in ws) {
-            console.log(ws[i])
+          for (let i in ws) {//这两个循环是为了把导入的表格键值对对应起来
             for (let j in ws[i]) {
-              console.log(this.headerUse[j].key)
-              ws[i][j] = this.headerUse[j].key
+              transRow[this.headerUse[num].key] = ws[i][j]
+              num = num + 1
             }
+            console.log(transRow)
+            num = 0
+            transSum.push(transRow)
+            transRow = new Object()
           }
-
-          this.tableDataUse = ws
+          console.log(transSum)
+          this.tableDataUse = transSum
 
           // that.outputs = []; //清空接收数据
           //编辑数据
@@ -330,8 +460,98 @@ export default {
 
     usedr () {
       this.dialogVisibledr = false//这里面接下来写获取到的ws来确定判断表格传入值
-    }
+    },
+    addSearch () {
+      this.i = this.i + 1
+    },
+    deleteSearch () {
+      if (this.i > 1)
+        this.i = this.i - 1
+    },
+    handleClose () {
+      this.dialogVisibleZhcx = false
+    },
+    merge (bigArray) {
+      let array = [];
+      const middeleArray = bigArray.reduce((a, b) => {
+        return a.concat(b);
+      });
 
+      middeleArray.forEach((arrItem) => {
+        if (array.indexOf(arrItem) == -1) {
+          array.push(arrItem);
+        }
+      });
+
+      return array;
+    },
+
+    isSearchSure () {
+
+      for (let t = 1; t < this.value1.length; t++) {
+        if (t == 1) {
+          if (this.value2[t] == "等于") {
+            this.tableDataUse = this.tableData.filter((data) => data[this.value1[t]] + "" == this.valueInput[t])
+          }
+          else if (this.value2[t] == "不等于") {
+            this.tableDataUse = this.tableData.filter((data) => data[this.value1[t]] + "" != this.valueInput[t])
+
+          }
+          else if (this.value2[t] == "相似于") {
+            this.tableDataUse = this.tableData.filter((data) => (data[this.value1[t]] + "").includes(this.valueInput[t]))
+
+          }
+          else if (this.value2[t] == "不相似于") {
+            this.tableDataUse = this.tableData.filter((data) => !(data[this.value1[t]] + "").includes(this.valueInput[t]))
+
+
+          }
+
+        }
+        if (t > 1) {
+          if (this.value3[t - 1] == "并且") {
+            // this.tableDataUse = this.tableDataUse.filter((data) =>
+            if (this.value2[t] == "等于") {
+              this.tableDataUse = this.tableDataUse.filter((data) => data[this.value1[t]] + "" == this.valueInput[t])
+            }
+            else if (this.value2[t] == "不等于") {
+              this.tableDataUse = this.tableDataUse.filter((data) => data[this.value1[t]] + "" != this.valueInput[t])
+
+            }
+            else if (this.value2[t] == "相似于") {
+              this.tableDataUse = this.tableDataUse.filter((data) => (data[this.value1[t]] + "").includes(this.valueInput[t]))
+
+            }
+            else if (this.value2[t] == "不相似于") {
+              this.tableDataUse = this.tableDataUse.filter((data) => !(data[this.value1[t]] + "").includes(this.valueInput[t]))
+
+
+            }
+          }
+          if (this.value3[t - 1] == '或者') {
+            if (this.value2[t] == "等于") {
+              this.tableDataUse = this.merge([this.tableDataUse, (this.tableData.filter((data) => data[this.value1[t]] + "" == this.valueInput[t]))])
+
+            }
+            else if (this.value2[t] == "不等于") {
+              this.tableDataUse = this.merge([this.tableDataUse, (this.tableData.filter((data) => data[this.value1[t]] + "" != this.valueInput[t]))])
+
+            }
+            else if (this.value2[t] == "相似于") {
+              this.tableDataUse = this.merge([this.tableDataUse, (this.tableData.filter((data) => (data[this.value1[t]] + "").includes(this.valueInput[t])))])
+
+            }
+            else if (this.value2[t] == "不相似于") {
+              this.tableDataUse = this.merge([this.tableDataUse, (this.tableData.filter((data) => !(data[this.value1[t]] + "").includes(this.valueInput[t])))])
+
+
+            }
+
+          }
+        }
+
+      }
+    }
   },
   components: {
     useDialog,
@@ -346,6 +566,16 @@ export default {
     return {
       showDialog: false,
       form: Object,
+
+      // 组合查询
+      i: 1,
+      dialogVisibleZhcx: false,
+      value1: [],
+      value2: [],
+      value3: [],
+      valueInput: [],
+
+
       currentPage: 1,
       pagesize: 5,
       tableChange: [],
@@ -356,6 +586,11 @@ export default {
       noshow: true,
       loading: true,
       dialogVisibledr: false,//导入的dialog
+
+
+      options2: ['等于', '不等于', '相似于', '不相似于'],
+      options3: ['并且', '或者'],
+
       json_meta: [//定义导出表格
         [
           {
