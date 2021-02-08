@@ -14,10 +14,6 @@
         <div style="margin-top:20px">
           测评序号：
 
-          <el-select v-model="cepingxuhaotemp" placeholder="请选择测评序号">
-            <el-option v-for="item in cepingList" :label="item.cepingxuhao+'('+item.cepingmingcheng+')'" 
-              :key="item.cepingxuhao" 
-              :value='i.cepingxuhao'>
           <el-select v-model="cepingxuhaotemp"
                      placeholder="请选择测评序号">
             <el-option v-for="item in data"
@@ -35,7 +31,8 @@
         <!-- 第二部分：表格1 -->
 
         <div style="margin-top:20px">
-          <table width="500px" border="2">
+          <table width="500px"
+                 border="2">
 
             <caption>用户密码分配与使用情况统计</caption>
             <tr>
@@ -43,7 +40,8 @@
               <th>合计</th>
               <th>范围a</th>
             </tr>
-            <tr v-for="item in tableData1" :key="item.label">
+            <tr v-for="item in tableData1"
+                :key="item.label">
               <td>{{item.label}}</td>
               <td>{{item.data1}}</td>
               <td>{{item.data2}}</td>
@@ -52,7 +50,8 @@
         </div>
         <!-- 第三部分：表格2 -->
         <div style="margin-top:20px">
-          <table width="500px" border="2">
+          <table width="500px"
+                 border="2">
 
             <caption>被测对象测评数据采集情况统计</caption>
             <tr>
@@ -65,7 +64,8 @@
               <th>单位</th>
               <th>部门</th>
             </tr>
-            <tr v-for="item in tableData2" :key="item.name">
+            <tr v-for="item in tableData2"
+                :key="item.name">
               <td>{{item.name}}</td>
               <td>{{item.data1}}</td>
               <td>{{item.data2}}</td>
@@ -97,54 +97,54 @@ export default {
        * cepingList ：测评序号、测评名称信息列表
        * danweiList：单位信息列表
        */
-      danweitemp : '',
-      cepingxuhaotemp : '',
-      cepingList : [],
-      danweiList : [],
+      danweitemp: '',
+      cepingxuhaotemp: '',
+      cepingList: [],
+      danweiList: [],
       /**第二部分（表格1）
        */
-      tableData1 : [
+      tableData1: [
         {
-          label : '用于密码分配数',
-          data1 : 5,
-          data2 : 5
+          label: '用于密码分配数',
+          data1: 5,
+          data2: 5
         },
         {
-          label : '已登录用户密码数',
-          data1 : 3,
-          data2 : 3
+          label: '已登录用户密码数',
+          data1: 3,
+          data2: 3
         },
         {
-          label : '已结束测评用户数',
-          data1 : 0,
-          data2 : 0
+          label: '已结束测评用户数',
+          data1: 0,
+          data2: 0
         },
         {
-          label : '应有测评记录总数',
-          data1 : 35,
-          data2 : 35
+          label: '应有测评记录总数',
+          data1: 35,
+          data2: 35
         },
         {
-          label : '已采集测评记录数',
-          data1 : 7,
-          data2 : 7
+          label: '已采集测评记录数',
+          data1: 7,
+          data2: 7
         }
       ],
       /**第三部分（表格2）
        */
-      tableData2 : [
+      tableData2: [
         {
-          name : '人员03',
-          data1 : 7,
-          data2 : 7,
-          data3 : 7,
-          data4 : 7,
-          data5 : 7,
-          data6 : 7,
-          data7 : 7 
+          name: '人员03',
+          data1: 7,
+          data2: 7,
+          data3: 7,
+          data4: 7,
+          data5: 7,
+          data6: 7,
+          data7: 7
         }
-      ] 
-      
+      ]
+
 
     }
   }

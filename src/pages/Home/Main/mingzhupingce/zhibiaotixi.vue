@@ -8,10 +8,7 @@
       <el-main>
         <useTable :headerUse="this.headerUse"
                   :tableData="this.tableData"
-                  :showDialogZbtx="true"/>
-                  :isBZXX="false"
-                  useTitle="指标体系"
-                  :showDialoggbxxbzxx="true" />
+                  :showDialogZbtx="true" />
       </el-main>
     </el-container>
 
@@ -51,27 +48,27 @@ export default {
         }
       ],
 
-      tableData : [
+      tableData: [
         {
-          cpxh : 'a',
-          sf : 'b',
-          zbmc : 'c',
-          zbgs : 'd',
-          cpqts : 'e'
+          cpxh: 'a',
+          sf: 'b',
+          zbmc: 'c',
+          zbgs: 'd',
+          cpqts: 'e'
         },
         {
-          cpxh : 'aa',
-          sf : 'ba',
-          zbmc : 'cd',
-          zbgs : 'da',
-          cpqts : 'eee'
+          cpxh: 'aa',
+          sf: 'ba',
+          zbmc: 'cd',
+          zbgs: 'da',
+          cpqts: 'eee'
         },
         {
-          cpxh : 'aa',
-          sf : 'bb',
-          zbmc : 'cc',
-          zbgs : 'dd',
-          cpqts : 'ee'
+          cpxh: 'aa',
+          sf: 'bb',
+          zbmc: 'cc',
+          zbgs: 'dd',
+          cpqts: 'ee'
         }
       ]
 
