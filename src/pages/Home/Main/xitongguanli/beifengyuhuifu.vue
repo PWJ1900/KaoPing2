@@ -7,14 +7,24 @@
         <headerUse />
       </el-header>
       <el-main>
-        这是main
+        <div style="margin-top:20px">
+          <el-button type="primary" @click="backup">备份数据库</el-button>
+          <el-button type="primary" @click="recover">恢复数据库</el-button>
+        </div>
       </el-main>
     </el-container>
   </div>
 </template>
 <script>
 export default {
+  methods : {
+    backup () {
 
+    },
+    recover () {
+      
+    }
+  }
 }
 </script>
 <style scoped>

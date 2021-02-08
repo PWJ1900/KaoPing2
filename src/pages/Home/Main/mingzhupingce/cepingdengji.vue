@@ -7,10 +7,15 @@
         <headerUse />
       </el-header>
       <el-main>
+        <!-- 表格 -->
         <el-table :data="tableData" border>
+          <!-- 测评等级 -->
           <el-table-column prop="cpdj" label="测评等级"></el-table-column>
+          <!-- 最低分 -->
           <el-table-column prop="zdf" label=">=最低分"></el-table-column>
+          <!-- 最高分 -->
           <el-table-column prop="zgf" label="<最高分"></el-table-column>
+          <!-- 编辑区 -->
           <el-table-column>
             <template slot-scope="scope">
               <el-button @click="editUse(scope.row)">编辑</el-button>
@@ -18,11 +23,15 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-button type="primary" @click="cpdjDialogVisible = true">新建测评等级</el-button>
-        <el-button type="primary" @click="zfpmDialogVisible = true">显示总分及排名</el-button>
-        <!-- 3个dialog ：修改、新建测评等级、显示总分及排名  -->
+        <!-- 两个功能按钮 -->
+        <div style="margin-top:20px">
+          <el-button type="primary" @click="cpdjDialogVisible = true">新建测评等级</el-button>
+          <el-button type="primary" @click="zfpmDialogVisible = true">显示总分及排名</el-button>
+        </div>
+        <!-- dialog ：修改、新建测评等级、显示总分及排名  -->
         <!-- 1.修改 -->
-        <el-dialog title="修改" :center="true" width="50%" :visible.sync="editDialogVisible" :before-close="handleClose">
+        <el-dialog  title="修改" :center="true" :visible.sync="editDialogVisible" 
+                    :before-close="handleClose" :fullscreen="true">
           <div>
             测评等级:<input v-model="editData.cpdj" type="text"/>
           </div>
@@ -39,7 +48,7 @@
         </el-dialog>
         <!-- 2.新建测评等级的dialog -->
         <el-dialog title="新建测评等级" :visible.sync="cpdjDialogVisible" 
-          :before-close="handleClose" :fullscreen="true">
+          :before-close="handleClose" :fullscreen="true" :center="true">
           <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="测评等级">
               <el-input v-model="form.cpdj" type="text"></el-input>
@@ -62,20 +71,20 @@
           :before-close="handleClose" :fullscreen="true" :center="true">
           <div>
             <p><b>请注意：一定要先 采集数据计算，再获取最新的总评分</b></p>
-        
-            测评序号：<el-select v-model="cepingxuhaotemp" placeholder="请选择测评序号">
+            <div>
+              测评序号：<el-select v-model="cepingxuhaotemp" placeholder="请选择测评序号">
               <el-option v-for="item in data" :label="item.cepingxuhao+'('+item.cepingmingcheng+')'" 
                 :key="item.cepingxuhao" 
                 value='i.cepingxuhao'>
               </el-option>
-            </el-select>
-            <br>
-            总分前:<input v-model="zfq" placeholder="10"/>%
-      
-       
+              </el-select>
+              <br>
+              总分前:<input v-model="zfq" placeholder="10"/>%
+            </div>
             <!-- 显示查询结果 -->
-            <h1>查询结果： {{result}}</h1>
-     
+            <div>        
+              <h1>查询结果： {{result}}</h1>
+            </div>
           </div>
           <span slot="footer" class="dialog-footer">
             <el-button type="primary" @click="zfpmDialogVisible = false">取 消</el-button>
@@ -94,7 +103,7 @@ export default {
   components: { index },
   async created () {
     console.log("测评等级组件-加载完成")
-    tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
+    // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
   },
   data () {
     return {

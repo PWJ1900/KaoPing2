@@ -9,7 +9,7 @@
       <!-- 测评序号 -->
       <useTable   :headerUse="this.headerUse"
                   :tableData="this.tableData"
-                  :useTitle="测评序号"/>
+                  :showDialogCpxh="true"/>
       </el-main>
   </div>
 </template>

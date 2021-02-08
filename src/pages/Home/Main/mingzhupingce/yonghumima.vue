@@ -9,8 +9,6 @@
       <el-main>
         <useTable :headerUse="this.headerUse"
                   :tableData="this.tableData"   
-                  :useTitle="用户密码"
-                  :isBZXX="false"
                   :showDialogYhmm="true"/>
       </el-main>
     </el-container>
@@ -38,7 +36,7 @@ export default {
         {
           yhm : '144',
           mm : '222',
-          jy : 'true',
+          jy : true,
           kpxh : '212',
           qtlx : 'a',
           fzm : '',
@@ -47,7 +45,7 @@ export default {
         {
           yhm : '222',
           mm : '33',
-          jy : 'true',
+          jy : true,
           kpxh : '22',
           qtlx : 'a',
           fzm : '',

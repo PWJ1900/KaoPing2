@@ -7,10 +7,8 @@
       </el-header>
       <el-main>
         <useTable :headerUse="this.headerUse"
-                    :tableData="this.tableData"
-                    :isBZXX="false"
-                    useTitle="指标体系"
-                    :showDialoggbxxbzxx="true" />
+                  :tableData="this.tableData"
+                  :showDialogZbtx="true"/>
       </el-main>
     </el-container>
 
@@ -23,7 +21,7 @@ import useTable from '@/components/Table/useTable'
 export default {
   async created () {
     console.log("指标体系组件-加载完成")
-    talePostGet(this, "test")//根据postman的Api获取数据来测试
+    // talePostGet(this, "test")//根据postman的Api获取数据来测试
   },
   components : {
     useTable
@@ -49,7 +47,29 @@ export default {
           key : 'cpqts'
         }
       ],
-      tableData : []
+      tableData : [
+        {
+          cpxh : 'a',
+          sf : 'b',
+          zbmc : 'c',
+          zbgs : 'd',
+          cpqts : 'e'
+        },
+        {
+          cpxh : 'aa',
+          sf : 'ba',
+          zbmc : 'cd',
+          zbgs : 'da',
+          cpqts : 'eee'
+        },
+        {
+          cpxh : 'aa',
+          sf : 'bb',
+          zbmc : 'cc',
+          zbgs : 'dd',
+          cpqts : 'ee'
+        }
+      ]
     }
   }
 }

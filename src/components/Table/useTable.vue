@@ -85,6 +85,8 @@
         gbxxbzxxDialog ： 干部信息、班子信息
       民主评测的：  
         yhmmDialog : 用户密码
+        zbtxDialog : 指标体系
+        cpxhDialog ：测评序号
     -->
     <useDialog v-if="this.showDialogNormal&&this.showDialog"
                :headerUse="headerUse"
@@ -112,11 +114,18 @@
                     :isBZXX="isBZXX"
                     :useTitle="useTitle"
                     @funcgbxxbzxx="getifshow"/>
-    <yhmmDialog v-if="this.showDialoggbxxbzxx&&this.showDialog"
+    <yhmmDialog v-if="this.showDialogYhmm&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
-                :isBZXX="isBZXX"
-                :useTitle="useTitle"/>              
+                @funcYhmm="getifshow"/>
+    <cpxhDialog v-if="this.showDialogCpxh&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcCpxh="getifshow"/>
+    <zbtxDialog v-if="this.showDialogZbtx&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcZbtx="getifshow"/>              
   </el-row>
 </template>
 <script>
@@ -127,29 +136,36 @@ import ejzbDialog from '@/components/dialog/ejzbDialog'
 import cpqtDialog from '@/components/dialog/cpqtDialog'
 import gbxxbzxxDialog from '@/components/dialog/gbxxbzxxDialog'
 import yhmmDialog from '@/components/dialog/yhmmDialog'
+import cpxhDialog from '@/components/dialog/cpxhDialog'
+import zbtxDialog from '@/components/dialog/zbtxDialog'
 
 export default {
-   created () {
+  // 生命周期钩子函数：useTable组件被创建后执行，给
+  created () {
     this.tableDataUse = this.tableData
     this.loading = false
   },
 
   props: {
     /**表格基本属性
-     * headerUse ：表头信息，带key（用来绑定prop）
+     * headerUse ：表头信息：key（用来绑定prop），label（绘制表格）
      * tableData ：表格数据
      */
-    headerUse: Array,//此处为传入label的参数
-    tableData: Array,//此处为传入的表单数据
+    headerUse: Array,
+    tableData: Array,
 
-    /**此处设置的传入值是来判断使用什么dialog，因为很多dialog不一样
+    /**判断使用什么dialog。所有的dialog如下：
+     * 基础信息部分：
      * showDialogNormal : 普通dialog
      * showDialogBmxx : 部门信息的dialog
      * showDialogYjzb : 一级指标的dialog
      * showDialogEjzb : 二级指标dialog
      * showDialogCpqt : 参评群体的dialog
-     * showDialoggbxxbzxx ：
+     * showDialoggbxxbzxx ：班子信息，干部信息合用（isBZXX、useTitle区分）
+     * 民主测评部分：
+     * showDialogCpxh : 测评序号的dialog
      * showDialogYhmm : 用户密码的dialog
+     * showDialogZbtx : 指标体系的dialog
      */
     showDialogNormal: Boolean,
     showDialogBmxx: Boolean,
@@ -158,9 +174,11 @@ export default {
     showDialogCpqt: Boolean,
     showDialoggbxxbzxx: Boolean,
     showDialogYhmm : Boolean,
+    showDialogCpxh : Boolean,
+    showDialogZbtx : Boolean,
     /**
-     * isBZXX : 
-     * useTitle : 
+     * isBZXX : 区分班子信息、干部信息区别
+     * useTitle : 区分班子信息、干部信息区别
      */
     isBZXX: Boolean,
     useTitle: String
@@ -172,7 +190,9 @@ export default {
     ejzbDialog,
     cpqtDialog,
     gbxxbzxxDialog,
-    yhmmDialog
+    yhmmDialog,
+    cpxhDialog,
+    zbtxDialog
   },
   data () {
     return {
@@ -241,11 +261,14 @@ export default {
     // changeTri(){
 
     // },
+    // 根据传来的 该列的label信息，判断是否显示该列
     ifshow (data) {
-      console.log(data)
+      console.log("useTable组件：判断该列是否显示：")
       if (data == '单位代码') {//此处添加要隐藏的列
+        console.log("--为单位代码....不显示")
         return false
       } else {
+        console.log("--label："+data+'....可以显示')
         return true
       }
     },
