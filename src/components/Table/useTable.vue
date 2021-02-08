@@ -232,6 +232,59 @@
                      :total="tableData.length">
       </el-pagination>
     </div>
+
+    <!--以下是所有的dialog （新增、编辑用的是同一个dialog，区别在于带不带数据）
+      useDialog ： 基础dialog
+      基础信息的：
+        bmxxDialog ： 部门信息
+        yjzbDialog ： 一级指标
+        ejzbDialog ： 二级指标
+        cpqtDialog ： 参评群体
+        gbxxbzxxDialog ： 干部信息、班子信息
+      民主评测的：  
+        yhmmDialog : 用户密码
+        zbtxDialog : 指标体系
+        cpxhDialog ：测评序号
+    -->
+    <useDialog v-if="this.showDialogNormal&&this.showDialog"
+               :headerUse="headerUse"
+               :form="form"
+               @func="getifshow"/>
+    <bmxxDialog v-if="this.showDialogBmxx&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcBmxx="getifshow"/>
+    <yjzbDialog v-if="this.showDialogYjzb&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcYjzb="getifshow"/>
+    <ejzbDialog v-if="this.showDialogEjzb&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcEjzb="getifshow"/>
+    <cpqtDialog v-if="this.showDialogCpqt&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcCpqt="getifshow"/>
+    <gbxxbzxxDialog v-if="this.showDialoggbxxbzxx&&this.showDialog"
+                    :headerUse="headerUse"
+                    :form="form"
+                    :isBZXX="isBZXX"
+                    :useTitle="useTitle"
+                    @funcgbxxbzxx="getifshow"/>
+    <yhmmDialog v-if="this.showDialogYhmm&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcYhmm="getifshow"/>
+    <cpxhDialog v-if="this.showDialogCpxh&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcCpxh="getifshow"/>
+    <zbtxDialog v-if="this.showDialogZbtx&&this.showDialog"
+                :headerUse="headerUse"
+                :form="form"
+                @funcZbtx="getifshow"/>              
+
   </el-row>
 </template>
 <script>
@@ -242,10 +295,89 @@ import ejzbDialog from '@/components/dialog/ejzbDialog'
 import cpqtDialog from '@/components/dialog/cpqtDialog'
 import gbxxbzxxDialog from '@/components/dialog/gbxxbzxxDialog'
 
+import yhmmDialog from '@/components/dialog/yhmmDialog'
+import cpxhDialog from '@/components/dialog/cpxhDialog'
+import zbtxDialog from '@/components/dialog/zbtxDialog'
+
+export default {
+  // 生命周期钩子函数：useTable组件被创建后执行，给
+  created () {
+    this.tableDataUse = this.tableData
+    this.loading = false
+  },
+
+
 import XLSX from 'xlsx'//对excel导入操作
+
 
 export default {
   props: {
+    /**表格基本属性
+     * headerUse ：表头信息：key（用来绑定prop），label（绘制表格）
+     * tableData ：表格数据
+     */
+    headerUse: Array,
+    tableData: Array,
+
+    /**判断使用什么dialog。所有的dialog如下：
+     * 基础信息部分：
+     * showDialogNormal : 普通dialog
+     * showDialogBmxx : 部门信息的dialog
+     * showDialogYjzb : 一级指标的dialog
+     * showDialogEjzb : 二级指标dialog
+     * showDialogCpqt : 参评群体的dialog
+     * showDialoggbxxbzxx ：班子信息，干部信息合用（isBZXX、useTitle区分）
+     * 民主测评部分：
+     * showDialogCpxh : 测评序号的dialog
+     * showDialogYhmm : 用户密码的dialog
+     * showDialogZbtx : 指标体系的dialog
+     */
+    showDialogNormal: Boolean,
+    showDialogBmxx: Boolean,
+    showDialogYjzb: Boolean,
+    showDialogEjzb: Boolean,
+    showDialogCpqt: Boolean,
+    showDialoggbxxbzxx: Boolean,
+    showDialogYhmm : Boolean,
+    showDialogCpxh : Boolean,
+    showDialogZbtx : Boolean,
+    /**
+     * isBZXX : 区分班子信息、干部信息区别
+     * useTitle : 区分班子信息、干部信息区别
+     */
+    isBZXX: Boolean,
+    useTitle: String
+  },
+  components: {
+    useDialog,
+    bmxxDialog,
+    yjzbDialog,
+    ejzbDialog,
+    cpqtDialog,
+    gbxxbzxxDialog,
+    yhmmDialog,
+    cpxhDialog,
+    zbtxDialog
+  },
+  data () {
+    return {
+      /**组件数据
+      * showDialog ： 用于直接控制所有的dialog
+      * form ： 给弹出的dialog传数据
+      * searchinfo ：搜索框内的条件
+      */
+      showDialog: false,
+      form: Object,
+      currentPage: 1,
+      pagesize: 5,
+      tableChange: [],
+      tableUse: [],
+      searchinfo: '',
+      restoretableData: [],
+      tableDataUse: [],
+      noshow: true,
+      loading: true,
+
     headerUse: Array,//此处为传入label的参数
     tableData: Array,//此处为传入的表单数据
     showDialogNormal: Boolean,//此处设置的传入值是来判断使用什么dialog，因为很多dialog不一样
@@ -326,11 +458,14 @@ export default {
   methods: {
     // changeTri(){
     // },
+    // 根据传来的 该列的label信息，判断是否显示该列
     ifshow (data) {
-      console.log(data)
+      console.log("useTable组件：判断该列是否显示：")
       if (data == '单位代码') {//此处添加要隐藏的列
+        console.log("--为单位代码....不显示")
         return false
       } else {
+        console.log("--label："+data+'....可以显示')
         return true
       }
     },

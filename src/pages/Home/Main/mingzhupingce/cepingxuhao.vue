@@ -7,10 +7,11 @@
     </el-header>
     <el-main>
       <!-- 测评序号 -->
-      <useTable :headerUse="this.headerUse"
-                :tableData="this.tableData"
-                :useTitle="测评序号" />
-    </el-main>
+      <useTable   :headerUse="this.headerUse"
+                  :tableData="this.tableData"
+                  :showDialogCpxh="true"/>
+      </el-main>
+
   </div>
 </template>
 <script>
