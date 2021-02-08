@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tabs v-model="editableTabsValue"
-             style="margin-left:-1vw;height:3vh !important"
+             style="margin-left:1vw;height:3vh !important"
              type="card"
              closable
              @tab-click="tabClick"
@@ -9,7 +9,7 @@
       <!-- 此处获取点击的vuex中的路由 -->
       <el-tab-pane v-for="(item, index) in routerUse"
                    :key="index"
-                   :label="item"
+                   :label="headerLabel[item]"
                    :name="item">
       </el-tab-pane>
     </el-tabs>
@@ -27,7 +27,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(['routerUse'])
+    ...mapState(['routerUse']),
+    ...mapState(['headerLabel'])
 
   },
   activated () {
@@ -41,11 +42,11 @@ export default {
 
     });
     if (deUse === true) {//若不是重复路由就添加tag，只有不是重复的情况下才考虑是不是要加入到路由路径中
-      if (this.routerUse.length <= 9) {//若在9个以内则可以加入，否则不用
+      if (this.routerUse.length <= 19) {//若在11个以内则可以加入，否则不用
         this.routerUse.push(this.getRouter)
       }//把它放入tag标签内
       else {
-        this.$alert('对不起当前页数已经超过最大可容页数10页，当前点击页可以显示但无法在导航栏显示', '⚠️', {
+        this.$alert('对不起当前页数已经超过最大可容页数20页，当前点击页可以显示但无法在导航栏显示', '⚠️', {
           confirmButtonText: '确定',
           callback: action => {
             this.$message({
@@ -70,12 +71,12 @@ export default {
       console.log(targetName)
       let beforeRouter
       if (this.routerUse.length - 1 == 0) {
-        this.$router.push({ name: "home" })
+        this.$router.push({ name: "home" })//如果路由长度为最后一个关闭则跳home
       } else {
         this.routerUse.forEach((element, index) => {
           if (targetName === element) {
 
-            beforeRouter = this.routerUse[index - 1]
+            beforeRouter = this.routerUse[index - 1]//否则关闭则跳第一个页面
             this.routerUse.splice(index, 1)
           }
         });

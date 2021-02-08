@@ -10,7 +10,10 @@
         <el-row>
           <useTable :headerUse="this.headerUse"
                     :tableData="this.tableData"
-                    :showDialogCpqt="true" />
+                    :showDialogCpqt="true"
+                    :showAddorDelete="true"
+                    :showSearch="true"
+                    :showCheckbox="false" />
 
         </el-row>
       </el-main>

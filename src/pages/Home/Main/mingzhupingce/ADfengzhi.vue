@@ -7,6 +7,7 @@
         <headerUse />
       </el-header>
       <el-main>
+        <!-- 这是main -->
         <table border="5">
           <caption>分值设定表格</caption>
           <tr>

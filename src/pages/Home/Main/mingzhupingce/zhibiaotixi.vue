@@ -9,6 +9,9 @@
         <useTable :headerUse="this.headerUse"
                   :tableData="this.tableData"
                   :showDialogZbtx="true"/>
+                  :isBZXX="false"
+                  useTitle="指标体系"
+                  :showDialoggbxxbzxx="true" />
       </el-main>
     </el-container>
 
@@ -23,30 +26,31 @@ export default {
     console.log("指标体系组件-加载完成")
     // talePostGet(this, "test")//根据postman的Api获取数据来测试
   },
-  components : {
+  components: {
     useTable
   },
   data () {
     return {
-      headerUse : [
+      headerUse: [
         {
-          label :"测评序号",
-          key : 'cpxh'
+          label: "测评序号",
+          key: 'cpxh'
         },
         {
-          label :'身份',
-          key : 'sf'
-        },{
-          label :'指标名称',
-          key : 'zbmc'
-        },{
-          label :'指标个数',
-          key : 'zbgs'
-        },{
-          label :'参评群体数',
-          key : 'cpqts'
+          label: '身份',
+          key: 'sf'
+        }, {
+          label: '指标名称',
+          key: 'zbmc'
+        }, {
+          label: '指标个数',
+          key: 'zbgs'
+        }, {
+          label: '参评群体数',
+          key: 'cpqts'
         }
       ],
+
       tableData : [
         {
           cpxh : 'a',
@@ -70,6 +74,7 @@ export default {
           cpqts : 'ee'
         }
       ]
+
     }
   }
 }

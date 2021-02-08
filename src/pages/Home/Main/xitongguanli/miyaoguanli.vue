@@ -6,10 +6,13 @@
         <headerUse />
       </el-header>
       <el-main>
+
       <!-- 测评序号 -->
       <useTable   :headerUse="this.headerUse"
                   :tableData="this.tableData"
                   :showDialogCpxh="true"/>
+
+        <!-- 这是main -->
       </el-main>
   </div>
 </template>

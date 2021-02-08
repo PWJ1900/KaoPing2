@@ -8,8 +8,14 @@
       </el-header>
       <el-main>
         <useTable :headerUse="this.headerUse"
+
                   :tableData="this.tableData"   
                   :showDialogYhmm="true"/>
+
+                  :tableData="this.tableData"
+                  :useTitle="用户密码"
+                  :isBZXX="false"
+                  :showDialogYhmm="true" />
       </el-main>
     </el-container>
 
@@ -24,7 +30,7 @@ export default {
     console.log("用户密码组件-加载完成")
     // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
   },
-  components : {
+  components: {
     useTable
   },
   data () {
@@ -32,7 +38,7 @@ export default {
       /**表格数据、表头信息
        * 
        */
-      tableData : [
+      tableData: [
         {
           yhm : '144',
           mm : '222',
@@ -50,36 +56,54 @@ export default {
           qtlx : 'a',
           fzm : '',
           fzma : ''
+},
+          yhm: '144',
+          mm: '222',
+          jy: 'true',
+          kpxh: '212',
+          qtlx: 'a',
+          fzm: '',
+          fzma: ''
+        },
+        {
+          yhm: '222',
+          mm: '33',
+          jy: 'true',
+          kpxh: '22',
+          qtlx: 'a',
+          fzm: '',
+          fzma: ''
+
         }
       ],
-      headerUse : [
+      headerUse: [
         {
-          label : '用户名',
-          key : 'yhm'
+          label: '用户名',
+          key: 'yhm'
         },
         {
-          label : '密码',
-          key : 'mm'
+          label: '密码',
+          key: 'mm'
         },
         {
-          label : '禁用',
-          key : 'jy'
+          label: '禁用',
+          key: 'jy'
         },
         {
-          label : '考评序号',
-          key : 'kpxh'
+          label: '考评序号',
+          key: 'kpxh'
         },
         {
-          label : '群体类型',
-          key : 'qtlx'
+          label: '群体类型',
+          key: 'qtlx'
         },
         {
-          label : '分组名',
-          key : 'fzm'
+          label: '分组名',
+          key: 'fzm'
         },
         {
-          label : '分组码',
-          key : 'fzma'
+          label: '分组码',
+          key: 'fzma'
         }
       ]
     }

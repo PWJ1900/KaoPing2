@@ -11,7 +11,7 @@ Vue：2.9.6
 4、有公用的组件自定义显示的放在 components 下<br>
 5、静态文件可以放在 assets 下<br>
 6、页面及其效果文件放在 css 里<br>
-7、富文本基本形成en
+7、富文本基本形成 en
 
     总之先自己吧对应页面功能做一下
 
@@ -20,6 +20,8 @@ Vue：2.9.6
      2、把dialog位置调整
      3、设置table高度自适应-
      4、上传图片下载功能，富文本编辑，->
+     cnpm install vue-json-excel -S此插件通过json导出表格
+     cnpm install --save xlsx file-saver 此插件通过excel导出导入表格
 
 ## Build Setup
 

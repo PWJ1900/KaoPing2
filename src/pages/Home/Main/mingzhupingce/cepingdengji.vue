@@ -7,6 +7,7 @@
         <headerUse />
       </el-header>
       <el-main>
+
         <!-- 表格 -->
         <el-table :data="tableData" border>
           <!-- 测评等级 -->
@@ -23,6 +24,7 @@
             </template>
           </el-table-column>
         </el-table>
+
         <!-- 两个功能按钮 -->
         <div style="margin-top:20px">
           <el-button type="primary" @click="cpdjDialogVisible = true">新建测评等级</el-button>
@@ -32,43 +34,58 @@
         <!-- 1.修改 -->
         <el-dialog  title="修改" :center="true" :visible.sync="editDialogVisible" 
                     :before-close="handleClose" :fullscreen="true">
+
           <div>
-            测评等级:<input v-model="editData.cpdj" type="text"/>
+            测评等级:<input v-model="editData.cpdj"
+                   type="text" />
           </div>
           <div>
-            最低分:<input v-model="editData.zdf" type="number"/>
+            最低分:<input v-model="editData.zdf"
+                   type="number" />
           </div>
           <div>
-            最高分:<input v-model="editData.zgf" type="number"/>
+            最高分:<input v-model="editData.zgf"
+                   type="number" />
           </div>
-          <span slot="footer" class="dialog-footer">
+          <span slot="footer"
+                class="dialog-footer">
             <el-button @click="editDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="edit">保存</el-button>
+            <el-button type="primary"
+                       @click="edit">保存</el-button>
           </span>
         </el-dialog>
         <!-- 2.新建测评等级的dialog -->
         <el-dialog title="新建测评等级" :visible.sync="cpdjDialogVisible" 
           :before-close="handleClose" :fullscreen="true" :center="true">
           <el-form ref="form" :model="form" label-width="80px">
+
             <el-form-item label="测评等级">
-              <el-input v-model="form.cpdj" type="text"></el-input>
+              <el-input v-model="form.cpdj"
+                        type="text"></el-input>
             </el-form-item>
             <el-form-item label=">=最低分">
-              <el-input v-model="form.zdf" type="number"></el-input>
+              <el-input v-model="form.zdf"
+                        type="number"></el-input>
             </el-form-item>
             <el-form-item label="<最高分">
-              <el-input v-model="form.zgf" type="number"></el-input>
+              <el-input v-model="form.zgf"
+                        type="number"></el-input>
             </el-form-item>
           </el-form>
-          <span slot="footer" class="dialog-footer">
+          <span slot="footer"
+                class="dialog-footer">
             <el-button @click="cpdjDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="add">保存</el-button>
+            <el-button type="primary"
+                       @click="add">保存</el-button>
           </span>
         </el-dialog>
 
         <!-- 3.显示总分及排名的dialog -->
-        <el-dialog title="总分及排名" :visible.sync="zfpmDialogVisible" 
-          :before-close="handleClose" :fullscreen="true" :center="true">
+        <el-dialog title="总分及排名"
+                   :visible.sync="zfpmDialogVisible"
+                   :before-close="handleClose"
+                   :fullscreen="true"
+                   :center="true">
           <div>
             <p><b>请注意：一定要先 采集数据计算，再获取最新的总评分</b></p>
             <div>
@@ -85,10 +102,14 @@
             <div>        
               <h1>查询结果： {{result}}</h1>
             </div>
+
           </div>
-          <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="zfpmDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="search">查询</el-button>
+          <span slot="footer"
+                class="dialog-footer">
+            <el-button type="primary"
+                       @click="zfpmDialogVisible = false">取 消</el-button>
+            <el-button type="primary"
+                       @click="search">查询</el-button>
           </span>
         </el-dialog>
       </el-main>
@@ -110,18 +131,18 @@ export default {
       /**修改的dialog
        * editData : 需要修改的数据
        */
-      editDialogVisible : false,
-      editData : '',
+      editDialogVisible: false,
+      editData: '',
 
       /**新建测评等级的dialog
        * cpdjDialogVisible : dialog切换开关
        * form : 表单信息 
        * */
       cpdjDialogVisible: false,
-      form : {
-        cpdj : '',
-        zdf : '',
-        zgf : ''
+      form: {
+        cpdj: '',
+        zdf: '',
+        zgf: ''
       },
 
       /**显示分数及排名的dialog
@@ -132,48 +153,48 @@ export default {
       * result ： 查询结果
       */
       zfpmDialogVisible: false,
-      data : [
+      data: [
         {
-          cepingxuhao : '202002',
-          cepingmingcheng : '测试用1'
+          cepingxuhao: '202002',
+          cepingmingcheng: '测试用1'
         },
         {
-          cepingxuhao : '202101',
-          cepingmingcheng : '测试用2'
+          cepingxuhao: '202101',
+          cepingmingcheng: '测试用2'
         }
       ],
-      cepingxuhaotemp : '',
-      zfq : '',
-      result : 'jieguo',
+      cepingxuhaotemp: '',
+      zfq: '',
+      result: 'jieguo',
 
       /**表格数据
        * 
-       *  */ 
-      tableData : [
-      {
-        cpdj : '优秀',
-        zdf : 99,
-        zgf: 100
-      },
-      {
-        cpdj : '良好',
-        zdf : 88,
-        zgf : 99
-      },
-      {
-        cpdj : '一般',
-        zdf : 70,
-        zgf : 79
-      },
-      {
-        cpdj : '改进',
-        zdf : 60,
-        zgf : 69
-      }
-    ]
+       *  */
+      tableData: [
+        {
+          cpdj: '优秀',
+          zdf: 99,
+          zgf: 100
+        },
+        {
+          cpdj: '良好',
+          zdf: 88,
+          zgf: 99
+        },
+        {
+          cpdj: '一般',
+          zdf: 70,
+          zgf: 79
+        },
+        {
+          cpdj: '改进',
+          zdf: 60,
+          zgf: 69
+        }
+      ]
     }
   },
-  methods : {
+  methods: {
     // 编辑 ，传入当前行数据（scope.row）
     editUse (value) {
       this.editData = value
@@ -190,7 +211,7 @@ export default {
         .then(_ => {
           done();
         })
-        .catch(_ => {});
+        .catch(_ => { });
     },
     // 修改dialog的修改请求
     edit () {

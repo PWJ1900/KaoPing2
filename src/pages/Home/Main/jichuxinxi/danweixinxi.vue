@@ -10,7 +10,11 @@
         <el-row>
           <useTable :headerUse="this.headerUse"
                     :tableData="this.tableData"
-                    :showDialogNormal="true" />
+                    :showDialogNormal="true"
+                    :showAddorDelete="true"
+                    :showSearch="true"
+                    :showdaoru="true"
+                    :showdaochu="true" />
 
         </el-row>
       </el-main>

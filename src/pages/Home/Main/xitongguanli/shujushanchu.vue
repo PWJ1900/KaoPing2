@@ -7,6 +7,7 @@
         <headerUse />
       </el-header>
       <el-main>
+
         <table border="2" style="margin-top:10px">
           <caption><el-button type="success" @click="groupDelete">数据成批删除</el-button></caption>
           <tr>
@@ -51,6 +52,8 @@
             </td>
           </tr>
         </table>
+
+        <!-- 这是main -->
       </el-main>
     </el-container>
 
