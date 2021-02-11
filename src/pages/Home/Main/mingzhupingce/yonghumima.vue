@@ -56,14 +56,15 @@ export default {
           qtlx : 'a',
           fzm : '',
           fzma : ''
-},
-          yhm: '144',
-          mm: '222',
-          jy: 'true',
-          kpxh: '212',
-          qtlx: 'a',
-          fzm: '',
-          fzma: ''
+        },
+        {
+          yhm : '144',
+          mm : '222',
+          jy : 'true',
+          kpxh : '212',
+          qtlx : 'a',
+          fzm : '',
+          fzma : ''
         },
         {
           yhm: '222',

@@ -298,6 +298,12 @@ import gbxxbzxxDialog from '@/components/dialog/gbxxbzxxDialog'
 import yhmmDialog from '@/components/dialog/yhmmDialog'
 import cpxhDialog from '@/components/dialog/cpxhDialog'
 import zbtxDialog from '@/components/dialog/zbtxDialog'
+import XLSX from 'xlsx'//对excel导入操作
+
+
+  
+
+
 
 export default {
   // 生命周期钩子函数：useTable组件被创建后执行，给
@@ -305,12 +311,6 @@ export default {
     this.tableDataUse = this.tableData
     this.loading = false
   },
-
-
-import XLSX from 'xlsx'//对excel导入操作
-
-
-export default {
   props: {
     /**表格基本属性
      * headerUse ：表头信息：key（用来绑定prop），label（绘制表格）
@@ -361,6 +361,35 @@ export default {
   },
   data () {
     return {
+      // 组合查询
+      i: 1,
+      dialogVisibleZhcx: false,
+      value1: [],
+      value2: [],
+      value3: [],
+      valueInput: [],
+
+
+     
+      dialogVisibledr: false,//导入的dialog
+      syncUse: true,
+      useModal: false,
+
+
+      options2: ['等于', '不等于', '相似于', '不相似于'],
+      options3: ['并且', '或者'],
+
+      json_meta: [//定义导出表格
+        [
+          {
+            " key ": " charset ",
+            " value ": " utf- 8 "
+          }
+        ]
+      ],
+      json_fields: {
+
+      },
       /**组件数据
       * showDialog ： 用于直接控制所有的dialog
       * form ： 给弹出的dialog传数据
@@ -378,14 +407,7 @@ export default {
       noshow: true,
       loading: true,
 
-    headerUse: Array,//此处为传入label的参数
-    tableData: Array,//此处为传入的表单数据
-    showDialogNormal: Boolean,//此处设置的传入值是来判断使用什么dialog，因为很多dialog不一样
-    showDialogBmxx: Boolean,//这个为部门信息的dialog
-    showDialogYjzb: Boolean,//这个为一级指标的dialog
-    showDialogEjzb: Boolean,//这个为二级指标dialog
-    showDialogCpqt: Boolean,//这个对应的是参评群体的dialog
-    showDialoggbxxbzxx: Boolean,
+  
     isBZXX: Boolean,
     useTitle: String,
     showAddorDelete: {
@@ -418,7 +440,7 @@ export default {
     //   default: true
     // }
   },
-  computed: {
+  computed : {
     useTableHeight () {
       return (window.innerHeight * 3 / 5)
     }
@@ -701,62 +723,7 @@ export default {
 
       }
     }
-  },
-  components: {
-    useDialog,
-    bmxxDialog,
-    yjzbDialog,
-    ejzbDialog,
-    cpqtDialog,
-    gbxxbzxxDialog
-
-  },
-  data () {
-    return {
-      showDialog: false,
-      form: Object,
-
-      // 组合查询
-      i: 1,
-      dialogVisibleZhcx: false,
-      value1: [],
-      value2: [],
-      value3: [],
-      valueInput: [],
-
-
-      currentPage: 1,
-      pagesize: 5,
-      tableChange: [],
-      tableUse: [],
-      searchinfo: '',
-      restoretableData: [],
-      tableDataUse: [],
-      noshow: true,
-      loading: true,
-      dialogVisibledr: false,//导入的dialog
-      syncUse: true,
-      useModal: false,
-
-
-      options2: ['等于', '不等于', '相似于', '不相似于'],
-      options3: ['并且', '或者'],
-
-      json_meta: [//定义导出表格
-        [
-          {
-            " key ": " charset ",
-            " value ": " utf- 8 "
-          }
-        ]
-      ],
-      json_fields: {
-
-      }
-
-    }
   }
-
 }
 </script>
 
@@ -765,4 +732,3 @@ export default {
   text-align: center;
 }
 </style>
-<style>
