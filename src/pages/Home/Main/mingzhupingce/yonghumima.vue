@@ -8,14 +8,9 @@
       </el-header>
       <el-main>
         <useTable :headerUse="this.headerUse"
-
-                  :tableData="this.tableData"   
-                  :showDialogYhmm="true"/>
-
                   :tableData="this.tableData"
-                  :useTitle="用户密码"
-                  :isBZXX="false"
                   :showDialogYhmm="true" />
+
       </el-main>
     </el-container>
 
@@ -40,31 +35,31 @@ export default {
        */
       tableData: [
         {
-          yhm : '144',
-          mm : '222',
-          jy : true,
-          kpxh : '212',
-          qtlx : 'a',
-          fzm : '',
-          fzma : ''
+          yhm: '144',
+          mm: '222',
+          jy: true,
+          kpxh: '212',
+          qtlx: 'a',
+          fzm: '',
+          fzma: ''
         },
         {
-          yhm : '222',
-          mm : '33',
-          jy : true,
-          kpxh : '22',
-          qtlx : 'a',
-          fzm : '',
-          fzma : ''
+          yhm: '222',
+          mm: '33',
+          jy: true,
+          kpxh: '22',
+          qtlx: 'a',
+          fzm: '',
+          fzma: ''
         },
         {
-          yhm : '144',
-          mm : '222',
-          jy : 'true',
-          kpxh : '212',
-          qtlx : 'a',
-          fzm : '',
-          fzma : ''
+          yhm: '144',
+          mm: '222',
+          jy: 'true',
+          kpxh: '212',
+          qtlx: 'a',
+          fzm: '',
+          fzma: ''
         },
         {
           yhm: '222',

@@ -105,7 +105,32 @@
                 </table>
               </div>
               <!-- 总体评价 -->
-              <div></div>
+              <div>
+                <table>
+                  <tr>
+                    <td rowspan="5">总体评价</td>
+                    <td rowspan="1">评价标题</td>
+                    <td>
+                      <el-input></el-input>
+                      <br>
+                      <p>“文本框型题|选项型标题|上行右边的标题|上行左边的标题”     没有为空，但"|"一定要输入</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td rowspan="4">选项定义：</td>
+                    <td>1.<el-input></el-input></td>
+                  </tr>
+                  <tr>
+                    <td>2.<el-input></el-input></td>
+                  </tr>
+                  <tr>
+                    <td>3.<el-input></el-input></td>
+                  </tr>
+                  <tr>
+                    <td>4.<el-input></el-input></td>
+                  </tr>
+                </table>
+              </div>
             </table>
             <span>这是一段信息</span>
             <span slot="footer" class="dialog-footer">
