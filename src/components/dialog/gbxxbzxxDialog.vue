@@ -8,6 +8,7 @@
                width="auto"
                :before-close="handleCloseShowFile"
                :fullscreen="true"
+               :modal-append-to-body='false'
                :center="true">
       <div style="height: 80vh">
         <embed :src="showFile"
