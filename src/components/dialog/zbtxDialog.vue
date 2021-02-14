@@ -2,10 +2,14 @@
     <div>
         <el-dialog
             title="提示"
+            :modal='false'
+            width="70%"
             v-if="form!=undefined"
+            :close-on-click-modal='false'
             :visible.sync="dialogVisible"
+            :before-close="handleClose"
             :fullscreen="true"
-            :before-close="handleClose">
+            :center="true">
             <table>
               <!-- 指标体系 -->
               <div>
@@ -134,13 +138,15 @@
             </table>
             <span>这是一段信息</span>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                <el-button @click="cancel">取 消</el-button>
+                <el-button type="primary" @click="confirmit">确 定</el-button>
             </span>
         </el-dialog>
     </div>
 </template>
 <script>
+import { tablePostUpdate } from '@/api/tablePostUpdate'
+
 export default {
     props : {
         headerUse: Array,  //这里用不到，因为这个dialog比较复杂
@@ -152,13 +158,38 @@ export default {
         checkList : [],
       };
     },
-    methods: {
-      handleClose(done) {
+    watch: {
+    form: {//子组建向其第一次传值的判断
+      handler (newName, oldName) {
+        let copy = JSON.parse(JSON.stringify(newName))//深复制避免获取同一个地址直接绑定到表上
+        this.formUse = copy
+        // ...
+      },
+      immediate: true
+    }
+  },
+  methods: {
+      cancel () {
+      this.dialogVisible = false
+      this.$emit("funcZbtx", this.dialogVisible)
+
+
+      },
+      confirmit () {
+        this.dialogVisible = false
+        tablePostUpdate(this, "xgbmxx", this.formUse)
+        location.reload();
+        this.$emit("funcZbtx", this.dialogVisible)
+        //这里面写后端的edit，delete，create接口
+      },
+      handleClose (done) {
         this.$confirm('确认关闭？')
           .then(_ => {
+            this.dialogVisible = false
+            this.$emit("funcZbtx", this.dialogVisible)
             done();
           })
-          .catch(_ => {});
+          .catch(_ => { });
       }
     }
 }

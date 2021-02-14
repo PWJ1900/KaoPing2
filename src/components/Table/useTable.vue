@@ -260,13 +260,6 @@ import cpxhDialog from '@/components/dialog/cpxhDialog'
 import zbtxDialog from '@/components/dialog/zbtxDialog'
 import XLSX from 'xlsx'//对excel导入操作
 
-
-  
-
-
-
-import XLSX from 'xlsx'//对excel导入操作
-
 export default {
   props: {
     headerUse: Array,//此处为传入label的参数
@@ -278,9 +271,9 @@ export default {
     showDialogCpqt: Boolean,//这个对应的是参评群体的dialog
     showDialoggbxxbzxx: Boolean,
 
-    showDialogYhmm: Boolean,
-    showDialogCpxh: Boolean,
-    showDialogZbtx: Boolean,
+    showDialogYhmm: Boolean,//用户密码
+    showDialogCpxh: Boolean,//测评序号
+    showDialogZbtx: Boolean,//指标体系
     /**
      * isBZXX : 区分班子信息、干部信息区别
      * useTitle : 区分班子信息、干部信息区别
