@@ -260,7 +260,6 @@ import gbxxbzxxDialog from '@/components/dialog/gbxxbzxxDialog'
 import yhmmDialog from '@/components/dialog/yhmmDialog'
 import cpxhDialog from '@/components/dialog/cpxhDialog'
 import zbtxDialog from '@/components/dialog/zbtxDialog'
-
 import XLSX from 'xlsx'//对excel导入操作
 
 export default {
@@ -274,9 +273,9 @@ export default {
     showDialogCpqt: Boolean,//这个对应的是参评群体的dialog
     showDialoggbxxbzxx: Boolean,
 
-    showDialogYhmm: Boolean,
-    showDialogCpxh: Boolean,
-    showDialogZbtx: Boolean,
+    showDialogYhmm: Boolean,//用户密码
+    showDialogCpxh: Boolean,//测评序号
+    showDialogZbtx: Boolean,//指标体系
     /**
      * isBZXX : 区分班子信息、干部信息区别
      * useTitle : 区分班子信息、干部信息区别
@@ -313,7 +312,7 @@ export default {
     //   default: true
     // }
   },
-  computed: {
+  computed : {
     useTableHeight () {
       return (window.innerHeight * 3 / 5)
     }
@@ -651,7 +650,6 @@ export default {
 
     }
   }
-
 }
 </script>
 
@@ -659,9 +657,12 @@ export default {
 .block {
   text-align: center;
 }
+
 </style>
+
 <style>
 #inputheight {
   height: 6vh;
 }
 </style>
+

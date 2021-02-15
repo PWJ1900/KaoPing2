@@ -9,7 +9,11 @@
       <el-main>
         <useTable :headerUse="this.headerUse"
                   :tableData="this.tableData"
-                  :showDialogYhmm="true" />
+                  :showDialogYhmm="true"
+                  :showAddorDelete="true"
+                  :showdaoru="true"
+                  :useSearch="true"
+                  :showdaochu="true"/>
 
       </el-main>
     </el-container>

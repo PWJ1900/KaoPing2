@@ -8,7 +8,11 @@
       <el-main>
         <useTable :headerUse="this.headerUse"
                   :tableData="this.tableData"
-                  :showDialogZbtx="true" />
+                  :showDialogZbtx="true"
+                  :showAddorDelete="true"
+                  :showdaoru="true"
+                  :useSearch="true"
+                  :showdaochu="true"/>
       </el-main>
     </el-container>
 

@@ -9,7 +9,11 @@
       <!-- 测评序号 -->
       <useTable   :headerUse="this.headerUse"
                   :tableData="this.tableData"
-                  :showDialogCpxh="true"/>
+                  :showDialogCpxh="true"
+                  :showAddorDelete="true"
+                  :showdaoru="true"
+                  :useSearch="true"
+                  :showdaochu="true" />
       </el-main>
 
   </div>
