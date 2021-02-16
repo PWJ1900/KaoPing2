@@ -20,9 +20,11 @@
         <el-col :span="10"
                 v-show="showSearch">
           请输入查询条件：<el-input style="width:15vw"
+                    id="inputheight"
                     v-model="searchinfo"></el-input>
 
-          <el-button @click="searchinfoUse(searchinfo)">查询</el-button>
+          <el-button @click="searchinfoUse(searchinfo)"
+                     size="small">查询</el-button>
         </el-col>
         <el-col :span="2"
                 v-show="useSearch">
@@ -655,4 +657,12 @@ export default {
 .block {
   text-align: center;
 }
+
 </style>
+
+<style>
+#inputheight {
+  height: 6vh;
+}
+</style>
+
