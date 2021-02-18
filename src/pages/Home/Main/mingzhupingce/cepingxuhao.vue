@@ -12,7 +12,7 @@
                   :showDialogCpxh="true"
                   :showAddorDelete="true"
                   :showdaoru="true"
-                  :useSearch="true"
+                  :showSearch="true"
                   :showdaochu="true" />
       </el-main>
 
