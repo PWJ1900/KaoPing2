@@ -77,7 +77,7 @@ i {
 </style>
 <style scoped>
 #useHeader {
-  height: 7vh;
+  height: 7vh !important;
   background: url('../../assets/loginbg1.jpg');
 }
 

@@ -14,8 +14,10 @@
                     :showAddorDelete="true"
                     :showdaoru="true"
                     :useSearch="true"
-                    :showdaochu="true" />
+                    :showdaochu="true"
+                    @refreshUseData="SecondGet" />
           <!-- 这个里面的查询功能另外写 -->
+          <!-- @refreshUseData="SecondGet"  -->
 
         </el-row>
       </el-main>
@@ -29,7 +31,7 @@ import useTable from '@/components/Table/useTable'
 
 export default {
   async created () {
-    // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
+    tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
 
   },
   data () {
@@ -63,6 +65,12 @@ export default {
     }
   },
   methods: {
+    async SecondGet () {
+      tablePostGet(this, "bmxx")//更改数据时第二次刷新其逻辑dialog->table->this属性，$emit实现
+
+
+
+    }
 
   }
 

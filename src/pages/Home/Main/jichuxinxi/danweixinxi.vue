@@ -14,7 +14,9 @@
                     :showAddorDelete="true"
                     :showSearch="true"
                     :showdaoru="true"
-                    :showdaochu="true" />
+                    :showdaochu="true"
+                    @refreshUseData="SecondGet" />
+          <!-- @refreshUseData="SecondGet" 这个为更改传值再次刷新数据 -->
 
         </el-row>
       </el-main>
@@ -58,7 +60,12 @@ export default {
     }
   },
   methods: {
+    SecondGet () {
+      tablePostGet(this, "dwxx")//更改数据时第二次刷新其逻辑dialog->table->this属性，$emit实现
 
+
+
+    }
   }
 }
 </script>

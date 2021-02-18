@@ -201,6 +201,7 @@
       <el-scrollbar>
         <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                   border
+                  ref="useTable"
                   :max-height="useTableHeight"
                   :row-style="{height: '0'}"
                   :cell-style="{padding: '1px'}"
@@ -312,7 +313,7 @@ export default {
     //   default: true
     // }
   },
-  computed : {
+  computed: {
     useTableHeight () {
       return (window.innerHeight * 3 / 5)
     }
@@ -398,6 +399,7 @@ export default {
     },
     getifshow (data) {
       this.showDialog = data//得到子组建的传值来点击关闭
+      this.$emit("refreshUseData")
 
     },
     handleClosedr (done) {
@@ -501,7 +503,7 @@ export default {
     usedr () {
       this.dialogVisibledr = false//这里面接下来写获取到的ws来确定判断表格传入值
     },
-    addSearch () {
+    addSearch () {//增加搜索框
       this.i = this.i + 1
     },
     deleteSearch () {
@@ -657,12 +659,11 @@ export default {
 .block {
   text-align: center;
 }
-
 </style>
 
 <style>
 #inputheight {
-  height: 6vh;
+  height: 5vh;
 }
 </style>
 

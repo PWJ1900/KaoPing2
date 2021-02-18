@@ -1,4 +1,4 @@
-const tablePostUpdate = (the,editUrl,form)=>{
+const tablePostUpdate = async (the,editUrl,form)=>{
 	the.$axios.post(
 			editUrl,
 			the.qs.stringify( form)
