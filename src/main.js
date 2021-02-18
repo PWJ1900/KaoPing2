@@ -12,7 +12,6 @@ import qs from 'qs'
 import Router from 'vue-router'
 
 // 导出excel表格插件
-
 import JsonExcel from 'vue-json-excel'
 Vue.component('downloadExcel', JsonExcel)
 

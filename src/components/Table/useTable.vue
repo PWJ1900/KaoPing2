@@ -1,12 +1,9 @@
 <template>
   <el-row>
     <el-card style="margin:1%">
+      <!-- 顶部设计 -->
       <el-row>
-        <!-- 以下分别分为showAddorDelete显示新增和批量删除 
-           showSearch显示查询 
-           showdaoru显示导入
-           showdaochu显示导出默认值都为false
-           showCheckbox为复选框默认值为true-->
+        <!-- 新增、批量删除，由showAddorDelete控制 -->
         <el-col :span="5"
                 v-show="showAddorDelete">
           <el-button @click="addUse"
@@ -17,6 +14,7 @@
                      size="small"
                      plain>批量删除</el-button>
         </el-col>
+        <!-- 第一种查询，通过搜索框筛选 -->
         <el-col :span="10"
                 v-show="showSearch">
           请输入查询条件：<el-input style="width:15vw"
@@ -26,18 +24,20 @@
           <el-button @click="searchinfoUse(searchinfo)"
                      size="small">查询</el-button>
         </el-col>
+        <!-- 第二种查询：打开dialog -->
         <el-col :span="2"
                 v-show="useSearch">
-
           <el-button size="small"
                      @click="dialogVisibleZhcx=true">查询</el-button>
         </el-col>
+        <!-- 导入excel，由showdaoru控制 -->
         <el-col :span="2"
                 v-show="showdaoru">
           <el-button type="info"
                      @click="dialogVisibledr=true"
                      size="small">导入excel</el-button>
         </el-col>
+        <!-- 导出excel，由showdaochu控制 -->
         <el-col :span="3"
                 v-show="showdaochu">
           <download-excel :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
@@ -48,14 +48,12 @@
             <!--      header="这是个excel的头部"  这里还有个动态绑定的问题没解决-->
             <el-button type="primary"
                        size="small">导出EXCEL</el-button>
-
           </download-excel>
         </el-col>
       </el-row>
-
     </el-card>
 
-    <!-- 这个是导入excel的dialog -->
+    <!--导入excel的dialog -->
     <el-dialog title="导入操作"
                :visible.sync="syncUse"
                v-show="dialogVisibledr"
@@ -78,7 +76,7 @@
                    @click="usedr">确 定</el-button>
       </span>
     </el-dialog>
-    <!-- 这是组合查询的dialog -->
+    <!--组合查询的dialog -->
     <el-dialog title="组合查询"
                :visible.sync="dialogVisibleZhcx"
                width="auto"
@@ -150,53 +148,56 @@
       </span>
     </el-dialog>
 
-    <!-- 以下是通用dialog -->
+    <!--通用的dialog -->
     <useDialog v-if="this.showDialogNormal&&this.showDialog"
                :headerUse="headerUse"
                :form="form"
                @func="getifshow" />
-    <!-- 此处为分别不同类型的页面使用不同的dialog -->
-    <!-- 以下是部门信息dialog -->
+    <!--基础信息-部门信息的dialog -->
     <bmxxDialog v-if="this.showDialogBmxx&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
                 @funcBmxx="getifshow" />
-    <!-- 以下是 一级指标dialog-->
+    <!--基础信息-一级指标的dialog-->
     <yjzbDialog v-if="this.showDialogYjzb&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
                 @funcYjzb="getifshow" />
-    <!-- 以下是二级指标 -->
+    <!--基础信息-二级指标的dialog -->
     <ejzbDialog v-if="this.showDialogEjzb&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
                 @funcEjzb="getifshow" />
-    <!-- 以下是参评群体的dialog -->
+    <!--基础信息-参评群体的dialog -->
     <cpqtDialog v-if="this.showDialogCpqt&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
                 @funcCpqt="getifshow" />
-    <!-- 以下是班子信息和干部信息的复用 -->
+    <!--基础信息-班子信息和干部信息的复用dialog -->
     <gbxxbzxxDialog v-if="this.showDialoggbxxbzxx&&this.showDialog"
                     :headerUse="headerUse"
                     :form="form"
                     :isBZXX="isBZXX"
                     :useTitle="useTitle"
                     @funcgbxxbzxx="getifshow" />
-
+    <!--民主评测-用户密码的dialog-->
     <yhmmDialog v-if="this.showDialogYhmm&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
                 @funcYhmm="getifshow" />
+    <!--民主评测-测评序号的dialog -->
     <cpxhDialog v-if="this.showDialogCpxh&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
                 @funcCpxh="getifshow" />
+    <!--民主评测-指标体系的dialog -->
     <zbtxDialog v-if="this.showDialogZbtx&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
                 @funcZbtx="getifshow" />
 
+
+    <!--中部设计：表格-->
     <el-card style="margin:1%;">
       <el-scrollbar>
         <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
@@ -238,6 +239,7 @@
       </el-scrollbar>
     </el-card>
 
+    <!--底部设计：页数组件  -->
     <div class="block">
       <el-pagination @size-change="handleSizeChange"
                      @current-change="handleCurrentChange"
@@ -261,49 +263,49 @@ import gbxxbzxxDialog from '@/components/dialog/gbxxbzxxDialog'
 import yhmmDialog from '@/components/dialog/yhmmDialog'
 import cpxhDialog from '@/components/dialog/cpxhDialog'
 import zbtxDialog from '@/components/dialog/zbtxDialog'
+
 import XLSX from 'xlsx'//对excel导入操作
 
 export default {
   props: {
     headerUse: Array,//此处为传入label的参数
     tableData: Array,//此处为传入的表单数据
-    showDialogNormal: Boolean,//此处设置的传入值是来判断使用什么dialog，因为很多dialog不一样
-    showDialogBmxx: Boolean,//这个为部门信息的dialog
-    showDialogYjzb: Boolean,//这个为一级指标的dialog
-    showDialogEjzb: Boolean,//这个为二级指标dialog
-    showDialogCpqt: Boolean,//这个对应的是参评群体的dialog
+    //所有的dialog控制开关交给showDialog
+    showDialogNormal: Boolean,//激活普通的dialog
+    showDialogBmxx: Boolean,//激活部门信息的dialog
+    showDialogYjzb: Boolean,//激活一级指标的dialog
+    showDialogEjzb: Boolean,//激活二级指标dialog
+    showDialogCpqt: Boolean,//激活参评群体的dialog
     showDialoggbxxbzxx: Boolean,
 
-    showDialogYhmm: Boolean,//用户密码
-    showDialogCpxh: Boolean,//测评序号
-    showDialogZbtx: Boolean,//指标体系
-    /**
-     * isBZXX : 区分班子信息、干部信息区别
-     * useTitle : 区分班子信息、干部信息区别
-     */
-    isBZXX: Boolean,
-    useTitle: String,
-    showAddorDelete: {
+    showDialogYhmm: Boolean,//激活用户密码的dialog
+    showDialogCpxh: Boolean,//激活测评序号的dialog
+    showDialogZbtx: Boolean,//激活指标体系的dialog
+   
+    isBZXX: Boolean,//区分班子信息、干部信息区别
+    useTitle: String,//区分班子信息、干部信息区别
+
+    showAddorDelete: {//新增、批量删除
       type: Boolean,
       default: false//default也可以写成函数形式default: () => {return []}
     },
-    showSearch: {
+    showSearch: {//查询框
       type: Boolean,
       default: false
     },
-    showdaoru: {
+    showdaoru: {//导入excel
       type: Boolean,
       default: false
     },
-    showdaochu: {
+    showdaochu: {//导出excel
       type: Boolean,
       default: false
     },
-    showCheckbox: {
+    showCheckbox: {//表格第一列的复选框
       type: Boolean,
       default: true
     },
-    useSearch: {
+    useSearch: {//具体查询dialog
       type: Boolean,
       default: false
 
@@ -414,7 +416,6 @@ export default {
       //把tableData的一组key取出来，从而做下面对应属性的过滤
       for (let i in this.tableData[0]) {
         keyUse.push(i)
-
       }
       this.tableDataUse = this.tableData
       if (datasearch != '') {
