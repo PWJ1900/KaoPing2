@@ -30,7 +30,7 @@
             <td>单位代码：</td>
             <td>
               <el-input type="text"
-                        v-model="this.form.bmxx"></el-input>
+                        v-model="formUse.bmxx"></el-input>
             </td>
             <td>单位名称：</td>
             <td>
@@ -47,12 +47,12 @@
           </tr>
         </tbody>
       </table>
-      <!-- <span slot="footer"
+      <span slot="footer"
             class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
         <el-button type="primary"
                    @click="confirmit">确 定</el-button>
-      </span> -->
+      </span>
     </el-dialog>
   </el-row>
 
@@ -109,10 +109,9 @@ export default {
 
 
     },
-    confirmit () {
+    async confirmit () {
       this.dialogVisible = false
-      tablePostUpdate(this, "xgbmxx", this.formUse)
-      location.reload();
+      await tablePostUpdate(this, "xgbmxx", this.formUse)//异步等待此结果完成在进行下一步获取
       this.$emit("funcBmxx", this.dialogVisible)
       //这里面写后端的edit，delete，create接口
 

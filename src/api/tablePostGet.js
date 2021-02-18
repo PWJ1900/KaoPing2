@@ -1,6 +1,6 @@
 
 
-const tablePostGet = (the,addUrl)=>{
+const tablePostGet = async (the,addUrl)=>{
 	// the.$axios({
 	// 	method: 'post',
 	// 	url: addUrl,
@@ -19,7 +19,7 @@ const tablePostGet = (the,addUrl)=>{
 		.then((response) => {
 			console.log(response)
 			// the.tableData = JSON.parse(JSON.stringify(response.data))
-			the.tableData = response.data
+			the.tableData = response.data.data//此处为我测试springboot统一管理异常而准备的
 			// console.log( the.tableData[0,2])
 		}).catch((error) => {
 			console.log(error)
