@@ -7,7 +7,7 @@
                     :visible.sync="dialogVisible"
                     :before-close="handleClose"
                     :center="true"
-                    >
+                    style="margin-top:6%;width:100%;margin-left:5%">
             <div>
               <el-form ref="form" :model="form" label-width="80px">
                 <el-form-item label="测评序号">

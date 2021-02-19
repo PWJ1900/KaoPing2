@@ -1,17 +1,18 @@
 <template>
     <div>
         <el-dialog
-            title="提示"
+            title="用户密码"
             :modal='false'
             v-if="form!=undefined"
             :close-on-click-modal='false'
             :visible.sync="dialogVisible"
             :before-close="handleClose"
-            :center="true">
-            <table>
+            :center="true"
+            style="margin-top:6%;width:100%;margin-left:5%">
+           
               <!--表格  -->
               <div>
-              <table border="2" width="500px">
+              <table border="2">
                 <tr>
                   <td>测评序号：</td>
                   <td></td>
@@ -56,12 +57,10 @@
                 <el-button type="primary" @click="confirmit">确 定</el-button>
             </span>
             <!-- 表格 -->
-            <div>
+            <div style="width:100%">
               这是一张表格：
               <el-row>
-                <el-col :span="3">姓名或编号：
-                  <input/>
-                </el-col>
+                <el-col :span="3">姓名或编号<input/></el-col>
                 <el-col :span="3">单位：
                   <el-select>
                     <el-option label="1" value="1"></el-option>
@@ -79,21 +78,22 @@
                   <el-button size="small">全部查询</el-button>
                 </el-col>
               </el-row>
-              <el-table border="true">
-                <el-table-column type="selection">
-                </el-table-column>
-                <el-table-column label="代码"></el-table-column>
-                <el-table-column label="姓名"></el-table-column>
-                <el-table-column label="身份"></el-table-column>
-                <el-table-column label="性别"></el-table-column>
-                <el-table-column label="职务"></el-table-column>
-                <el-table-column label="职级"></el-table-column>
-                <el-table-column label="出生年月"></el-table-column>
-                <el-table-column label="单位"></el-table-column>
-                <el-table-column label="部门"></el-table-column>
-            </el-table>
+              <el-row>
+                <el-table border="true">
+                  <el-table-column type="selection"></el-table-column>
+                  <el-table-column label="代码"></el-table-column>
+                  <el-table-column label="姓名"></el-table-column>
+                  <el-table-column label="身份"></el-table-column>
+                  <el-table-column label="性别"></el-table-column>
+                  <el-table-column label="职务"></el-table-column>
+                  <el-table-column label="职级"></el-table-column>
+                  <el-table-column label="出生年月"></el-table-column>
+                  <el-table-column label="单位"></el-table-column>
+                  <el-table-column label="部门"></el-table-column>
+                </el-table>
+              </el-row>
             </div>
-            </table>
+       
         </el-dialog>
     </div>
 </template>

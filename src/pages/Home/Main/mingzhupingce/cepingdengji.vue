@@ -33,7 +33,7 @@
         <!-- dialog ：修改、新建测评等级、显示总分及排名  -->
         <!-- 1.修改 -->
         <el-dialog  title="修改" :center="true" :visible.sync="editDialogVisible" 
-                    :before-close="handleClose" >
+                    :before-close="handleClose" :modal='false'>
 
           <div>
             测评等级:<input v-model="editData.cpdj"
@@ -56,7 +56,7 @@
         </el-dialog>
         <!-- 2.新建测评等级的dialog -->
         <el-dialog title="新建测评等级" :visible.sync="cpdjDialogVisible" 
-          :before-close="handleClose" :center="true">
+          :before-close="handleClose" :center="true" :modal='false'>
           <el-form ref="form" :model="form" label-width="80px">
 
             <el-form-item label="测评等级">
@@ -84,7 +84,7 @@
         <el-dialog title="总分及排名"
                    :visible.sync="zfpmDialogVisible"
                    :before-close="handleClose"
-                   :center="true">
+                   :center="true" :modal='false'>
           <div>
             <p><b>请注意：一定要先 采集数据计算，再获取最新的总评分</b></p>
             <div>

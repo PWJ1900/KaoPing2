@@ -1,13 +1,15 @@
  <template>
   <el-row>
 
-    <el-dialog style="wdith:60vw !important;height:auto;!important"
+    <el-dialog style="margin-top:6%;width:50%;margin-left:5%"
                v-if="dialogVisibleShowFile"
                :close-on-click-modal="false"
+               :modal="false"
                :visible.sync="dialogVisibleShowFile"
                :before-close="handleCloseShowFile"
                :modal-append-to-body='false'
-               :center="true">
+               :center="true"
+               >
       <div style="height: 80vh">
         <embed :src="showFile"
                type="application/pdf"

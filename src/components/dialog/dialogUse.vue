@@ -7,7 +7,8 @@
                v-if="form!=undefined"
                :visible.sync="dialogVisible"
                :before-close="handleClose"
-               :center="true">
+               :center="true"
+               style="margin-top:6%;width:100%;margin-left:5%">
       <!--  判断undefined就不显示    v-if="form!=undefined"-->
 
       <el-form ref="form"

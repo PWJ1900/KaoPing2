@@ -1,14 +1,15 @@
 <template>
     <div>
         <el-dialog
-            title="提示"
+            title="指标体系"
             :modal='false'
             v-if="form!=undefined"
             :close-on-click-modal='false'
             :visible.sync="dialogVisible"
             :before-close="handleClose"
-            :center="true">
-            <table>
+            :center="true"
+            style="margin-top:6%;width:100%;margin-left:5%">
+  
               <!-- 指标体系 -->
               <div>
                 <table border="2" width="500px">
@@ -176,7 +177,7 @@
                   </tr>
                 </table>
               </div>
-            </table>
+
             
             <span slot="footer" class="dialog-footer">
                 <el-button @click="cancel">取 消</el-button>
