@@ -2,13 +2,11 @@
   <el-row>
     <el-dialog title="一级指标信息更改"
                :modal='false'
-               width="70%"
                v-if="form!=undefined"
                :modal-append-to-body="true"
                :close-on-click-modal='false'
                :visible.sync="dialogVisible"
                :before-close="handleClose"
-               :fullscreen="true"
                :center="true">
       <!--  判断undefined就不显示    v-if="form!=undefined"-->
 

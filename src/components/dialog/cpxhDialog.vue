@@ -1,14 +1,13 @@
 <template>
     <el-row>
         <el-dialog  title="提示"
-                    :modal='false'
-                    width="70%"
+                    :modal='false'                
                     v-if="form!=undefined"
                     :close-on-click-modal='false'
                     :visible.sync="dialogVisible"
                     :before-close="handleClose"
-                    :fullscreen="true"
-                    :center="true">
+                    :center="true"
+                    >
             <div>
               <el-form ref="form" :model="form" label-width="80px">
                 <el-form-item label="测评序号">

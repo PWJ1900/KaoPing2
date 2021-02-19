@@ -3,12 +3,10 @@
         <el-dialog
             title="提示"
             :modal='false'
-            width="70%"
             v-if="form!=undefined"
             :close-on-click-modal='false'
             :visible.sync="dialogVisible"
             :before-close="handleClose"
-            :fullscreen="true"
             :center="true">
             <table>
               <!-- 指标体系 -->

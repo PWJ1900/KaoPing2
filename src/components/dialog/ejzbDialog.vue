@@ -2,13 +2,11 @@
   <el-row>
     <el-dialog title="提示"
                :modal='false'
-               width="70%"
                v-if="form!=undefined"
                :close-on-click-modal='false'
                :modal-append-to-body="true"
                :visible.sync="dialogVisible"
                :before-close="handleClose"
-               :fullscreen="true"
                :center="true">
       <!--  判断undefined就不显示    v-if="form!=undefined"-->
 

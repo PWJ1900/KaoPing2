@@ -24,9 +24,13 @@ export default {
   margin-left: 11vw;
   margin-top: 11vh;
 }
+/* 所有的dialog */
 .el-dialog {
-  margin-top: 0vh !important;
-  width: auto;
+  margin-top: 10%;
+  margin-left: 25%;
+  width: 50%;
+  /* margin-top: 0vh !important; */
+  /* width: auto; */
 }
 .el-dialog .el-dialog__body {
   display: flex;

@@ -3,14 +3,14 @@
         <el-dialog
             title="提示"
             :modal='false'
-            width="70%"
             v-if="form!=undefined"
             :close-on-click-modal='false'
             :visible.sync="dialogVisible"
             :before-close="handleClose"
-            :fullscreen="true"
             :center="true">
-            <div>
+            <table>
+              <!--表格  -->
+              <div>
               <table border="2" width="500px">
                 <tr>
                   <td>测评序号：</td>
@@ -43,16 +43,19 @@
                   <td>选中的干部：</td>
                 </tr>
               </table>
-              <div style="width:500px">
-                <el-transfer v-model="transferList2" :data="transferList1"></el-transfer>
               </div>
-            </div>
-            
+              <!-- 穿梭框 -->
+              <div>
+                <template>
+                  <el-transfer v-model="transferList2" :data="transferList1"></el-transfer>
+                </template>
+              </div>
+              <!--底部按钮  -->
             <span slot="footer" class="dialog-footer">
                 <el-button @click="cancel">取 消</el-button>
                 <el-button type="primary" @click="confirmit">确 定</el-button>
             </span>
-
+            <!-- 表格 -->
             <div>
               这是一张表格：
               <el-row>
@@ -90,7 +93,7 @@
                 <el-table-column label="部门"></el-table-column>
             </el-table>
             </div>
-            
+            </table>
         </el-dialog>
     </div>
 </template>

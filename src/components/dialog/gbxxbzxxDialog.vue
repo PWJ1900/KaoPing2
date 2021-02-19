@@ -5,9 +5,7 @@
                v-if="dialogVisibleShowFile"
                :close-on-click-modal="false"
                :visible.sync="dialogVisibleShowFile"
-               width="auto"
                :before-close="handleCloseShowFile"
-               :fullscreen="true"
                :modal-append-to-body='false'
                :center="true">
       <div style="height: 80vh">
