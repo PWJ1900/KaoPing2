@@ -60,7 +60,7 @@
             <div style="width:100%">
               这是一张表格：
               <el-row>
-                <el-col :span="3">姓名或编号<input/></el-col>
+                <el-col :span="3">姓名或编号:<input/></el-col>
                 <el-col :span="3">单位：
                   <el-select>
                     <el-option label="1" value="1"></el-option>
