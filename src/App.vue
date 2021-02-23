@@ -25,7 +25,11 @@ export default {
   margin-top: 11vh;
 }
 /* 所有的dialog */
-
+.el-dialog {
+  position: absolute;
+  left: 10%;
+  top: 0%;
+}
 .el-dialog .el-dialog__body {
   background-color: rgb(178, 240, 219);
   display: flex;

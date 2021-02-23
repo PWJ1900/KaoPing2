@@ -5,7 +5,6 @@
       <el-header id="useHeader">
         <h3>管理系统</h3>
         <div id="headerUse">
-
           <el-menu :default-active="activeIndex"
                    class="el-menu-demo"
                    mode="horizontal"
@@ -23,8 +22,7 @@
               <i class="el-icon-delete"
                  @click="exitTo"></i>
             </div>
-          </el-menu>
-
+          </el-menu> 
         </div>
       </el-header>
       <!-- 下句是放aside和main布局 -->
