@@ -23,7 +23,7 @@
 
       </el-form>
       <span slot="footer"
-            class="dialog-footer">
+            class="dialog-footer" style="background-color:white">
         <el-button @click="cancel">取 消</el-button>
         <el-button type="primary"
                    @click="confirmit">确 定</el-button>

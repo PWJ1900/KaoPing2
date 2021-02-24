@@ -273,7 +273,7 @@
       </table>
       <!-- 
             <span slot="footer"
-                  class="dialog-footer">
+                  class="dialog-footer" style="background-color:white">
               <el-button @click="dialogVisible = false">取 消</el-button>
               <el-button type="primary"
                          @click="dialogVisible = false">确 定</el-button>

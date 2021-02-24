@@ -48,7 +48,7 @@
                    type="number" />
           </div>
           <span slot="footer"
-                class="dialog-footer">
+                class="dialog-footer" style="background-color:white">
             <el-button @click="editDialogVisible = false">取 消</el-button>
             <el-button type="primary"
                        @click="edit">保存</el-button>
@@ -73,7 +73,7 @@
             </el-form-item>
           </el-form>
           <span slot="footer"
-                class="dialog-footer">
+                class="dialog-footer" style="background-color:white">
             <el-button @click="cpdjDialogVisible = false">取 消</el-button>
             <el-button type="primary"
                        @click="add">保存</el-button>
@@ -104,7 +104,7 @@
 
           </div>
           <span slot="footer"
-                class="dialog-footer">
+                class="dialog-footer" style="background-color:white">
             <el-button type="primary"
                        @click="zfpmDialogVisible = false">取 消</el-button>
             <el-button type="primary"
