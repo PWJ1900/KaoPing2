@@ -76,16 +76,18 @@ export default {
 </script>
 <style scoped>
 @import '../../../../css/headermain2.css';
-</style>
-<style>
 .el-main {
   padding: 0;
 }
 table {
-  width: 400px;
+  width: 500px;
   height: 300px;
-  margin-top: 10px;
-  margin-left: 50px;
+  margin-top: 1%;
+  margin-left: 10%;
+}
+table th,table td {
+  height: 50px;
+  width: 250px;
 }
 input {
   margin: 10px;

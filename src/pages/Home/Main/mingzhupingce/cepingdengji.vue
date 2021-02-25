@@ -30,28 +30,23 @@
           <el-button type="primary" @click="cpdjDialogVisible = true">新建测评等级</el-button>
           <el-button type="primary" @click="zfpmDialogVisible = true">显示总分及排名</el-button>
         </div>
-        <!-- dialog ：修改、新建测评等级、显示总分及排名  -->
+        <!-- 3个dialog ：修改、新建测评等级、显示总分及排名  -->
         <!-- 1.修改 -->
         <el-dialog  title="修改" :center="true" :visible.sync="editDialogVisible" 
                     :before-close="handleClose" :modal='false'>
 
           <div>
-            测评等级:<input v-model="editData.cpdj"
-                   type="text" />
+            测评等级:<el-input v-model="editData.cpdj" type="text"></el-input>
           </div>
           <div>
-            最低分:<input v-model="editData.zdf"
-                   type="number" />
+            最低分:<el-input v-model="editData.zdf" type="number"></el-input>
           </div>
           <div>
-            最高分:<input v-model="editData.zgf"
-                   type="number" />
+            最高分:<el-input v-model="editData.zgf" type="number"></el-input>
           </div>
-          <span slot="footer"
-                class="dialog-footer" style="background-color:white">
+          <span slot="footer" class="dialog-footer" style="background-color:white">
             <el-button @click="editDialogVisible = false">取 消</el-button>
-            <el-button type="primary"
-                       @click="edit">保存</el-button>
+            <el-button type="primary" @click="edit">保存</el-button>
           </span>
         </el-dialog>
         <!-- 2.新建测评等级的dialog -->
@@ -60,16 +55,13 @@
           <el-form ref="form" :model="form" label-width="80px">
 
             <el-form-item label="测评等级">
-              <el-input v-model="form.cpdj"
-                        type="text"></el-input>
+              <el-input v-model="form.cpdj" type="text"></el-input>
             </el-form-item>
             <el-form-item label=">=最低分">
-              <el-input v-model="form.zdf"
-                        type="number"></el-input>
+              <el-input v-model="form.zdf" type="number"></el-input>
             </el-form-item>
             <el-form-item label="<最高分">
-              <el-input v-model="form.zgf"
-                        type="number"></el-input>
+              <el-input v-model="form.zgf" type="number"></el-input>
             </el-form-item>
           </el-form>
           <span slot="footer"
@@ -103,12 +95,9 @@
             </div>
 
           </div>
-          <span slot="footer"
-                class="dialog-footer" style="background-color:white">
-            <el-button type="primary"
-                       @click="zfpmDialogVisible = false">取 消</el-button>
-            <el-button type="primary"
-                       @click="search">查询</el-button>
+          <span slot="footer" class="dialog-footer" style="background-color:white">
+            <el-button type="primary" @click="zfpmDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="search">查询</el-button>
           </span>
         </el-dialog>
       </el-main>
@@ -204,6 +193,7 @@ export default {
     // 删除，传入当前行数据（scope.row）
     deleteUse (value) {
       console.log('删除的是' + value.cepingdengji)
+      var x = this.$confirm("确定删除吗？")
     },
     handleClose (done) {
       this.$confirm('确认关闭？')
@@ -233,7 +223,6 @@ export default {
   padding: 0;
 }
 .el-table {
-  width: 80%;
-  height: 60%;
+  width: 100%;
 }
 </style>
