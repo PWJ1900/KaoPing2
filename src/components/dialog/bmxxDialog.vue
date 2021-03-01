@@ -1,15 +1,16 @@
 <template>
   <el-row>
     <el-dialog title="部门信息修改"
-               :modal='false'
+               :modal='true'
                width="70%"
                v-if="form!=undefined"
                :close-on-click-modal='false'
                :visible.sync="dialogVisible"
+               :modal-append-to-body='false'
                :before-close="handleClose"
-               :fullscreen="true"
                :center="true">
-      <!--  判断undefined就不显示    v-if="form!=undefined"-->
+      <!--  判断undefined就不显示    v-if="form!=undefined"
+       :fullscreen="true"-->
 
       <table cellspacing="0">
         <tbody>
@@ -49,9 +50,11 @@
       </table>
       <span slot="footer"
             class="dialog-footer">
-        <el-button @click="cancel">取 消</el-button>
+        <el-button @click="cancel"
+                   size="small">取 消</el-button>
         <el-button type="primary"
-                   @click="confirmit">确 定</el-button>
+                   @click="confirmit"
+                   size="small">确 定</el-button>
       </span>
     </el-dialog>
   </el-row>

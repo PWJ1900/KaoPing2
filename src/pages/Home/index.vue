@@ -13,6 +13,7 @@
                    router>
             <el-menu-item v-for="(item, index) in headerUseR"
                           :key="index"
+                          style="height:6vh"
                           :index="item">
               <span slot="title">{{index}}</span>
             </el-menu-item>
@@ -77,8 +78,11 @@ i {
 </style>
 <style scoped>
 #useHeader {
-  height: 7vh !important;
-  background: url('../../assets/loginbg1.jpg');
+  height: 6vh !important;
+  background: url('../../assets/loginbg1.jpg') no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  z-index: 3000;
 }
 
 /*  此处设置页面最初头部的image */
