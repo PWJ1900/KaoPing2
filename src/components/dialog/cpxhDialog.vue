@@ -1,14 +1,13 @@
 <template>
     <el-row>
         <el-dialog  title="提示"
-                    :modal='false'
-                    width="70%"
+                    :modal='false'                
                     v-if="form!=undefined"
                     :close-on-click-modal='false'
                     :visible.sync="dialogVisible"
                     :before-close="handleClose"
-                    :fullscreen="true"
-                    :center="true">
+                    :center="true"
+                    style="margin-top:6%;width:100%;margin-left:5%">
             <div>
               <el-form ref="form" :model="form" label-width="80px">
                 <el-form-item label="测评序号">
@@ -31,7 +30,7 @@
                 </el-form-item>
               </el-form>
             </div>
-            <span slot="footer" class="dialog-footer">
+            <span slot="footer" class="dialog-footer" style="background-color:white">
                 <el-button @click="cancel">取 消</el-button>
                 <el-button type="primary" @click="confirmit">确 定</el-button>
             </span>

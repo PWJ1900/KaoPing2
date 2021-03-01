@@ -12,8 +12,8 @@
 
         <!-- 第一部分： -->
         <div style="margin-top:20px">
+          <span style="margin-left:50px">
           测评序号：
-
           <el-select v-model="cepingxuhaotemp"
                      placeholder="请选择测评序号">
             <el-option v-for="item in data"
@@ -22,14 +22,17 @@
                        value='i.cepingxuhao'>
             </el-option>
           </el-select>
-
+          </span>
+          <span style="margin-left:50px">
           单位：
           <el-select v-model="cepingxuhaotemp"
                      placeholder="请选择测评序号">
           </el-select>
+          </span>
         </div>
         <!-- 第二部分：表格1 -->
 
+        <div style="margin-top:20px"></div>  
         <div style="margin-top:20px">
           <table width="500px"
                  border="2">
@@ -50,7 +53,7 @@
         </div>
         <!-- 第三部分：表格2 -->
         <div style="margin-top:20px">
-          <table width="500px"
+          <table  style="height:100px;width:600px"
                  border="2">
 
             <caption>被测对象测评数据采集情况统计</caption>

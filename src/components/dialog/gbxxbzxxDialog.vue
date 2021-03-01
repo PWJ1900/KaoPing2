@@ -1,15 +1,15 @@
  <template>
   <el-row>
 
-    <el-dialog style="wdith:60vw !important;height:auto;!important"
+    <el-dialog style="margin-top:6%;width:50%;margin-left:5%"
                v-if="dialogVisibleShowFile"
                :close-on-click-modal="false"
+               :modal="false"
                :visible.sync="dialogVisibleShowFile"
-               width="auto"
                :before-close="handleCloseShowFile"
-               :fullscreen="true"
                :modal-append-to-body='false'
-               :center="true">
+               :center="true"
+               >
       <div style="height: 80vh">
         <embed :src="showFile"
                type="application/pdf"
@@ -273,7 +273,7 @@
       </table>
       <!-- 
             <span slot="footer"
-                  class="dialog-footer">
+                  class="dialog-footer" style="background-color:white">
               <el-button @click="dialogVisible = false">取 消</el-button>
               <el-button type="primary"
                          @click="dialogVisible = false">确 定</el-button>

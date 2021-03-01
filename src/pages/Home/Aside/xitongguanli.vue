@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-aside style="width:auto">
+      <el-aside>
         <!-- Aside -->
         <el-menu background-color="#303133"
                  text-color="#fff"
