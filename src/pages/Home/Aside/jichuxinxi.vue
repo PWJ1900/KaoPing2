@@ -29,13 +29,10 @@
           <router-view></router-view>
         </keep-alive>
         <!-- <span>基础信息</span> -->
-
       </el-main>
     </el-container>
   </div>
 </template>
-<style scoped>
-</style>
 <script>
 import { listenWindow } from '@/utils/listenWindow'
 export default {
@@ -94,5 +91,6 @@ export default {
 }
 </script>
 <style scoped>
+/*  */
 @import '../../../css/headerasidemain1.css';
 </style>

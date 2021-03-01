@@ -5,17 +5,17 @@
       <el-header id="useHeader">
         <h3>管理系统</h3>
         <div id="headerUse">
-
           <el-menu :default-active="activeIndex"
                    class="el-menu-demo"
                    mode="horizontal"
                    @select="handleSelect"
-                   router>
+                   router
+                   active-text-color="black">
             <el-menu-item v-for="(item, index) in headerUseR"
                           :key="index"
                           style="height:6vh"
                           :index="item">
-              <span slot="title">{{index}}</span>
+              <template slot="title">{{index}}</template>
             </el-menu-item>
             <div id="iconUse">
               <i class="el-icon-s-custom"></i>
@@ -24,8 +24,7 @@
               <i class="el-icon-delete"
                  @click="exitTo"></i>
             </div>
-          </el-menu>
-
+          </el-menu> 
         </div>
       </el-header>
       <!-- 下句是放aside和main布局 -->
@@ -37,7 +36,7 @@
   </el-row>
 
 </template>
-<style>
+<style scope>
 h3 {
   position: absolute;
   left: 10%;
@@ -50,6 +49,13 @@ h3 {
 .el-menu {
   background-color: transparent;
 }
+/* 整个el-header部分 */
+#useHeader {
+  height: 8vh !important;
+  background: url('../../assets/loginbg1.jpg');
+}
+
+/* el-header部分的菜单 */
 #headerUse {
   margin-left: 30%;
 }

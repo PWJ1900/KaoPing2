@@ -740,11 +740,7 @@ export default {
 .block {
   text-align: center;
 }
-</style>
-
-<style>
 #inputheight {
   height: 4vh;
 }
 </style>
-
