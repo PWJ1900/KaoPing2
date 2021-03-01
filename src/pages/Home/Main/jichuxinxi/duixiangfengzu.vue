@@ -11,65 +11,82 @@
           <el-card style="margin:1%;">
             <div>
               <el-button @click="addUse"
+                         size="small"
                          type="success">新增</el-button>
               <el-button type="danger"
-                         @click="groupDelete"
-                         plain>批量删除</el-button>
-              请输入分组名称和代号：<el-input type="text"
-                        style="width:20%"
-                        v-model="fzOrdh"></el-input>
-              <el-button @click="search">查询</el-button>
+                         size="small"
+                         @click="groupDelete">批量删除</el-button>
+
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <span style="font-size:13px"> 请输入分组名称和代号：</span>
+              <el-input type="text"
+                        style="width:25%"
+                        id="useSearch2"
+                        v-model="fzOrdh">
+                <el-button slot="append"
+                           icon="el-icon-search"
+                           size="small"
+                           style="width:5vw;padding:0;font-size:12px;  background: #23C6C8;color:white"
+                           @click="search">查询</el-button>
+              </el-input>
             </div>
           </el-card>
-          <el-card style="margin:1%;">
-            <el-table :data="
+          <div style="height:68vh">
+            <el-card style="margin:1%;">
+              <el-table :data="
                   this.tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-                      :max-height="useTableHeight"
-                      :row-style="{height: '0'}"
-                      :cell-style="{padding: '1px'}"
-                      border
-                      key=1
-                      @selection-change="selectionLineChangeHandle"
-                      style="width: 100%">
-              <el-table-column type="selection">
+                        :max-height="useTableHeight"
+                        :row-style="{height: '0'}"
+                        :cell-style="{padding: '1px'}"
+                        border
+                        key=1
+                        @selection-change="selectionLineChangeHandle"
+                        style="width: 100%;
+                        ">
+                <el-table-column type="selection">
 
-              </el-table-column>
-              <el-table-column prop="dm"
-                               label="代码"
-                               width="180">
-              </el-table-column>
-              <el-table-column prop="mc"
-                               label="名称"
-                               width="180">
-              </el-table-column>
-              <el-table-column prop="gbxm"
-                               label="干部姓名"
-                               width="180">
-              </el-table-column>
-              <el-table-column prop="gbdm"
-                               label="干部代码">
-              </el-table-column>
-              <el-table-column label="拉选框">
-                <template slot-scope="scope">
-                  <el-button type="info"
-                             icon="el-icon-edit"
-                             @click="editUse(scope.row)">编辑</el-button>
-                  <el-popconfirm title="您确定要将此行信息删除吗"
-                                 @confirm="deleteUse(scope.row)">
-                    <el-button type="danger"
-                               slot="reference"
-                               icon="el-icon-delete">删除</el-button>
-                  </el-popconfirm>
-                </template>
-              </el-table-column>
-            </el-table>
-          </el-card>
+                </el-table-column>
+                <el-table-column prop="dm"
+                                 label="代码"
+                                 width="180">
+                </el-table-column>
+                <el-table-column prop="mc"
+                                 label="名称"
+                                 width="180">
+                </el-table-column>
+                <el-table-column prop="gbxm"
+                                 label="干部姓名"
+                                 width="180">
+                </el-table-column>
+                <el-table-column prop="gbdm"
+                                 label="干部代码">
+                </el-table-column>
+                <el-table-column label="操作"
+                                 fixed="right"
+                                 width="300">
+                  <template slot-scope="scope">
+                    <el-button type="info"
+                               icon="el-icon-edit"
+                               size="small"
+                               @click="editUse(scope.row)">编辑</el-button>
+                    <el-popconfirm title="您确定要将此行信息删除吗"
+                                   @confirm="deleteUse(scope.row)">
+                      <el-button type="danger"
+                                 slot="reference"
+                                 size="small"
+                                 icon="el-icon-delete">删除</el-button>
+                    </el-popconfirm>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-card>
+          </div>
           <div class="block">
             <el-pagination @size-change="handleSizeChange"
                            key="11"
                            @current-change="handleCurrentChange"
                            :current-page="currentPage"
-                           :page-sizes="[5, 10, 15, 20]"
+                           :page-sizes="[5, 10, 50, 200]"
                            :page-size="pagesize"
                            layout="total, sizes, prev, pager, next, jumper"
                            :total="tableData.length">
@@ -148,7 +165,6 @@
                                    type="success"
                                    plain>复制</el-button>
                         <el-button size="mini"
-                                   type="warning"
                                    @click="returnTo"
                                    plain>返回</el-button>
                       </td>
@@ -190,7 +206,8 @@
                 </el-select>
                 <el-button size="mini">查询</el-button>
                 <el-button size="mini">全部</el-button>
-                <el-button size="mini">组合查询</el-button>
+                <el-button size="mini"
+                           style="width:5vw;padding:0;font-size:12px;  background: #23C6C8;">组合查询</el-button>
 
                 <el-table :data="
                   this.tableData2.slice((currentPage-1)*pagesize,currentPage*pagesize)"
@@ -257,7 +274,7 @@
                                  key="12"
                                  @current-change="handleCurrentChange"
                                  :current-page="currentPage"
-                                 :page-sizes="[5, 10, 15, 20]"
+                                 :page-sizes="[5, 10, 50, 200]"
                                  :page-size="pagesize"
                                  layout="total, sizes, prev, pager, next, jumper"
                                  :total="tableData2.length">
@@ -277,6 +294,7 @@
 </template>
 <script>
 import index from '../../index.vue'
+import { listenWindow } from '@/utils/listenWindow'
 export default {
   components: { index },
   data () {
@@ -630,14 +648,19 @@ export default {
         bm: '1'
       },
 
-      ]
+
+      ],
+      useJJJ: '',
 
     }
   },
   computed: {
     useTableHeight () {
-      return (window.innerHeight * 5 / 8)
+      return (window.innerHeight * 3 / 5)
     }
+
+  },
+  mounted () {
 
   },
   methods: {
@@ -772,11 +795,20 @@ export default {
 .box-card {
   width: 480px;
 }
+#useSearch2 {
+  height: 4vh;
+}
 </style>
 <style scoped>
 .block {
   text-align: center;
 }
+/* .block {
+  position: absolute;
+  top: 92vh;
+  left: 37vw;
+  text-align: center;
+} */
 .el-divider--horizontal {
 }
 table,

@@ -1,20 +1,21 @@
 <template>
   <el-row>
     <el-dialog title="提示"
-               :modal='false'
+               :modal='true'
+               width="70%"
                v-if="form!=undefined"
                :close-on-click-modal='false'
-               :modal-append-to-body="true"
+               :modal-append-to-body="false"
                :visible.sync="dialogVisible"
                :before-close="handleClose"
-               :center="true"
-               style="margin-top:6%;width:100%;margin-left:5%">
-      <!--  判断undefined就不显示    v-if="form!=undefined"-->
+               :center="true">
+      <!--  判断undefined就不显示    v-if="form!=undefined"
+      :fullscreen="true"-->
 
       <table cellspacing="0">
         <tbody>
           <tr>
-            <td></td>
+            <!-- <td></td> -->
             <td>指标名称定义:</td>
             <td colspan="2">
               <el-input type="text"
@@ -35,7 +36,7 @@
 
           </tr>
           <tr>
-            <td :rowspan="this.value1 + 1">指标内容定义:</td>
+            <!-- <td :rowspan="this.value1 + 1">指标内容定义:</td> -->
             <td>指标个数:</td>
             <td>
               <el-select v-model="value1"
@@ -48,9 +49,9 @@
                 </el-option>
               </el-select>
             </td>
-            <td>考评要点:</td>
-            <td>权重:</td>
-            <td>对应一级指标:</td>
+            <td>考评要点</td>
+            <td>权重</td>
+            <td>对应一级指标</td>
           </tr>
           <tr v-for="i in this.value1"
               :key="i">
@@ -84,9 +85,11 @@
           <tr>
             <td colspan="6"
                 id="buttonUse">
-              <el-button>复制</el-button>
-              <el-button>修改</el-button>
-              <el-button>返回</el-button>
+              <el-button size="small"
+                         type="warning">复制</el-button>
+              <el-button size="small"
+                         type="success">保存</el-button>
+              <el-button size="small">返回</el-button>
 
             </td>
           </tr>
@@ -122,7 +125,7 @@ export default {
       value2: [],
       valueUsezb: [],
       valueUsekpyd: [],
-      valueUseqz: [],
+      valueUseqz: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       value3: this.form.d,
       value4: this.form.d,
       value5: this.form.d,
@@ -181,7 +184,7 @@ export default {
       //这里面写后端的edit，delete，create接口
 
     },
-    handleClose (done) {
+    handleClose (done) {//此处遮罩层有问题
       this.$confirm('确认关闭？')
         .then(_ => {
           this.dialogVisible = false

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tabs v-model="editableTabsValue"
-             style="margin-left:1vw;height:3vh !important"
+             style="height:3vh !important;"
              type="card"
              closable
              @tab-click="tabClick"
@@ -42,20 +42,20 @@ export default {
 
     });
     if (deUse === true) {//若不是重复路由就添加tag，只有不是重复的情况下才考虑是不是要加入到路由路径中
-      if (this.routerUse.length <= 19) {//若在11个以内则可以加入，否则不用
-        this.routerUse.push(this.getRouter)
-      }//把它放入tag标签内
-      else {
-        this.$alert('对不起当前页数已经超过最大可容页数20页，当前点击页可以显示但无法在导航栏显示', '⚠️', {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.$message({
-              type: 'info',
-              message: `已经读取`
-            });
-          }
-        });
-      }
+      // if (this.routerUse.length <= 19) {//若在11个以内则可以加入，否则不用
+      this.routerUse.push(this.getRouter)
+      // }//把它放入tag标签内
+      // else {
+      // this.$alert('对不起当前页数已经超过最大可容页数20页，当前点击页可以显示但无法在导航栏显示', '⚠️', {
+      //   confirmButtonText: '确定',
+      //   callback: action => {
+      //     this.$message({
+      //       type: 'info',
+      //       message: `已经读取`
+      //     });
+      //   }
+      // });
+      // }
 
     }
 
@@ -99,6 +99,7 @@ export default {
 }
 .el-tabs--card > .el-tabs__header {
   border-bottom: 1px solid #c3c7d0;
+  z-index: 3000;
 }
 .el-tags_item {
   width: 11vw;
@@ -106,5 +107,8 @@ export default {
 }
 .el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
   border-bottom-color: #22adff;
+}
+.el-icon-arrow-right {
+  display: inline;
 }
 </style>

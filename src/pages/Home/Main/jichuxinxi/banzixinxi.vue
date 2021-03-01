@@ -7,16 +7,18 @@
         <headerUse />
       </el-header>
       <el-main>
-        <el-row>
-          <useTable :headerUse="this.headerUse"
-                    :tableData="this.tableData"
-                    :isBZXX="false"
-                    useTitle="班子信息"
-                    :showDialoggbxxbzxx="true"
-                    :showAddorDelete="true"
-                    :showdaoru="true"
-                    :showdaochu="true" />
-        </el-row>
+        <div>
+          <el-row>
+            <useTable :headerUse="this.headerUse"
+                      :tableData="this.tableData"
+                      :isBZXX="false"
+                      useTitle="班子信息"
+                      :showDialoggbxxbzxx="true"
+                      :showAddorDelete="true"
+                      :showdaoru="true"
+                      :showdaochu="true" />
+          </el-row>
+        </div>
       </el-main>
     </el-container>
   </div>
@@ -56,7 +58,7 @@ export default {
       tableData: [],
     }
   },
-  components : {
+  components: {
     useTable
   },
   methods: {

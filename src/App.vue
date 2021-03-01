@@ -24,6 +24,7 @@ export default {
   margin-left: 11vw;
   margin-top: 11vh;
 }
+
 /* 所有的dialog */
 .el-dialog {
   position: absolute;
@@ -73,4 +74,15 @@ export default {
 /* .el-dialog__footer {
   padding: 0;
 } */
+.el-button--small,
+.el-button--small.is-round {
+  width: 96px;
+  height: 4vh;
+}
+.el-menu-item {
+  font-size: 12px;
+}
+.el-tabs__item {
+  font-size: 12px;
+}
 </style>

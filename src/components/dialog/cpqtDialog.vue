@@ -14,13 +14,13 @@
       <table cellspacing="0">
         <tbody>
           <tr>
-            <td>shiyong</td>
+            <td></td>
             <td>参评群体名称定义:</td>
             <td>
               <el-input type="text"
                         v-model="value1"></el-input>
             </td>
-            <td>shiyong</td>
+            <td></td>
           </tr>
           <tr>
             <td :rowspan="value1+1">群体内容定义:</td>
@@ -36,7 +36,7 @@
                 </el-option>
               </el-select>
             </td>
-            <td>权重:</td>
+            <td>权重</td>
           </tr>
           <tr v-for="i in this.value1"
               :key="i">
@@ -54,9 +54,11 @@
           <tr>
             <td colspan="4"
                 id="buttonUse">
-              <el-button>复制</el-button>
-              <el-button>修改</el-button>
-              <el-button>返回</el-button>
+              <el-button size="small"
+                         type="warning">复制</el-button>
+              <el-button size="small"
+                         type="success">保存</el-button>
+              <el-button size="small">返回</el-button>
             </td>
           </tr>
         </tbody>
@@ -96,7 +98,7 @@ export default {
         label: '测试单位'
       }],
       valueUseGroup: [],
-      valueUseQ: []
+      valueUseQ: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     };
   },
   methods: {

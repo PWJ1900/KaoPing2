@@ -48,7 +48,8 @@ export default {
     }
     // 创建编辑器
     editor.config.height = 420
-    editor.config.zIndex = 10
+    // editor.config.zIndex = 100
+    editor.config.zindex = 20000
     editor.create()
     this.editor = editor
 
@@ -92,7 +93,7 @@ export default {
 // } */
 
 .home {
-  width: 500px;
+  width: 700px;
   margin: auto;
   position: relative;
 }

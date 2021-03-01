@@ -2,7 +2,7 @@ table tbody {
   position: relative;
   display: block;
   height: auto;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 table {
   border: 0px solid;
