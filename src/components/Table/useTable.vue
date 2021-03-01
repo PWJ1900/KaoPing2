@@ -11,36 +11,45 @@
                      size="small">新增</el-button>
           <el-button type="danger"
                      @click="groupDelete"
-                     size="small"
-                     plain>批量删除</el-button>
+                     size="small">批量删除</el-button>
         </el-col>
         <!-- 第一种查询，通过搜索框筛选 -->
         <el-col :span="10"
                 v-show="showSearch">
-          请输入查询条件：<el-input style="width:15vw"
+          <span style="font-size:13px">请输入查询条件：</span>
+          <el-input style="width:20vw"
                     id="inputheight"
-                    v-model="searchinfo"></el-input>
+                    v-model="searchinfo">
+            <el-button @click="searchinfoUse(searchinfo)"
+                       slot="append"
+                       icon="el-icon-search"
+                       style="width:5vw;padding:0;font-size:12px;  background: #23C6C8;"
+                       size="small">
+              <span style="color:white">查询</span>
+            </el-button>
+          </el-input>
 
-          <el-button @click="searchinfoUse(searchinfo)"
-                     size="small">查询</el-button>
         </el-col>
         <!-- 第二种查询：打开dialog -->
         <el-col :span="2"
                 v-show="useSearch">
           <el-button size="small"
-                     @click="dialogVisibleZhcx=true">查询</el-button>
+                     @click="dialogVisibleZhcx=true"
+                     style="width:5vw;padding:0;font-size:12px;  background: #23C6C8;color:white;  width: 96px;
+  height: 4vh;">组合查询</el-button>
         </el-col>
         <!-- 导入excel，由showdaoru控制 -->
         <el-col :span="2"
                 v-show="showdaoru">
           <el-button type="info"
                      @click="dialogVisibledr=true"
-                     size="small">导入excel</el-button>
+                     size="small">导入EXCEL</el-button>
         </el-col>
         <!-- 导出excel，由showdaochu控制 -->
         <el-col :span="3"
                 v-show="showdaochu">
-          <download-excel :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+          <download-excel :data="this.tableDataUse.
+          slice((currentPage-1)*pagesize,currentPage*pagesize)"
                           style="margin:0"
                           :fields="json_fields"
                           name="导出的表格名称.xls">
@@ -196,13 +205,14 @@
                 :form="form"
                 @funcZbtx="getifshow" />
 
-
     <!--中部设计：表格-->
-    <el-card style="margin:1%;">
-      <el-scrollbar>
+    <div style="height:68vh">
+      <el-card style="margin:1%;">
+        <!-- <el-scrollbar> -->
         <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                   border
                   ref="useTable"
+                  style="font-size: 12px"
                   :max-height="useTableHeight"
                   :row-style="{height: '0'}"
                   :cell-style="{padding: '1px'}"
@@ -222,29 +232,39 @@
               </template> -->
             </el-table-column>
           </template>
-          <el-table-column label="拉选框">
+          <el-table-column label="操作框"
+                           fixed="right"
+                           width="300">
             <template slot-scope="scope">
               <el-button type="info"
                          icon="el-icon-edit"
+                         size="small"
                          @click="editUse(scope.row)">编辑</el-button>
-              <el-popconfirm title="您确定要将此行信息删除吗"
+              <!-- <el-popconfirm :title="scope.row"
                              @confirm="deleteUse(scope.row)">
                 <el-button type="danger"
                            slot="reference"
+                           size="small"
                            icon="el-icon-delete">删除</el-button>
-              </el-popconfirm>
+              </el-popconfirm> -->
+              <el-button type="danger"
+                         @click="open(scope.row,1)"
+                         size="small"
+                         icon="el-icon-delete">删除</el-button>
+
             </template>
           </el-table-column>
         </el-table>
-      </el-scrollbar>
-    </el-card>
+        <!-- </el-scrollbar> -->
+      </el-card>
+    </div>
 
     <!--底部设计：页数组件  -->
     <div class="block">
       <el-pagination @size-change="handleSizeChange"
                      @current-change="handleCurrentChange"
                      :current-page="currentPage"
-                     :page-sizes="[5, 10, 15, 20]"
+                     :page-sizes="[5, 10, 50, 200]"
                      :page-size="5"
                      layout="total, sizes, prev, pager, next, jumper"
                      :total="tableData.length">
@@ -281,7 +301,7 @@ export default {
     showDialogYhmm: Boolean,//激活用户密码的dialog
     showDialogCpxh: Boolean,//激活测评序号的dialog
     showDialogZbtx: Boolean,//激活指标体系的dialog
-   
+
     isBZXX: Boolean,//区分班子信息、干部信息区别
     useTitle: String,//区分班子信息、干部信息区别
 
@@ -337,6 +357,7 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
+      // console.log(this.$refs)
       this.$refs.upload.addEventListener("change", e => {
         this.readExcel(e)
       })
@@ -356,7 +377,7 @@ export default {
     // changeTri(){
     // },
     ifshow (data) {
-      console.log(data)
+      // console.log(data)
       if (data == '单位代码') {//此处添加要隐藏的列
         return false
       } else {
@@ -364,10 +385,21 @@ export default {
       }
     },
     groupDelete () {
+      console.log(this.groupDeleteData)
+      if (this.groupDeleteData.length === 0) {
+        alert("请您选择需要批量删除的数据，目前选择为空！")
+      }
+      else {
+        // for (let i in this.groupDeleteData) {
+        //   this.open(this.groupDeleteData[i])//把删除的数组全部遍历进去
+        // }
+        this.open(this.groupDeleteData, 2)//代表list
+      }
 
     },
     selectionLineChangeHandle (val) {
-      console.log(val)//把此值交给后groupDelete处理然后交给后端分配处理，交给后端接口
+      console.log(val)//把此值交给后groupDelete处理然后交给后端分配处理，交给后端接口，与groupDelete方法连接
+      this.groupDeleteData = val
 
     },
     handleSizeChange (val) {
@@ -594,7 +626,55 @@ export default {
         }
 
       }
-    }
+    },
+    open (data, numU) {//使用的删除弹出
+      console.log(data)
+      let useTranslate = {}
+      let sumString = ''
+      let trUse = []
+      const h = this.$createElement
+      trUse.push(h('tr', null, [h('td', null, "您确定要删除吗？已选择数据如下：")]))//表格嵌套着来做,第三个参数指的是要用[]型来当子节点
+      if (numU === 1) {
+        for (let i in this.headerUse) {
+          useTranslate[this.headerUse[i].label] = data[this.headerUse[i].key]
+        }
+        for (let i in useTranslate) {
+          sumString = i + ":" + useTranslate[i]//用字符串拼接使其label与字段对应，这边获取为{}数据
+          trUse.push(h('tr', null, [h('td', null, sumString)]))
+        }
+      }
+      if (numU === 2) {
+        for (let j in data) {
+          for (let i in this.headerUse) {
+            useTranslate[this.headerUse[i].label] = data[j][this.headerUse[i].key]//这边获取为list数据
+          }
+          for (let i in useTranslate) {
+            sumString = i + ":" + useTranslate[i]//用字符串拼接使其label与字段对应
+            trUse.push(h('tr', null, [h('td', null, sumString)]))
+          }
+        }
+
+      }
+      // console.log(useTranslate)
+      this.$confirm('提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        message: h('div', null, trUse),//重写message
+
+      }).then(() => {
+        // this.$message({
+        //   type: 'success',
+        //   message: '删除成功!'
+        // });
+      }).catch(() => {
+        // this.$message({
+        //   type: 'info',
+        //   message: '已取消删除'
+        // });
+      });
+    },
+
   },
   components: {
     useDialog,
@@ -638,7 +718,7 @@ export default {
 
       options2: ['等于', '不等于', '相似于', '不相似于'],
       options3: ['并且', '或者'],
-
+      groupDeleteData: [],
       json_meta: [//定义导出表格
         [
           {
@@ -649,7 +729,7 @@ export default {
       ],
       json_fields: {
 
-      }
+      },
 
     }
   }
@@ -661,6 +741,6 @@ export default {
   text-align: center;
 }
 #inputheight {
-  height: 5vh;
+  height: 4vh;
 }
 </style>

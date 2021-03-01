@@ -1,51 +1,59 @@
 <template>
-    <el-row>
-        <el-dialog  title="提示"
-                    :modal='false'                
-                    v-if="form!=undefined"
-                    :close-on-click-modal='false'
-                    :visible.sync="dialogVisible"
-                    :before-close="handleClose"
-                    :center="true"
-                    style="margin-top:6%;width:100%;margin-left:5%">
-            <div>
-              <el-form ref="form" :model="form" label-width="80px">
-                <el-form-item label="测评序号">
-                  <el-input></el-input>
-                </el-form-item>
-                <el-form-item label="测评名称">
-                  <el-input></el-input>
-                </el-form-item>
-                <el-form-item label="开始时间">
-                  <el-input></el-input>
-                </el-form-item>
-                <el-form-item label="开始日期">
-                  <el-input></el-input>
-                </el-form-item>
-                <el-form-item label="结束时间">
-                  <el-input></el-input>
-                </el-form-item>
-                <el-form-item label="结束日期">
-                  <el-input></el-input>
-                </el-form-item>
-              </el-form>
-            </div>
-            <span slot="footer" class="dialog-footer" style="background-color:white">
-                <el-button @click="cancel">取 消</el-button>
-                <el-button type="primary" @click="confirmit">确 定</el-button>
-            </span>
-        </el-dialog>
-    </el-row>
+  <el-row>
+    <el-dialog title="提示"
+               :modal='true'
+               width="70%"
+               v-if="form!=undefined"
+               :close-on-click-modal='false'
+               :visible.sync="dialogVisible"
+               :before-close="handleClose"
+               :modal-append-to-body='false'
+               :center="true">
+      <!-- :fullscreen="true" -->
+      <div>
+        <el-form ref="form"
+                 :model="form"
+                 label-width="80px">
+          <el-form-item label="测评序号">
+            <el-input></el-input>
+          </el-form-item>
+          <el-form-item label="测评名称">
+            <el-input></el-input>
+          </el-form-item>
+          <el-form-item label="开始时间">
+            <el-input></el-input>
+          </el-form-item>
+          <el-form-item label="开始日期">
+            <el-input></el-input>
+          </el-form-item>
+          <el-form-item label="结束时间">
+            <el-input></el-input>
+          </el-form-item>
+          <el-form-item label="结束日期">
+            <el-input></el-input>
+          </el-form-item>
+        </el-form>
+      </div>
+      <span slot="footer"
+            class="dialog-footer">
+        <el-button @click="cancel"
+                   size="small">取 消</el-button>
+        <el-button type="primary"
+                   @click="confirmit"
+                   size="small">确 定</el-button>
+      </span>
+    </el-dialog>
+  </el-row>
 </template>
 <script>
 import { tablePostUpdate } from '@/api/tablePostUpdate'
 
 export default {
-  props : {
-      headerUse: Array,
-      form: Object
+  props: {
+    headerUse: Array,
+    form: Object
   },
-  data() {
+  data () {
     return {
       dialogVisible: true,
     };
@@ -61,31 +69,30 @@ export default {
     }
   },
   methods: {
-      cancel () {
+    cancel () {
       this.dialogVisible = false
       this.$emit("funcCpxh", this.dialogVisible)
 
 
-      },
-      confirmit () {
-        this.dialogVisible = false
-        tablePostUpdate(this, "xgbmxx", this.formUse)
-        location.reload();
-        this.$emit("funcCpxh", this.dialogVisible)
-        //这里面写后端的edit，delete，create接口
-      },
-      handleClose (done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            this.dialogVisible = false
-            this.$emit("funcCpxh", this.dialogVisible)
-            done();
-          })
-          .catch(_ => { });
-      }
+    },
+    confirmit () {
+      this.dialogVisible = false
+      tablePostUpdate(this, "xgbmxx", this.formUse)
+      location.reload();
+      this.$emit("funcCpxh", this.dialogVisible)
+      //这里面写后端的edit，delete，create接口
+    },
+    handleClose (done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          this.dialogVisible = false
+          this.$emit("funcCpxh", this.dialogVisible)
+          done();
+        })
+        .catch(_ => { });
     }
+  }
 }
 </script>
 <style scoped>
-
 </style>

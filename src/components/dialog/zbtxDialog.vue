@@ -208,11 +208,9 @@ export default {
     }
   },
   methods: {
-      cancel () {
+    cancel () {
       this.dialogVisible = false
       this.$emit("funcZbtx", this.dialogVisible)
-
-
       },
       confirmit () {
         this.dialogVisible = false
@@ -244,6 +242,7 @@ export default {
         this.zongtipingjia.xuanxiangdingyi.pop()
       }
     }
+  }
 }
 </script>
 <style scoped>

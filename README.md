@@ -43,3 +43,8 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 王晓伟
+
+<!-- 今日任务
+     1、把操作一栏无竖线解决了
+     2、把自动放大缩小解决了
+     3、 -->

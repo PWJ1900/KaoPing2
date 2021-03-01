@@ -1,4 +1,5 @@
 .el-header {
   height: 4vh !important;
+  padding: 0;
 }
 /* 此处设置页面内置头部的image */

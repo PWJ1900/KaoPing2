@@ -224,11 +224,11 @@ export default {
 
     },
     confirmit () {
-        this.dialogVisible = false
-        tablePostUpdate(this, "xgbmxx", this.formUse)
-        location.reload();
-        this.$emit("funcYhmm", this.dialogVisible)
-        //这里面写后端的edit，delete，create接口
+      this.dialogVisible = false
+      tablePostUpdate(this, "xgbmxx", this.formUse)
+      location.reload();
+      this.$emit("funcYhmm", this.dialogVisible)
+      //这里面写后端的edit，delete，create接口
     },
     handleClose (done) {
       this.$confirm('确认关闭？')

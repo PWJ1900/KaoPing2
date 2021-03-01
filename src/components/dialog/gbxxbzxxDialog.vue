@@ -6,10 +6,12 @@
                :close-on-click-modal="false"
                :modal="false"
                :visible.sync="dialogVisibleShowFile"
+               width="auto"
+               :modal='true'
                :before-close="handleCloseShowFile"
                :modal-append-to-body='false'
-               :center="true"
-               >
+               :center="true">
+      <!--  :fullscreen="true" -->
       <div style="height: 80vh">
         <embed :src="showFile"
                type="application/pdf"
@@ -21,7 +23,7 @@
     </el-dialog>
     <el-dialog :visible.sync="dialogVisible"
                :title="useTitle"
-               :modal='false'
+               id="thisDialogUse"
                :modal-append-to-body='false'
                :before-close="handleClose">
 
@@ -142,8 +144,8 @@
                 </el-date-picker>
               </div>
             </td>
-            <td>12</td>
-            <td>12</td>
+            <td></td>
+            <td></td>
 
           </tr>
           <tr>
@@ -254,7 +256,8 @@
           </tr>
           <tr>
             <td>简介内容：</td>
-            <td colspan="3">
+            <td colspan="3"
+                style="padding:0">
               <fwbUse />
             </td>
 
@@ -263,9 +266,10 @@
             <td colspan="4"
                 style="text-align:center">
               <el-button type="success"
-                         @click="uploadUse">修改</el-button>
-              <el-button type="success"
-                         @click="cancel">返回</el-button>
+                         @click="uploadUse"
+                         size="small">保存</el-button>
+              <!-- <el-button type="success"
+                         @click="cancel">返回</el-button> -->
             </td>
 
           </tr>
@@ -278,7 +282,8 @@
               <el-button type="primary"
                          @click="dialogVisible = false">确 定</el-button>
             </span> -->
-      <button @click="useImage">点击获取</button>
+      <button @click="useImage"
+              size="small">点击获取</button>
     </el-dialog>
 
   </el-row>
@@ -574,7 +579,7 @@ export default {
       console.log(file);
     },
     // 上传图片方法结尾
-    cancel () {
+    uploadUse () {
       this.dialogVisible = false
       this.$emit("funcgbxxbzxx", this.dialogVisible)
 
@@ -628,5 +633,10 @@ table td {
 #el-selectUse {
   width: 180px;
   height: 35px;
+}
+</style>
+<style scoped>
+#thisDialogUse {
+  z-index: 10000 !important;
 }
 </style>

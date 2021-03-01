@@ -1,7 +1,7 @@
 const listenWindow = (the)=>{
 	const that = the
     window.onresize = () => {
-      return (() => {
+      return (() => {//此函数为自己回调方法挂在mounted,此方法只能一时自己调用
         //这里写要操作的函数
 				// console.log(window.screenWidth)
         // window.screenWidth = document.body.clientWidth

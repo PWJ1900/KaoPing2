@@ -1,20 +1,20 @@
 <template>
   <el-row>
     <el-dialog title="一级指标信息更改"
-               :modal='false'
+               :modal='true'
+               width="70%"
                v-if="form!=undefined"
-               :modal-append-to-body="true"
+               :modal-append-to-body="false"
                :close-on-click-modal='false'
                :visible.sync="dialogVisible"
                :before-close="handleClose"
-               :center="true"
-               style="margin-top:6%;width:100%;margin-left:5%">
-      <!--  判断undefined就不显示    v-if="form!=undefined"-->
-
+               :center="true">
+      <!--  判断undefined就不显示    v-if="form!=undefined"
+       :fullscreen="true"-->
       <table cellspacing="0">
         <tbody>
           <tr>
-            <td></td>
+            <!-- <td></td> -->
             <td>指标名称定义:</td>
             <td>
               <el-input type="text"
@@ -22,7 +22,7 @@
             </td>
           </tr>
           <tr>
-            <td :rowspan="value1+1">指标内容定义:</td>
+            <!-- <td :rowspan="value1+1">指标内容定义:</td> -->
             <td>指标个数设置:</td>
             <td>
               <el-select v-model="value1"
@@ -47,9 +47,12 @@
           <tr>
             <td colspan="3"
                 id="buttonUse">
-              <el-button type="info">复制</el-button>
-              <el-button type="success">修改</el-button>
-              <el-button type="warning">返回</el-button>
+              <el-button type="info"
+                         size="small">复制</el-button>
+              <el-button type="success"
+                         size="small">保存</el-button>
+              <el-button type="warning"
+                         size="small">返回</el-button>
             </td>
           </tr>
         </tbody>
