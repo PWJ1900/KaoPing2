@@ -1,7 +1,8 @@
 <template>
   <div>
     <el-container>
-      <el-aside>
+      <el-aside style="width:auto;z-index: 3000">
+        <!-- 把其级别设置成比遮罩层高 -->
         <!-- Aside background-color="#545c64"-->
         <el-menu text-color="#fff"
                  background-color="#303133"

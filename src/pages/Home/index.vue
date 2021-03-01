@@ -13,6 +13,7 @@
                    active-text-color="black">
             <el-menu-item v-for="(item, index) in headerUseR"
                           :key="index"
+                          style="height:6vh"
                           :index="item">
               <template slot="title">{{index}}</template>
             </el-menu-item>
@@ -80,6 +81,17 @@ body,
 i {
   width: 30px;
 }
+</style>
+<style scoped>
+#useHeader {
+  height: 6vh !important;
+  background: url('../../assets/loginbg1.jpg') no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  z-index: 3000;
+}
+
+/*  此处设置页面最初头部的image */
 </style>
 <script>
 export default {

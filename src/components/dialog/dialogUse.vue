@@ -2,14 +2,16 @@
 <template>
   <el-row>
     <el-dialog title="提示"
-               :modal='false'
+               width="70%"
                :destroy-on-close='true'
+               :modal='true'
                v-if="form!=undefined"
                :visible.sync="dialogVisible"
                :before-close="handleClose"
-               :center="true"
-               style="margin-top:6%;width:100%;margin-left:5%">
-      <!--  判断undefined就不显示    v-if="form!=undefined"-->
+               :modal-append-to-body='false'
+               :center="true">
+      <!--  判断undefined就不显示    v-if="form!=undefined"
+       :fullscreen="true"-->
 
       <el-form ref="form"
                :model="formUse"
@@ -23,10 +25,12 @@
 
       </el-form>
       <span slot="footer"
-            class="dialog-footer" style="background-color:white">
-        <el-button @click="cancel">取 消</el-button>
+            class="dialog-footer">
+        <el-button @click="cancel"
+                   size="small">取 消</el-button>
         <el-button type="primary"
-                   @click="confirmit">确 定</el-button>
+                   @click="confirmit"
+                   size="small">确 定</el-button>
       </span>
     </el-dialog>
   </el-row>
