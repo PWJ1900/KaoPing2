@@ -100,12 +100,14 @@ import yhmmDialog from '@/components/dialog/yhmmDialog'
 export default {
   async created () {
     console.log("创建完成...")
-    // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
     // this.tableDataUse=this.tableData
+    let copy = JSON.parse(JSON.stringify(this.tableData))
+    this.tableDataUse=copy
+    console.log(this.tableDataUse)
     //☆☆☆  2个数组的内存地址是相同的，修改时会同时修改，所以需要开辟两个不同内容
-    for(var i in this.tableData){
-      this.tableDataUse.push(this.tableData[i])
-    }
+  
+        // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
+
   },
   components: {
     yhmmDialog
@@ -164,10 +166,11 @@ export default {
       this.currentPage = val
     },
     rowClick(scope){
+      console.log("修改")
       this.tableDataUse[scope.$index].isEdit=! this.tableDataUse[scope.$index].isEdit
-      // scope.row.isEdit=!scope.row.isEdit
     },
     editYes(scope){
+      console.log("确定")
       //修改完成，隐藏（确定、复原），显示“编辑”
       this.tableDataUse[scope.$index].isEdit=! this.tableDataUse[scope.$index].isEdit
       //发送修改请求到后端
@@ -175,9 +178,11 @@ export default {
     },
     editNo(scope){
       //将该行的tableDataUse，用tableData替换  ..scope.$index为当前行值（0开始）
-  
-      this.tableDataUse[scope.$index] = this.tableData[scope.$index]
-      this.tableDataUse[scope.$index].isEdit=! this.tableDataUse[scope.$index].isEdit
+      console.log("复原前"+this.tableDataUse[scope.$index].mm)
+        this.tableDataUse[scope.$index].mm=this.tableData[scope.$index].mm
+        this.tableDataUse[scope.$index].yhm=this.tableData[scope.$index].yhm
+        this.tableDataUse[scope.$index].jy=this.tableData[scope.$index].jy
+      console.log("复原后"+this.tableDataUse[scope.$index].mm)
     },
     searchInfo (searchData) {
       let keyUse = []
