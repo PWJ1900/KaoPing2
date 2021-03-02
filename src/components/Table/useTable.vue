@@ -1,5 +1,6 @@
 <template>
   <el-row>
+    <!-- 顶部设计 -->
     <el-card style="margin:1%">
       <!-- 顶部设计 -->
       <el-row>
@@ -190,10 +191,8 @@
                     :useTitle="useTitle"
                     @funcgbxxbzxx="getifshow" />
     <!--民主评测-用户密码的dialog-->
-    <yhmmDialog v-if="this.showDialogYhmm&&this.showDialog"
-                :headerUse="headerUse"
-                :form="form"
-                @funcYhmm="getifshow" />
+    <!-- <yhmmDialog v-if="this.showDialogYhmm&&this.showDialog"
+                @funcYhmm="getifshow" /> -->
     <!--民主评测-测评序号的dialog -->
     <cpxhDialog v-if="this.showDialogCpxh&&this.showDialog"
                 :headerUse="headerUse"
@@ -298,7 +297,7 @@ export default {
     showDialogCpqt: Boolean,//激活参评群体的dialog
     showDialoggbxxbzxx: Boolean,
 
-    showDialogYhmm: Boolean,//激活用户密码的dialog
+    //showDialogYhmm: Boolean,//激活用户密码的dialog
     showDialogCpxh: Boolean,//激活测评序号的dialog
     showDialogZbtx: Boolean,//激活指标体系的dialog
 

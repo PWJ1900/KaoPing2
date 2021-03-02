@@ -104,6 +104,7 @@ export default {
       cepingxuhaotemp: '',
       cepingList: [],
       danweiList: [],
+      data:[],
       /**第二部分（表格1）
        */
       tableData1: [
