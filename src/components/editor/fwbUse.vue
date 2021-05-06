@@ -29,7 +29,7 @@ export default {
   mounted () {
     const editor = new wangEditor(`#demo1`)
     console.log(editor)
-    editor.config.uploadImgServer = 'http://localhost:8080' + "/upload"//这个地方呢写后端获取图片的请求一定要在create之前设置
+    editor.config.uploadImgServer = 'http://10.211.55.15:80' + "/upload"//这个地方呢写后端获取图片的请求一定要在create之前设置
     editor.config.uploadVideoServer = "/hkk"//这个地方写后端的获取video
     editor.config.uploadImgShowBase64 = false
     editor.config.uploadFileName = 'myFileName'

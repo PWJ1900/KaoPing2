@@ -38,6 +38,10 @@ export default {
     return {//下面的headerUse写的是属性字段//tableData则为调用的json值
       headerUse: [
         {
+          label: "id",
+          key: "id"
+        },
+        {
           label: "部门代码",
           key: "bmdm"
         },
@@ -46,13 +50,26 @@ export default {
           key: "bmmc"
         },
         {
+          label: "py",
+          key: "py"
+        },
+        {
           label: "单位代码",
-          key: "bmxx"//这边写错了应该是单位代码为dwdm
+          key: "dwdm"//这边写错了bmxx应该是单位代码为dwdm
         },
         {
           label: "单位名称",
           key: "dwmc"
         },
+        {
+          label: "时间",
+          key: "addtime"
+        },
+        {
+          label: "使用人",
+          key: "UserName"
+        }
+
 
 
 

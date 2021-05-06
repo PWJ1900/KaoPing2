@@ -1,8 +1,13 @@
 <template>
   <el-row>
-    <el-dialog title="部门信息修改"
-               :modal='true'
+    <el-dialog title="提示"
                width="70%"
+               :destroy-on-close='true'
+               :modal='true'
+               v-if="form!=undefined"
+               :visible.sync="dialogVisible"
+               :before-close="handleClose"
+               :modal-append-to-body='false'
                :center="true">
       <!--  判断undefined就不显示    v-if="form!=undefined"
        :fullscreen="true"-->
@@ -26,7 +31,7 @@
             <td>单位代码：</td>
             <td>
               <el-input type="text"
-                        v-model="formUse.bmxx"></el-input>
+                        v-model="formUse.dwdm"></el-input>
             </td>
             <td>单位名称：</td>
             <td>
@@ -105,8 +110,6 @@ export default {
     cancel () {
       this.dialogVisible = false
       this.$emit("funcBmxx", this.dialogVisible)
-
-
     },
     async confirmit () {
       this.dialogVisible = false

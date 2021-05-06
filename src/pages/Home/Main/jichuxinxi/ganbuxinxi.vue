@@ -28,7 +28,7 @@
 import { tablePostGet } from '@/api/tablePostGet'
 export default {
   async created () {
-    // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
+    tablePostGet(this, "gbxx")//根据postman的Api获取数据来测试
 
   },
   data () {
@@ -36,7 +36,7 @@ export default {
       headerUse: [
         {
           label: "代码",
-          key: "dm"
+          key: "bmdm"
         },
         {
           label: "姓名",
@@ -46,29 +46,29 @@ export default {
           label: "性别",
           key: "xb"//这边写错了应该是单位代码为dwdm
         },
-        {
-          label: "出生年月",
-          key: "csny"
-        },
+        // {
+        //   label: "出生年月",
+        //   key: "csny"
+        // },
         {
           label: "职务",
           key: "zw"
         },
-        {
-          label: "任职时间",
-          key: "rzsj"
-        },
+        // {
+        //   label: "任职时间",
+        //   key: "rzsj"
+        // },
         {
           label: "职级",
           key: "zj"
         },
-        {
-          label: "职级时间",
-          key: "zjsj"
-        },
+        // {
+        //   label: "职级时间",
+        //   key: "zjsj"
+        // },
         {
           label: "身份",
-          key: "sf"
+          key: "rysfmc"
         },
         {
           label: "单位",

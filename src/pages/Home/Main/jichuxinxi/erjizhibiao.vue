@@ -25,28 +25,45 @@ import { tablePostGet } from '@/api/tablePostGet'
 import useTable from '@/components/Table/useTable'
 export default {
   async created () {
-    tablePostGet(this, "test")//根据postman的Api获取数据来测试
+    tablePostGet(this, "ejzb")//根据postman的Api获取数据来测试
 
   },
   data () {
     return {//下面的headerUse写的是属性字段//tableData则为调用的json值
       headerUse: [//此处虚更改与后端提取字段的一致
         {
+          label: "测评代码",
+          key: "cpdm"
+
+        },
+        {
+          label: "测评姓名",
+          key: "cpxm"
+        },
+        {
           label: "单位信息代码",
-          key: "a"
+          key: "dwdm"
         },
         {
           label: "单位信息名称",
-          key: "b"
+          key: "dwmc"
         },
         {
-          label: "调用",
-          key: "c"
-        },
-        {
-          label: "调用2",
-          key: "d"
+          label: "人员身份",
+          key: "rysf"
+        }, {
+          label: "职位",
+          key: "zw"
+
         }
+        // {
+        //   label: "调用",
+        //   key: "c"
+        // },
+        // {
+        //   label: "调用2",
+        //   key: "d"
+        // }
 
 
 
@@ -57,7 +74,7 @@ export default {
 
     }
   },
-  components : {
+  components: {
     useTable
   },
   methods: {

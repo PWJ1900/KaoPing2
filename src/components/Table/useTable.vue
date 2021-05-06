@@ -64,6 +64,7 @@
 
     <!--导入excel的dialog -->
     <el-dialog title="导入操作"
+               id="daoruUSeId"
                :visible.sync="syncUse"
                v-show="dialogVisibledr"
                :modal="useModal"
@@ -216,12 +217,17 @@
                   :max-height="useTableHeight"
                   :row-style="{height: '0'}"
                   :cell-style="{padding: '1px'}"
+                  :row-class-name="rowClassName"
                   v-loading="loading"
                   @selection-change="selectionLineChangeHandle"
                   stripe>
           <el-table-column type="selection"
                            v-if="showCheckbox">
           </el-table-column>
+          <el-table-column label="序号"
+                           align="center"
+                           prop="xh"
+                           width="50"></el-table-column>
           <template v-for="info in headerUse">
             <el-table-column :key="info.key"
                              :prop="info.key"
@@ -376,6 +382,9 @@ export default {
   methods: {
     // changeTri(){
     // },
+    rowClassName ({ row, rowIndex }) {
+      row.xh = rowIndex + 1;
+    },
     ifshow (data) {
       // console.log(data)
       if (data == '单位代码') {//此处添加要隐藏的列
@@ -433,7 +442,7 @@ export default {
     },
     getifshow (data) {
       this.showDialog = data//得到子组建的传值来点击关闭
-      this.$emit("refreshUseData")
+      this.$emit("d")
 
     },
     handleClosedr (done) {
@@ -742,5 +751,8 @@ export default {
 }
 #inputheight {
   height: 4vh;
+}
+#daoruUSeId {
+  margin-left: 35%;
 }
 </style>

@@ -26,7 +26,7 @@ import { tablePostGet } from '@/api/tablePostGet'
 
 export default {
   async created () {
-    tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
+    tablePostGet(this, "yjzb")//根据postman的Api获取数据来测试
 
   },
   data () {
@@ -34,20 +34,20 @@ export default {
       headerUse: [//此处虚更改与后端提取字段的一致
         {
           label: "单位信息代码",
-          key: "a"
+          key: "dwdm"
         },
         {
           label: "单位信息名称",
-          key: "b"
+          key: "dwmc"
         },
-        {
-          label: "调用",
-          key: "c"
-        },
-        {
-          label: "调用2",
-          key: "d"
-        }
+        // {
+        //   label: "调用",
+        //   key: "c"
+        // },
+        // {
+        //   label: "调用2",
+        //   key: "d"
+        // }
 
 
 
