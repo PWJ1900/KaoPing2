@@ -46,19 +46,19 @@
                 <el-table-column type="selection">
 
                 </el-table-column>
-                <el-table-column prop="dm"
+                <el-table-column prop="gbfzdm"
                                  label="代码"
                                  width="180">
                 </el-table-column>
-                <el-table-column prop="mc"
+                <el-table-column prop="gbfzmc"
                                  label="名称"
                                  width="180">
                 </el-table-column>
-                <el-table-column prop="gbxm"
+                <el-table-column prop="cpxms"
                                  label="干部姓名"
                                  width="180">
                 </el-table-column>
-                <el-table-column prop="gbdm"
+                <el-table-column prop="cpdms_sql"
                                  label="干部代码">
                 </el-table-column>
                 <el-table-column label="操作"
@@ -295,6 +295,7 @@
 <script>
 import index from '../../index.vue'
 import { listenWindow } from '@/utils/listenWindow'
+
 export default {
   components: { index },
   data () {
@@ -325,330 +326,7 @@ export default {
         value: "选项2",
         label: '测试单位'
       },],
-      tableData: [{
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      }, {
-
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      }, {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      }, {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      }],
-      tableData2: [{
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '男',
-        zw: 'da1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎2',
-        sf: '1518 弄',
-        xb: '男',
-        zw: 'da2',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎3',
-        sf: '1518 弄',
-        xb: '男',
-        zw: '3',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎4',
-        sf: '1518 弄',
-        xb: '男',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎5',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-
-
+      tableData: [
       ],
       useJJJ: '',
 
@@ -661,7 +339,7 @@ export default {
 
   },
   mounted () {
-
+    tablePostGet(this, "dxfz")//根据postman的Api获取数据来测试
   },
   methods: {
     // AddUser () {

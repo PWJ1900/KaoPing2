@@ -79,7 +79,7 @@ export default {
 
     },
     confirmit () {
-      tablePostUpdate(this, "add_sflx", this.formUse)
+      tablePostUpdate(this, "add_dwxx", this.formUse)
       this.dialogVisible = false
       this.$emit("func", this.dialogVisible)
       //这里面写后端的edit，delete，create接口

@@ -28,7 +28,7 @@
 import { tablePostGet } from '@/api/tablePostGet'
 export default {
   async created () {
-    // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
+    tablePostGet(this, "gbxx")//根据postman的Api获取数据来测试
 
   },
   data () {
@@ -36,7 +36,7 @@ export default {
       headerUse: [
         {
           label: "代码",
-          key: "dm"
+          key: "cpdm"
         },
         {
           label: "姓名",
@@ -48,7 +48,7 @@ export default {
         },
         {
           label: "出生年月",
-          key: "csny"
+          key: "csrq"
         },
         {
           label: "职务",
@@ -68,7 +68,7 @@ export default {
         },
         {
           label: "身份",
-          key: "sf"
+          key: "rysfmc"
         },
         {
           label: "单位",

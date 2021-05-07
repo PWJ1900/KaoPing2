@@ -11,11 +11,11 @@
         <!-- 表格 -->
         <el-table :data="tableData" border>
           <!-- 测评等级 -->
-          <el-table-column prop="cpdj" label="测评等级"></el-table-column>
+          <el-table-column prop="name" label="测评等级"></el-table-column>
           <!-- 最低分 -->
-          <el-table-column prop="zdf" label=">=最低分"></el-table-column>
+          <el-table-column prop="low" label=">=最低分"></el-table-column>
           <!-- 最高分 -->
-          <el-table-column prop="zgf" label="<最高分"></el-table-column>
+          <el-table-column prop="high" label="<最高分"></el-table-column>
           <!-- 编辑区 -->
           <el-table-column>
             <template slot-scope="scope">
@@ -112,7 +112,7 @@ export default {
   components: { index },
   async created () {
     console.log("测评等级组件-加载完成")
-    // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
+    tablePostGet(this, "cpdj")//根据postman的Api获取数据来测试
   },
   data () {
     return {
@@ -159,26 +159,7 @@ export default {
        * 
        *  */
       tableData: [
-        {
-          cpdj: '优秀',
-          zdf: 99,
-          zgf: 100
-        },
-        {
-          cpdj: '良好',
-          zdf: 88,
-          zgf: 99
-        },
-        {
-          cpdj: '一般',
-          zdf: 70,
-          zgf: 79
-        },
-        {
-          cpdj: '改进',
-          zdf: 60,
-          zgf: 69
-        }
+      
       ]
     }
   },

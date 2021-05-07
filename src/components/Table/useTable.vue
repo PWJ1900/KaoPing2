@@ -163,6 +163,12 @@
                :headerUse="headerUse"
                :form="form"
                @func="getifshow" />
+               
+    <!-- 单位信息的dialog -->
+    <dwxxDialog v-if="this.showDialogDwxx&&this.showDialog"
+               :headerUse="headerUse"
+               :form="form"
+               @func="getifshow" />
     <!--基础信息-部门信息的dialog -->
     <bmxxDialog v-if="this.showDialogBmxx&&this.showDialog"
                 :headerUse="headerUse"
@@ -273,6 +279,7 @@
 </template>
 <script>
 import useDialog from '@/components/dialog/dialogUse'
+import dwxxDialog from '@/components/dialog/DwxxDialog'
 import bmxxDialog from '@/components/dialog/bmxxDialog'
 import yjzbDialog from '@/components/dialog/yjzbDialog'
 import ejzbDialog from '@/components/dialog/ejzbDialog'
@@ -291,6 +298,7 @@ export default {
     tableData: Array,//此处为传入的表单数据
     //所有的dialog控制开关交给showDialog
     showDialogNormal: Boolean,//激活普通的dialog
+    showDialogDwxx: Boolean,//激活单位信息的dialog
     showDialogBmxx: Boolean,//激活部门信息的dialog
     showDialogYjzb: Boolean,//激活一级指标的dialog
     showDialogEjzb: Boolean,//激活二级指标dialog
@@ -684,8 +692,8 @@ export default {
     gbxxbzxxDialog,
     yhmmDialog,
     cpxhDialog,
-    zbtxDialog
-
+    zbtxDialog,
+    dwxxDialog,
   },
   data () {
     return {

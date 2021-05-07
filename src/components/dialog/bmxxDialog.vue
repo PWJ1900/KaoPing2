@@ -3,7 +3,9 @@
     <el-dialog title="部门信息修改"
                :modal='true'
                width="70%"
-               :center="true">
+               :center="true"
+               :visible.sync="dialogVisible"
+               :before-close="handleClose">
       <!--  判断undefined就不显示    v-if="form!=undefined"
        :fullscreen="true"-->
 
@@ -26,17 +28,17 @@
             <td>单位代码：</td>
             <td>
               <el-input type="text"
-                        v-model="formUse.bmxx"></el-input>
+                        v-model="formUse.dwdm"></el-input>
             </td>
             <td>单位名称：</td>
             <td>
               <el-select v-model="formUse.dwmc"
                          placeholder="请选择单位"
                          id="el-selectUse">
-                <el-option v-for="item in options"
+                <el-option v-for="(item,index) in dwList"
                            :key="item.value"
                            :label="item.label"
-                           :value="item.label">
+                           :value="index">
                 </el-option>
               </el-select>
             </td>
@@ -60,12 +62,24 @@
 <script>
 import { tablePostUpdate } from '@/api/tablePostUpdate'
 export default {
+  beforeCreate(){
+    this.$axios.post("get_dw").then(
+      (res)=>{
+        this.dwList = res.data
+      }
+    )
+  },
   props: {
     headerUse: Array,
     form: Object,
     // showDialog: Boolean,
 
 
+  },
+  computed:{
+    aaaa(){
+      return this.formUse.dwmc;
+    }
   },
   watch: {
     form: {//子组建向其第一次传值的判断
@@ -75,10 +89,12 @@ export default {
         // ...
       },
       immediate: true
-
-
-
-
+    },
+    aaaa:{
+      handler(newval,oldval){
+        this.formUse.dwdm = this.dwList[this.formUse.dwmc]
+      },
+      immediate:true
     }
 
 
@@ -92,13 +108,7 @@ export default {
     return {
       dialogVisible: true,
       formUse: {},
-      options: [{
-        value: '选项1',
-        label: '请选择单位'
-      }, {
-        value: '选项2',
-        label: '测试单位'
-      }],
+      dwList: [],
     };
   },
   methods: {

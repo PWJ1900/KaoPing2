@@ -25,27 +25,19 @@ import { tablePostGet } from '@/api/tablePostGet'
 import useTable from '@/components/Table/useTable'
 export default {
   async created () {
-    tablePostGet(this, "test")//根据postman的Api获取数据来测试
+    tablePostGet(this, "ejzb")//根据postman的Api获取数据来测试
 
   },
   data () {
     return {//下面的headerUse写的是属性字段//tableData则为调用的json值
       headerUse: [//此处虚更改与后端提取字段的一致
         {
-          label: "单位信息代码",
-          key: "a"
+          label: "二级指标名称",
+          key: "name"
         },
         {
-          label: "单位信息名称",
-          key: "b"
-        },
-        {
-          label: "调用",
-          key: "c"
-        },
-        {
-          label: "调用2",
-          key: "d"
+          label: "指标个数",
+          key: "col_num"
         }
 
 

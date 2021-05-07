@@ -10,7 +10,7 @@
         <el-row>
           <useTable :headerUse="this.headerUse"
                     :tableData="this.tableData"
-                    :showDialogNormal="true"
+                    :showDialogDwxx="true"
                     :showAddorDelete="true"
                     :showSearch="true"
                     :showdaoru="true"
@@ -37,11 +37,11 @@ export default {
       headerUse: [
         {
           label: "单位信息代码",
-          key: "dwxxdm"
+          key: "dwdm"
         },
         {
           label: "单位信息名称",
-          key: "dwxxmc"
+          key: "dwmc"
         }
 
 

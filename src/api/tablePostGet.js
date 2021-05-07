@@ -17,9 +17,10 @@ const tablePostGet = async (the,addUrl)=>{
 	 */
 	the.$axios.post(addUrl, the.qs.stringify({ nihao: "fdsa" }))
 		.then((response) => {
+			console.log('返回结果！')
 			console.log(response)
 			// the.tableData = JSON.parse(JSON.stringify(response.data))
-			the.tableData = response.data.data//此处为我测试springboot统一管理异常而准备的
+			the.tableData = response.data//此处为我测试springboot统一管理异常而准备的
 			// console.log( the.tableData[0,2])
 		}).catch((error) => {
 			console.log(error)

@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import { tablePostGet } from '@/api/tablePostGet'
+import { tablePostGet } from '@/api/tablePostGet' 
 import useTable from '@/components/Table/useTable'
 
 

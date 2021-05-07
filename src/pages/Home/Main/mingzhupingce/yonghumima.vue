@@ -33,19 +33,18 @@
               <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                   border  style="font-size: 12px"
                   :row-style="{height: '0'}" :cell-style="{padding: '1px'}"
-                  stripe
-                 >
+                  stripe>
                 <el-table-column type="selection"></el-table-column>
-                <el-table-column label="用户名" width="100px" prop="yhm">
+                <el-table-column label="用户名"  prop="UserName">
                   <template slot-scope="scope"> 
-                     <el-input v-if="scope.row.isEdit"  v-model="scope.row.yhm" placeholder="请输入内容"></el-input> 
-                     <span v-else>{{scope.row.yhm}}</span>
+                     <el-input v-if="scope.row.isEdit"  v-model="scope.row.UserName" placeholder="请输入内容"></el-input> 
+                     <span v-else>{{scope.row.UserName}}</span>
                   </template>
                 </el-table-column>
-                <el-table-column label="密码" width="100px" prop="mm">
+                <el-table-column label="密码" prop="Password">
                   <template slot-scope="scope">
-                     <el-input v-if="scope.row.isEdit"  v-model="scope.row.mm" placeholder="请输入内容"></el-input> 
-                     <span v-else>{{scope.row.mm}}</span>
+                     <el-input v-if="scope.row.isEdit"  v-model="scope.row.UserName" placeholder="请输入内容"></el-input> 
+                     <span v-else>{{scope.row.Password}}</span>
                   </template>
                 </el-table-column>
                 <el-table-column label="禁用">
@@ -54,8 +53,8 @@
                      <!-- <span>{{scope.row.jy?'是':'否'}}</span> -->
                   </template>
                 </el-table-column>
-                <el-table-column label="考评序号" prop="kpxh"></el-table-column>
-                <el-table-column label="群体类型" prop="qtlx"></el-table-column>
+                <el-table-column label="考评序号" prop="cpid"></el-table-column>
+                <el-table-column label="群体类型" prop="cpfv"></el-table-column>
                 <el-table-column label="分组名" prop="fzm"></el-table-column>
                 <el-table-column label="分组码" prop="fzma"></el-table-column>
                 <el-table-column label="操作框" fixed="right" width="300">
@@ -98,64 +97,36 @@ import XLSX from 'xlsx'//对excel导入操作
 import yhmmDialog from '@/components/dialog/yhmmDialog'
 
 export default {
-  async created () {
-    console.log("创建完成...")
-    // this.tableDataUse=this.tableData
-    let copy = JSON.parse(JSON.stringify(this.tableData))
-    this.tableDataUse=copy
-    console.log(this.tableDataUse)
-    //☆☆☆  2个数组的内存地址是相同的，修改时会同时修改，所以需要开辟两个不同内容
-  
-        // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
-
+  beforeCreate(){
+    tablePostGet(this,"yhmm")//根据postman的Api获取数据来测试
+  },
+  created () {
+    
   },
   components: {
     yhmmDialog
   },
-  mounted () {
-    console.log("挂载完成...")
-  },
   data () {
     return {
-      //后台表格数据
-      tableData: [
-        {
-          yhm: '144',
-          mm: '222',
-          jy: true,
-          kpxh: '212',
-          qtlx: 'a',
-          fzm: '',
-          fzma: '',
-          isEdit:false
-        },
-        {
-          yhm: '144',
-          mm: '222',
-          jy: true,
-          kpxh: '212',
-          qtlx: 'a',
-          fzm: '',
-          fzma: '',
-          isEdit:false
-        },
-        {
-          yhm: '144',
-          mm: '222',
-          jy: true,
-          kpxh: '212',
-          qtlx: 'a',
-          fzm: '',
-          fzma: '',
-          isEdit:false
-        }
-      ],
+      tableData: [],//后台表格数据
       tableDataUse:[],//表格用数据
       currentPage: 1,//当前页
       pagesize: 5,//每页大小
       searchData:'',//搜索框内容
-      addDialog:false,//新建的dialog
+      addDialog:false,//新建dialog
       // editDialog:false,//编辑的dialog（如果采用表内直接修改，则取消此）
+    }
+  },
+  watch:{
+    tableData:{
+      handler(newval,oldval){
+        console.log(this.tableData)
+
+        let copy = JSON.parse(JSON.stringify(this.tableData))
+        this.tableDataUse=copy
+    //☆☆☆  2个数组的内存地址是相同的，修改时会同时修改，所以需要开辟两个不同内容
+      },
+      immediate:true
     }
   },
   methods : {

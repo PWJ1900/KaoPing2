@@ -26,19 +26,19 @@ import { tablePostGet } from '@/api/tablePostGet'
 
 export default {
   async created () {
-    tablePostGet(this, "dwxx")//根据postman的Api获取数据来测试
+    tablePostGet(this, "zjxx")//根据postman的Api获取数据来测试
 
   },
   data () {
     return {//下面的headerUse写的是属性字段//tableData则为调用的json值
       headerUse: [
         {
-          label: "单位信息代码",
-          key: "dwxxdm"
+          label: "职级信息代码",
+          key: "zjdm"
         },
         {
-          label: "单位信息名称",
-          key: "dwxxmc"
+          label: "职级信息名称",
+          key: "zjmc"
         }
 
 

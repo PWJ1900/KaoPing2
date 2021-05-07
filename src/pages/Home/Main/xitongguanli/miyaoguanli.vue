@@ -24,7 +24,7 @@ import useTable from '@/components/Table/useTable'
 export default {
   async created () {
     console.log("测评序号组件-加载完成")
-    // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
+    tablePostGet(this, "mygl")//根据postman的Api获取数据来测试
   },
   data () {
     return {
@@ -43,11 +43,11 @@ export default {
         },
         {
           label: "卡编号",
-          key: "kbh"
+          key: "bh"
         },
         {
           label: "卡序号",
-          key: "kxh"
+          key: "GUID"
         },
         {
           label: "启用",
