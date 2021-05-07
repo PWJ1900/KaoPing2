@@ -162,17 +162,20 @@
     <!--通用的dialog -->
     <useDialog v-if="this.showDialogNormal&&this.showDialog"
                :headerUse="headerUse"
+               :getEditOrAdd="useDefineEdit"
                :form="form"
                @func="getifshow" />
-               
+
     <!-- 单位信息的dialog -->
     <dwxxDialog v-if="this.showDialogDwxx&&this.showDialog"
-               :headerUse="headerUse"
-               :form="form"
-               @func="getifshow" />
+                :headerUse="headerUse"
+                :getEditOrAdd="useDefineEdit"
+                :form="form"
+                @func="getifshow" />
     <!--基础信息-部门信息的dialog -->
     <bmxxDialog v-if="this.showDialogBmxx&&this.showDialog"
                 :headerUse="headerUse"
+                :getEditOrAdd="useDefineEdit"
                 :form="form"
                 @funcBmxx="getifshow" />
     <!--基础信息-一级指标的dialog-->
@@ -317,7 +320,7 @@ export default {
 
     isBZXX: Boolean,//区分班子信息、干部信息区别
     useTitle: String,//区分班子信息、干部信息区别
-
+    getName: String,//进入的页面名
     showAddorDelete: {//新增、批量删除
       type: Boolean,
       default: false//default也可以写成函数形式default: () => {return []}
@@ -363,6 +366,12 @@ export default {
           this.json_fields[this.headerUse[i].label] = this.headerUse[i].key
         }
         // console.log(this.json_fields)
+      },
+      immediate: true
+    },
+    getName: {
+      handler (newVal, oldVal) {
+        this.Nameuse = newVal
       },
       immediate: true
     },
@@ -430,12 +439,14 @@ export default {
     },
     addUse () {
       this.showDialog = true
+      this.useDefineEdit = "add_" + this.Nameuse//改的编辑和增加
       this.form = {}
 
     },
     editUse (value) {
       this.showDialog = true
       this.form = value
+      this.useDefineEdit = "edit_" + this.Nameuse
 
 
       //把此次修改的值交给后端处理，写后端删除接口，可以设置一个值传入到dialog里面来判断是删除还是修改
@@ -679,7 +690,7 @@ export default {
         message: h('div', null, trUse),//重写message
 
       }).then(() => {
-        this.$emit("delete",data)
+        this.$emit("delete", data)
         // this.$message({
         //   type: 'success',
         //   message: '删除成功!'
@@ -707,8 +718,10 @@ export default {
   },
   data () {
     return {
+      useDefineEdit: '',
       showDialog: false,
       form: Object,
+      Nameuse: '',
 
       // 组合查询
       i: 1,

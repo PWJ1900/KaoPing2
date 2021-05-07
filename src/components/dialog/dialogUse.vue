@@ -43,6 +43,10 @@ export default {
   props: {
     headerUse: Array,
     form: Object,
+    getEditOrAdd: {
+      type: String,
+      default: "o"
+    },
     // showDialog: Boolean,
 
 
@@ -50,7 +54,8 @@ export default {
   data () {
     return {
       dialogVisible: true,
-      formUse: {}
+      formUse: {},
+      useEditOrAdd: ''
     };
   },
   watch: {
@@ -65,7 +70,20 @@ export default {
 
 
 
+    },
+    getEditOrAdd: {//子组建向其第一次传值的判断
+      handler (newName, oldName) {
+        // let copy = JSON.parse(JSON.stringify(newName))//深复制避免获取同一个地址直接绑定到表上
+        this.useEditOrAdd = newName
+        // ...
+      },
+      immediate: true
+
+
+
+
     }
+
 
 
 
@@ -79,7 +97,7 @@ export default {
 
     },
     confirmit () {
-      tablePostUpdate(this, "add_sflx", this.formUse)
+      tablePostUpdate(this, this.useEditOrAdd, this.formUse)
       this.dialogVisible = false
       this.$emit("func", this.dialogVisible)
       //这里面写后端的edit，delete，create接口

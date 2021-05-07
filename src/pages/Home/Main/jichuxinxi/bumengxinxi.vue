@@ -16,6 +16,7 @@
                     :useSearch="true"
                     :showdaochu="true"
                     @refreshUseData="SecondGet"
+                    getName="bmxx"
                     @delete="del" />
           <!-- 这个里面的查询功能另外写 -->
           <!-- @refreshUseData="SecondGet"  -->
@@ -26,7 +27,7 @@
   </div>
 </template>
 <script>
-import { tablePostGet } from '@/api/tablePostGet' 
+import { tablePostGet } from '@/api/tablePostGet'
 import useTable from '@/components/Table/useTable'
 
 
@@ -86,16 +87,16 @@ export default {
     async SecondGet () {
       tablePostGet(this, "bmxx")//更改数据时第二次刷新其逻辑dialog->table->this属性，$emit实现
     },
-    del(data){
-      this.$axios.post("del_bmxx",this.qs.stringify({id:data.id}) ).then(
-        (res)=>{
+    del (data) {
+      this.$axios.post("del_bmxx", this.qs.stringify({ id: data.id })).then(
+        (res) => {
           this.$message({
-          type: 'success',
-          message: '删除成功!'
-        });
+            type: 'success',
+            message: '删除成功!'
+          });
         }
       )
-      
+
     }
 
   }

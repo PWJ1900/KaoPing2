@@ -15,8 +15,9 @@
                     :showSearch="true"
                     :showdaoru="true"
                     :showdaochu="true"
-                    @refreshUseData="SecondGet" 
-                    @delete="del"/>
+                    getName="dwxx"
+                    @refreshUseData="SecondGet"
+                    @delete="del" />
           <!-- @refreshUseData="SecondGet" 这个为更改传值再次刷新数据 -->
 
         </el-row>
@@ -64,16 +65,16 @@ export default {
     SecondGet () {
       tablePostGet(this, "dwxx")//更改数据时第二次刷新其逻辑dialog->table->this属性，$emit实现
     },
-    del(data){
-      this.$axios.post("del_dwxx",this.qs.stringify({id:data.id}) ).then(
-        (res)=>{
+    del (data) {
+      this.$axios.post("del_dwxx", this.qs.stringify({ id: data.id })).then(
+        (res) => {
           this.$message({
-          type: 'success',
-          message: '删除成功!'
-        });
+            type: 'success',
+            message: '删除成功!'
+          });
         }
       )
-      
+
     }
   }
 }
