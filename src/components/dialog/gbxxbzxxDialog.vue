@@ -23,6 +23,7 @@
                :title="useTitle"
                id="thisDialogUse"
                :modal-append-to-body='false'
+               :show-close="false"
                :before-close="handleClose">
 
       <table cellspacing="0">
@@ -635,6 +636,6 @@ table td {
 </style>
 <style scoped>
 #thisDialogUse {
-  z-index: 10000 !important;
+  z-index: 4000 !important;
 }
 </style>

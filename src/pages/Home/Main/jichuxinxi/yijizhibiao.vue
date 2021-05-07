@@ -41,7 +41,7 @@ export default {
           label: "指标个数",
           key: "col_num"
         },
-        
+       
 
 
 

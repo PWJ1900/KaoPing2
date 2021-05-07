@@ -26,7 +26,8 @@ Router.prototype.push = function push(location) {
 
 Vue.prototype.$axios = axios    //全局注册，使用方法为:this.$axios
 // axios.defaults.baseURL = 'https://7ac6fd16-7d64-4750-9429-58f28f2e230a.mock.pstmn.io/';
-axios.defaults.baseURL = 'http://localhost:8080/'
+// axios.defaults.baseURL = 'http://localhost:8080/'
+axios.defaults.baseURL = 'http://10.211.55.15/'
 Vue.prototype.qs = qs      //全局注册，使用方法为:this.qs
 Vue.use(ElementUI)
 ElementUI.Dialog.props.closeOnClickModal.default = false

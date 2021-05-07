@@ -1,7 +1,6 @@
 <template>
   <el-row>
-    <el-dialog title="部门信息修改"
-               :modal='true'
+    <el-dialog title="提示"
                width="70%"
                :center="true"
                :visible.sync="dialogVisible"
@@ -115,8 +114,6 @@ export default {
     cancel () {
       this.dialogVisible = false
       this.$emit("funcBmxx", this.dialogVisible)
-
-
     },
     async confirmit () {
       this.dialogVisible = false

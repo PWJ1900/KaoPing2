@@ -55,18 +55,18 @@ export default {
           label: "职务",
           key: "zw"
         },
-        {
-          label: "任职时间",
-          key: "rzsj"
-        },
+        // {
+        //   label: "任职时间",
+        //   key: "rzsj"
+        // },
         {
           label: "职级",
           key: "zj"
         },
-        {
-          label: "职级时间",
-          key: "zjsj"
-        },
+        // {
+        //   label: "职级时间",
+        //   key: "zjsj"
+        // },
         {
           label: "身份",
           key: "rysfmc"

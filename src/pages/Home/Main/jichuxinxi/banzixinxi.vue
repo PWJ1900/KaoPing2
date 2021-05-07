@@ -30,7 +30,7 @@ import useTable from '@/components/Table/useTable'
 
 export default {
   async created () {
-    tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
+    tablePostGet(this, "getData")//根据postman的Api获取数据来测试
   },
   data () {
     return {

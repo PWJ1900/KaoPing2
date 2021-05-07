@@ -40,6 +40,14 @@ export default {
           label: "指标个数",
           key: "col_num"
         }
+        // {
+        //   label: "调用",
+        //   key: "c"
+        // },
+        // {
+        //   label: "调用2",
+        //   key: "d"
+        // }
 
 
 
@@ -50,7 +58,7 @@ export default {
 
     }
   },
-  components : {
+  components: {
     useTable
   },
   methods: {

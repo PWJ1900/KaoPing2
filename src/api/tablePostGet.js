@@ -20,6 +20,7 @@ const tablePostGet = async (the,addUrl)=>{
 			console.log('返回结果！')
 			console.log(response)
 			// the.tableData = JSON.parse(JSON.stringify(response.data))
+
 			the.tableData = response.data//此处为我测试springboot统一管理异常而准备的
 			// console.log( the.tableData[0,2])
 		}).catch((error) => {

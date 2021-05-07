@@ -28,6 +28,7 @@ export default {
 /* 所有的dialog */
 .el-dialog {
   position: absolute;
+  width: 1000px;
   left: 10%;
   top: 0%;
 }
