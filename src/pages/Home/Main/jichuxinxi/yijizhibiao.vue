@@ -13,7 +13,8 @@
                     :showDialogYjzb="true"
                     :showAddorDelete="true"
                     :showSearch="true"
-                    :showCheckbox="false" />
+                    :showCheckbox="false" 
+                    @delete="del"/>
 
         </el-row>
       </el-main>
@@ -33,21 +34,14 @@ export default {
     return {//下面的headerUse写的是属性字段//tableData则为调用的json值
       headerUse: [//此处虚更改与后端提取字段的一致
         {
-          label: "单位信息代码",
-          key: "dwdm"
+          label: "指标名称",
+          key: "name"
         },
         {
-          label: "单位信息名称",
-          key: "dwmc"
+          label: "指标个数",
+          key: "col_num"
         },
-        // {
-        //   label: "调用",
-        //   key: "c"
-        // },
-        // {
-        //   label: "调用2",
-        //   key: "d"
-        // }
+       
 
 
 
@@ -59,7 +53,17 @@ export default {
     }
   },
   methods: {
-
+    del(data){
+      this.$axios.post("del_yjzb",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
+    }
   }
 
 }

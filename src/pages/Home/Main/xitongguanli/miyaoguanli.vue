@@ -10,7 +10,12 @@
       <!-- 测评序号 -->
       <useTable   :headerUse="this.headerUse"
                   :tableData="this.tableData"
-                  :showDialogCpxh="true"/>
+                  :showDialogCpxh="true"
+                  :showAddorDelete="false"
+                  :showdaoru="true"
+                  :showSearch="true"
+                  :showdaochu="true"
+                  @delete="del" />
 
         <!-- 这是main -->
       </el-main>
@@ -24,7 +29,7 @@ import useTable from '@/components/Table/useTable'
 export default {
   async created () {
     console.log("测评序号组件-加载完成")
-    // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
+    tablePostGet(this, "mygl")//根据postman的Api获取数据来测试
   },
   data () {
     return {
@@ -43,39 +48,48 @@ export default {
         },
         {
           label: "卡编号",
-          key: "kbh"
+          key: "bh"
         },
         {
           label: "卡序号",
-          key: "kxh"
+          key: "GUID"
         },
         {
           label: "启用",
           key: "qy"
         }
       ],
-      tableData: [
-        {
-          xm : 'a',
-          dw : 'b',
-          kbh : 'c',
-          kxh : 'd',
-          qy : true
-        },
-        {
-          xm : 'a',
-          dw : 'b',
-          kbh : 'c',
-          kxh : 'd',
-          qy : true
-        }
-      ],
+      tableData: [],
     }
   },
   components : {
     useTable
   },
   methods: {
+    del(data){
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+  
+      this.$axios.post("del_mygl",this.qs.stringify({ID:data.ID}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!',
+          offset: 100
+        });
+        }
+      )
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除',
+            offset: 100
+          });         
+        })
+    }
   }
 }
 </script>

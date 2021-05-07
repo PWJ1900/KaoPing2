@@ -33,8 +33,7 @@
           </el-card>
           <div style="height:68vh">
             <el-card style="margin:1%;">
-              <el-table :data="
-                  this.tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+              <el-table :data="this.tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                         :max-height="useTableHeight"
                         :row-style="{height: '0'}"
                         :cell-style="{padding: '1px'}"
@@ -46,19 +45,19 @@
                 <el-table-column type="selection">
 
                 </el-table-column>
-                <el-table-column prop="dm"
+                <el-table-column prop="gbfzdm"
                                  label="代码"
                                  width="180">
                 </el-table-column>
-                <el-table-column prop="mc"
+                <el-table-column prop="gbfzmc"
                                  label="名称"
                                  width="180">
                 </el-table-column>
-                <el-table-column prop="gbxm"
+                <el-table-column prop="cpxms"
                                  label="干部姓名"
                                  width="180">
                 </el-table-column>
-                <el-table-column prop="gbdm"
+                <el-table-column prop="cpdms_sql"
                                  label="干部代码">
                 </el-table-column>
                 <el-table-column label="操作"
@@ -93,6 +92,9 @@
             </el-pagination>
           </div>
         </div>
+
+
+
         <div v-if="!showPage">
           <el-row>
             <el-col :span="8">
@@ -295,6 +297,8 @@
 <script>
 import index from '../../index.vue'
 import { listenWindow } from '@/utils/listenWindow'
+import { tablePostGet } from '@/api/tablePostGet'
+
 export default {
   components: { index },
   data () {
@@ -325,330 +329,7 @@ export default {
         value: "选项2",
         label: '测试单位'
       },],
-      tableData: [{
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      }, {
-
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      }, {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      }, {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      },
-      {
-        dm: '1',
-        mc: '王小虎',
-        gbxm: 'xadf',
-        gbdm: '341'
-      }],
-      tableData2: [{
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '男',
-        zw: 'da1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎2',
-        sf: '1518 弄',
-        xb: '男',
-        zw: 'da2',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎3',
-        sf: '1518 弄',
-        xb: '男',
-        zw: '3',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎4',
-        sf: '1518 弄',
-        xb: '男',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎5',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-      {
-        dm: '2016',
-        xm: '王小虎1',
-        sf: '1518 弄',
-        xb: '女',
-        zw: '1',
-        zj: '1',
-        csny: '1',
-        dw: '1',
-        bm: '1'
-      },
-
-
+      tableData: [
       ],
       useJJJ: '',
 
@@ -661,7 +342,7 @@ export default {
 
   },
   mounted () {
-
+    tablePostGet(this, "dxfz")//根据postman的Api获取数据来测试
   },
   methods: {
     // AddUser () {
@@ -752,6 +433,17 @@ export default {
       // this.pagesize = 5
       this.currentPage = 1
 
+    },
+    deleteUse(data){
+      this.$axios.post("del_dxfz",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
     },
     async formatter (row, column) {
       return row.address//格式化指定列的值

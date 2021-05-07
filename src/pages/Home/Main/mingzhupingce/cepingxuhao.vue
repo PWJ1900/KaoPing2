@@ -13,7 +13,8 @@
                   :showAddorDelete="true"
                   :showdaoru="true"
                   :showSearch="true"
-                  :showdaochu="true" />
+                  :showdaochu="true"
+                  @delete="del"  />
       </el-main>
 
   </div>
@@ -26,7 +27,7 @@ import useTable from '@/components/Table/useTable'
 export default {
   async created () {
     console.log("测评序号组件-加载完成")
-    // tablePostGet(this, "bmxx")//根据postman的Api获取数据来测试
+    tablePostGet(this, "cpxh")//根据postman的Api获取数据来测试
   },
   data () {
     return {
@@ -37,34 +38,22 @@ export default {
       headerUse: [
         {
           label: "测评序号",
-          key: "cpxh"
+          key: "cpid"
         },
         {
           label: "测评名称",
-          key: "cpmc"
+          key: "memo"
         },
         {
           label: "开始时间",
-          key: "kssj"
+          key: "starttime"
         },
         {
           label: "结束时间",
-          key: "jssj"
+          key: "endtime"
         }
       ],
       tableData: [
-        {
-          cpxh: 'a',
-          cpmc: 'b',
-          kssj: 'c',
-          jssj: 'd'
-        },
-        {
-          cpxh: 'aa',
-          cpmc: 'bb',
-          kssj: 'cc',
-          jssj: 'dd'
-        }
       ],
     }
   },
@@ -72,6 +61,17 @@ export default {
     useTable
   },
   methods: {
+    del(data){
+      this.$axios.post("del_cpxh",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
+    }
   }
 }
 </script>

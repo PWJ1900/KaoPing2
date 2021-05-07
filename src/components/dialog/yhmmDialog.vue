@@ -3,7 +3,6 @@
         <el-dialog
             title="用户密码"
             :modal='false'
-            v-if="form!=undefined"
             :close-on-click-modal='false'
             :visible.sync="dialogVisible"
             :before-close="handleClose"
@@ -119,10 +118,10 @@ export default {
     this.tableDataUse = this.tableData
   },
   components: { index },
-  props : {
-      headerUse: Array,
-      form: Object
-  },
+  // props : {
+  //     headerUse: Array,
+  //     form: Object
+  // },
   data() {
     return {
       dialogVisible: true,

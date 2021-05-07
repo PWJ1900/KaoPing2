@@ -16,17 +16,23 @@
           测评序号：
           <el-select v-model="cepingxuhaotemp"
                      placeholder="请选择测评序号">
-            <el-option v-for="item in data"
-                       :label="item.cepingxuhao+'('+item.cepingmingcheng+')'"
-                       :key="item.cepingxuhao"
-                       value='i.cepingxuhao'>
+            <el-option v-for="item in cplist"
+                       :label="item.cpid+'('+item.memo+')'"
+                       :key="item.cpid"
+                       :value='item.cpid'>
             </el-option>
           </el-select>
           </span>
           <span style="margin-left:50px">
           单位：
-          <el-select v-model="cepingxuhaotemp"
-                     placeholder="请选择测评序号">
+          <el-select v-model="danweitemp"
+                     placeholder="请选择单位">
+                     <el-option label="全部" value=""></el-option>
+                     <el-option v-for="item in dwlist"
+                       :label="item.dwdm+'('+item.dwmc+')'"
+                       :key="item.dwdm"
+                       :value='item.dwdm'>
+                       </el-option>
           </el-select>
           </span>
         </div>
@@ -90,7 +96,16 @@
 <script>
 export default {
   async created () {
-    console.log("数据统计组件-加载完成")
+    this.$axios.post("getCpxh").then(
+      (res)=>{
+          this.cplist = res.data
+      }
+    )
+    this.$axios.post("getDw").then(
+      (res)=>{
+          this.dwlist = res.data
+      }
+    )
   },
   data () {
     return {
@@ -104,6 +119,8 @@ export default {
       cepingxuhaotemp: '',
       cepingList: [],
       danweiList: [],
+      cplist:[],
+      dwlist:[],
       /**第二部分（表格1）
        */
       tableData1: [

@@ -17,25 +17,25 @@
           <tr>
             <td colspan="2">A</td>
             <td colspan="2">
-              <input type="number" v-model="dataList.A">
+              <input type="number" v-model="tableData[0].a">
             </td>
           </tr>
           <tr>
             <td colspan="2">B</td>
             <td colspan="2">
-              <input type="number" v-model="dataList.B">
+              <input type="number" v-model="tableData[0].b">
             </td>
           </tr>
           <tr>
             <td colspan="2">C</td>
             <td colspan="2">
-              <input type="number" v-model="dataList.C">
+              <input type="number" v-model="tableData[0].c">
             </td>
           </tr>
           <tr>
             <td colspan="2">D</td>
             <td colspan="2">
-              <input type="number" v-model="dataList.D">
+              <input type="number" v-model="tableData[0].d">
             </td>
           </tr>
           <tr>
@@ -50,20 +50,17 @@
   </div>
 </template>
 <script>
+import { tablePostGet } from '@/api/tablePostGet'
+
+
 export default {
   async created () {
-    // 获取后端的A~D分值
-    console.log("A~D分值组件-加载完成")
+    tablePostGet(this, "adfz")//根据postman的Api获取数据来测试
   },
   data () {
     return {
       // 这是测试用的数据，实际应该是axios获取数据
-      dataList : 
-        { A : 10,
-          B : 20,
-          C : 30,
-          D : 40
-        }
+      tableData : {}
     }
   },
   methods : {

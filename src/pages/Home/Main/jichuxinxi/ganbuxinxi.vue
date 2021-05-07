@@ -16,7 +16,8 @@
                     :showDialoggbxxbzxx="true"
                     :showAddorDelete="true"
                     :showdaoru="true"
-                    :showdaochu="true" />
+                    :showdaochu="true" 
+                    @delete="del"/>
           <!-- 查询自己写 -->
 
         </el-row>
@@ -36,7 +37,7 @@ export default {
       headerUse: [
         {
           label: "代码",
-          key: "bmdm"
+          key: "cpdm"
         },
         {
           label: "姓名",
@@ -46,10 +47,10 @@ export default {
           label: "性别",
           key: "xb"//这边写错了应该是单位代码为dwdm
         },
-        // {
-        //   label: "出生年月",
-        //   key: "csny"
-        // },
+        {
+          label: "出生年月",
+          key: "csrq"
+        },
         {
           label: "职务",
           key: "zw"
@@ -84,6 +85,18 @@ export default {
   },
 
   methods: {
+  
+    del(data){
+      this.$axios.post("del_gbxx",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
+    }
   }
 }
 </script>

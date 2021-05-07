@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-dialog title="提示"
+    <el-dialog title="测评序号"
                :modal='true'
                width="70%"
                v-if="form!=undefined"
@@ -15,23 +15,30 @@
                  :model="form"
                  label-width="80px">
           <el-form-item label="测评序号">
-            <el-input></el-input>
+            <el-input v-model="form.cpid"></el-input>
           </el-form-item>
           <el-form-item label="测评名称">
-            <el-input></el-input>
+            <el-input v-model="form.memo"></el-input>
           </el-form-item>
           <el-form-item label="开始时间">
-            <el-input></el-input>
-          </el-form-item>
-          <el-form-item label="开始日期">
-            <el-input></el-input>
+            <el-date-picker
+            v-model="form.starttime"
+            type="datetime"
+            placeholder="选择日期时间"
+            align="right"
+            :picker-options="pickerOptions">
+            </el-date-picker>
           </el-form-item>
           <el-form-item label="结束时间">
-            <el-input></el-input>
+            <el-date-picker
+            v-model="form.endtime"
+            type="datetime"
+            placeholder="选择日期时间"
+            align="right"
+            :picker-options="pickerOptions">
+    </el-date-picker>
           </el-form-item>
-          <el-form-item label="结束日期">
-            <el-input></el-input>
-          </el-form-item>
+        
         </el-form>
       </div>
       <span slot="footer"

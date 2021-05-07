@@ -2,13 +2,9 @@
   <el-row>
     <el-dialog title="提示"
                width="70%"
-               :destroy-on-close='true'
-               :modal='true'
-               v-if="form!=undefined"
+               :center="true"
                :visible.sync="dialogVisible"
-               :before-close="handleClose"
-               :modal-append-to-body='false'
-               :center="true">
+               :before-close="handleClose">
       <!--  判断undefined就不显示    v-if="form!=undefined"
        :fullscreen="true"-->
 
@@ -38,10 +34,10 @@
               <el-select v-model="formUse.dwmc"
                          placeholder="请选择单位"
                          id="el-selectUse">
-                <el-option v-for="item in options"
+                <el-option v-for="(item,index) in dwList"
                            :key="item.value"
                            :label="item.label"
-                           :value="item.label">
+                           :value="index">
                 </el-option>
               </el-select>
             </td>
@@ -65,12 +61,24 @@
 <script>
 import { tablePostUpdate } from '@/api/tablePostUpdate'
 export default {
+  beforeCreate(){
+    this.$axios.post("get_dw").then(
+      (res)=>{
+        this.dwList = res.data
+      }
+    )
+  },
   props: {
     headerUse: Array,
     form: Object,
     // showDialog: Boolean,
 
 
+  },
+  computed:{
+    aaaa(){
+      return this.formUse.dwmc;
+    }
   },
   watch: {
     form: {//子组建向其第一次传值的判断
@@ -80,10 +88,12 @@ export default {
         // ...
       },
       immediate: true
-
-
-
-
+    },
+    aaaa:{
+      handler(newval,oldval){
+        this.formUse.dwdm = this.dwList[this.formUse.dwmc]
+      },
+      immediate:true
     }
 
 
@@ -97,13 +107,7 @@ export default {
     return {
       dialogVisible: true,
       formUse: {},
-      options: [{
-        value: '选项1',
-        label: '请选择单位'
-      }, {
-        value: '选项2',
-        label: '测试单位'
-      }],
+      dwList: [],
     };
   },
   methods: {

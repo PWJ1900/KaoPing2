@@ -14,7 +14,8 @@
                     :showAddorDelete="true"
                     :showSearch="true"
                     :showdaoru="true"
-                    :showdaochu="true" />
+                    :showdaochu="true" 
+                    @delete="del"/>
 
         </el-row>
       </el-main>
@@ -26,7 +27,7 @@ import { tablePostGet } from '@/api/tablePostGet'
 
 export default {
   async created () {
-    tablePostGet(this, "zj")//根据postman的Api获取数据来测试
+    tablePostGet(this, "zjxx")//根据postman的Api获取数据来测试
 
   },
   data () {
@@ -39,10 +40,8 @@ export default {
         {
           label: "职级信息名称",
           key: "zjmc"
-        },
-        {
-          label: "入职时间",
-          key: "addtime"
+
+
         }
 
 
@@ -57,7 +56,17 @@ export default {
     }
   },
   methods: {
-
+    del(data){
+      this.$axios.post("del_zjxx",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
+    }
 
   }
 

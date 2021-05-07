@@ -1,5 +1,6 @@
 <template>
   <el-row>
+    <!-- 顶部设计 -->
     <el-card style="margin:1%">
       <!-- 顶部设计 -->
       <el-row>
@@ -163,6 +164,12 @@
                :headerUse="headerUse"
                :form="form"
                @func="getifshow" />
+               
+    <!-- 单位信息的dialog -->
+    <dwxxDialog v-if="this.showDialogDwxx&&this.showDialog"
+               :headerUse="headerUse"
+               :form="form"
+               @func="getifshow" />
     <!--基础信息-部门信息的dialog -->
     <bmxxDialog v-if="this.showDialogBmxx&&this.showDialog"
                 :headerUse="headerUse"
@@ -191,10 +198,8 @@
                     :useTitle="useTitle"
                     @funcgbxxbzxx="getifshow" />
     <!--民主评测-用户密码的dialog-->
-    <yhmmDialog v-if="this.showDialogYhmm&&this.showDialog"
-                :headerUse="headerUse"
-                :form="form"
-                @funcYhmm="getifshow" />
+    <!-- <yhmmDialog v-if="this.showDialogYhmm&&this.showDialog"
+                @funcYhmm="getifshow" /> -->
     <!--民主评测-测评序号的dialog -->
     <cpxhDialog v-if="this.showDialogCpxh&&this.showDialog"
                 :headerUse="headerUse"
@@ -280,6 +285,7 @@
 </template>
 <script>
 import useDialog from '@/components/dialog/dialogUse'
+import dwxxDialog from '@/components/dialog/DwxxDialog'
 import bmxxDialog from '@/components/dialog/bmxxDialog'
 import yjzbDialog from '@/components/dialog/yjzbDialog'
 import ejzbDialog from '@/components/dialog/ejzbDialog'
@@ -298,13 +304,14 @@ export default {
     tableData: Array,//此处为传入的表单数据
     //所有的dialog控制开关交给showDialog
     showDialogNormal: Boolean,//激活普通的dialog
+    showDialogDwxx: Boolean,//激活单位信息的dialog
     showDialogBmxx: Boolean,//激活部门信息的dialog
     showDialogYjzb: Boolean,//激活一级指标的dialog
     showDialogEjzb: Boolean,//激活二级指标dialog
     showDialogCpqt: Boolean,//激活参评群体的dialog
     showDialoggbxxbzxx: Boolean,
 
-    showDialogYhmm: Boolean,//激活用户密码的dialog
+    //showDialogYhmm: Boolean,//激活用户密码的dialog
     showDialogCpxh: Boolean,//激活测评序号的dialog
     showDialogZbtx: Boolean,//激活指标体系的dialog
 
@@ -437,7 +444,7 @@ export default {
     deleteUse (value) {
       // this.showDialog = true
       this.form = value//把此次修改的值交给后端处理
-      console.log(value.dwxxdm)
+      console.log(value)
 
     },
     getifshow (data) {
@@ -672,6 +679,7 @@ export default {
         message: h('div', null, trUse),//重写message
 
       }).then(() => {
+        this.$emit("delete",data)
         // this.$message({
         //   type: 'success',
         //   message: '删除成功!'
@@ -694,8 +702,8 @@ export default {
     gbxxbzxxDialog,
     yhmmDialog,
     cpxhDialog,
-    zbtxDialog
-
+    zbtxDialog,
+    dwxxDialog,
   },
   data () {
     return {

@@ -14,7 +14,8 @@
                     :showAddorDelete="true"
                     :showSearch="true"
                     :showdaoru="true"
-                    :showdaochu="true" />
+                    :showdaochu="true" 
+                    @delete="del"/>
 
         </el-row>
       </el-main>
@@ -39,10 +40,6 @@ export default {
         {
           label: "身份类型名称",
           key: "rysfmc"
-        },
-        {
-          label: "身份注册时间",
-          key: "addtime"
         }
 
 
@@ -57,8 +54,17 @@ export default {
     }
   },
   methods: {
-
-
+    del(data){
+      this.$axios.post("del_sflx",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
+    }
   }
 
 }
