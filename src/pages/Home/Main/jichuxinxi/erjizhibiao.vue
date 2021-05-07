@@ -13,7 +13,8 @@
                     :showDialogEjzb="true"
                     :showAddorDelete="true"
                     :showSearch="true"
-                    :showCheckbox="false" />
+                    :showCheckbox="false"
+                    @delete="del" />
 
         </el-row>
       </el-main>
@@ -53,7 +54,17 @@ export default {
     useTable
   },
   methods: {
-
+    del(data){
+      this.$axios.post("del_ejzb",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
+    }
   }
 
 }

@@ -13,7 +13,8 @@
                     :showDialogCpqt="true"
                     :showAddorDelete="true"
                     :showSearch="true"
-                    :showCheckbox="false" />
+                    :showCheckbox="false"
+                    @delete="del" />
 
         </el-row>
       </el-main>
@@ -47,7 +48,17 @@ export default {
     }
   },
   methods: {
-
+    del(data){
+      this.$axios.post("del_cpqt",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
+    }
   }
 
 }

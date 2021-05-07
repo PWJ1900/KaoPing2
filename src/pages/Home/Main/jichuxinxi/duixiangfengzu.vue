@@ -33,8 +33,7 @@
           </el-card>
           <div style="height:68vh">
             <el-card style="margin:1%;">
-              <el-table :data="
-                  this.tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+              <el-table :data="this.tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                         :max-height="useTableHeight"
                         :row-style="{height: '0'}"
                         :cell-style="{padding: '1px'}"
@@ -93,6 +92,9 @@
             </el-pagination>
           </div>
         </div>
+
+
+
         <div v-if="!showPage">
           <el-row>
             <el-col :span="8">
@@ -295,6 +297,7 @@
 <script>
 import index from '../../index.vue'
 import { listenWindow } from '@/utils/listenWindow'
+import { tablePostGet } from '@/api/tablePostGet'
 
 export default {
   components: { index },
@@ -430,6 +433,17 @@ export default {
       // this.pagesize = 5
       this.currentPage = 1
 
+    },
+    deleteUse(data){
+      this.$axios.post("del_dxfz",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
     },
     async formatter (row, column) {
       return row.address//格式化指定列的值

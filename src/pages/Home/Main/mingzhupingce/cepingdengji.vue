@@ -20,7 +20,7 @@
           <el-table-column>
             <template slot-scope="scope">
               <el-button @click="editUse(scope.row)">编辑</el-button>
-              <el-button @click="deleteUse(scope.row)">删除</el-button>
+              <!-- <el-button @click="deleteUse(scope.row)">删除</el-button> -->
             </template>
           </el-table-column>
         </el-table>

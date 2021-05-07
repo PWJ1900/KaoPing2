@@ -16,7 +16,8 @@
                     :showDialoggbxxbzxx="true"
                     :showAddorDelete="true"
                     :showdaoru="true"
-                    :showdaochu="true" />
+                    :showdaochu="true" 
+                    @delete="del"/>
           <!-- 查询自己写 -->
 
         </el-row>
@@ -84,6 +85,18 @@ export default {
   },
 
   methods: {
+  
+    del(data){
+      this.$axios.post("del_gbxx",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
+    }
   }
 }
 </script>

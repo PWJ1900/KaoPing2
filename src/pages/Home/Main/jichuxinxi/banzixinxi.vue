@@ -16,7 +16,8 @@
                       :showDialoggbxxbzxx="true"
                       :showAddorDelete="true"
                       :showdaoru="true"
-                      :showdaochu="true" />
+                      :showdaochu="true"
+                      @delete="del" />
           </el-row>
         </div>
       </el-main>
@@ -62,6 +63,17 @@ export default {
     useTable
   },
   methods: {
+    del(data){
+      this.$axios.post("del_bzxx",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
+    }
   }
 }
 </script>

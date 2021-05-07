@@ -66,7 +66,7 @@
                       </span>
                       <el-button type="info" icon="el-icon-edit" size="small" @click="rowClick(scope)" v-else > 编辑</el-button>
 
-                    <el-button type="danger" size="small" icon="el-icon-delete">删除</el-button>
+                    <el-button type="danger" size="small" icon="el-icon-delete" @click="deletea(scope.row)">删除</el-button>
                   </template>
                 </el-table-column>
         </el-table>
@@ -194,8 +194,31 @@ export default {
     },
     addUse(){
       this.addDialog=true
+    },
+    deletea(data){
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+  
+      this.$axios.post("del_yhmm",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!',
+          offset: 100
+        });
+        }
+      )
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除',
+            offset: 100
+          });         
+        })
     }
-
   }
 }
 </script>

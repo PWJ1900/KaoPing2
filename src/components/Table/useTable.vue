@@ -435,7 +435,7 @@ export default {
     deleteUse (value) {
       // this.showDialog = true
       this.form = value//把此次修改的值交给后端处理
-      console.log(value.dwxxdm)
+      console.log(value)
 
     },
     getifshow (data) {
@@ -670,6 +670,7 @@ export default {
         message: h('div', null, trUse),//重写message
 
       }).then(() => {
+        this.$emit("delete",data)
         // this.$message({
         //   type: 'success',
         //   message: '删除成功!'

@@ -13,7 +13,8 @@
                   :showAddorDelete="true"
                   :showdaoru="true"
                   :showSearch="true"
-                  :showdaochu="true" />
+                  :showdaochu="true"
+                  @delete="del"  />
       </el-main>
 
   </div>
@@ -53,18 +54,6 @@ export default {
         }
       ],
       tableData: [
-        {
-          cpxh: 'a',
-          cpmc: 'b',
-          kssj: 'c',
-          jssj: 'd'
-        },
-        {
-          cpxh: 'aa',
-          cpmc: 'bb',
-          kssj: 'cc',
-          jssj: 'dd'
-        }
       ],
     }
   },
@@ -72,6 +61,17 @@ export default {
     useTable
   },
   methods: {
+    del(data){
+      this.$axios.post("del_cpxh",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
+    }
   }
 }
 </script>

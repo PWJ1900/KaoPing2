@@ -10,7 +10,12 @@
       <!-- 测评序号 -->
       <useTable   :headerUse="this.headerUse"
                   :tableData="this.tableData"
-                  :showDialogCpxh="true"/>
+                  :showDialogCpxh="true"
+                  :showAddorDelete="false"
+                  :showdaoru="true"
+                  :showSearch="true"
+                  :showdaochu="true"
+                  @delete="del" />
 
         <!-- 这是main -->
       </el-main>
@@ -54,28 +59,37 @@ export default {
           key: "qy"
         }
       ],
-      tableData: [
-        {
-          xm : 'a',
-          dw : 'b',
-          kbh : 'c',
-          kxh : 'd',
-          qy : true
-        },
-        {
-          xm : 'a',
-          dw : 'b',
-          kbh : 'c',
-          kxh : 'd',
-          qy : true
-        }
-      ],
+      tableData: [],
     }
   },
   components : {
     useTable
   },
   methods: {
+    del(data){
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+  
+      this.$axios.post("del_mygl",this.qs.stringify({ID:data.ID}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!',
+          offset: 100
+        });
+        }
+      )
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除',
+            offset: 100
+          });         
+        })
+    }
   }
 }
 </script>
