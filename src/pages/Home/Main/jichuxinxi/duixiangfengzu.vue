@@ -58,11 +58,11 @@
                 </el-table-column>
                 <el-table-column prop="cpxms"
                                  label="干部姓名"
-                                 width="180">
+                                 width="450">
                 </el-table-column>
-                <el-table-column prop="cpdms"
+                <!-- <el-table-column prop="cpdms"
                                  label="干部代号">
-                </el-table-column>
+                </el-table-column> -->
                 <el-table-column label="操作"
                                  fixed="right"
                                  width="300">
@@ -216,8 +216,8 @@
                            style="width:5vw;padding:0;font-size:12px;  background: #23C6C8;">组合查询</el-button> -->
 
                 <el-table :data="
-                  this.tableData2.filter(data=>!searchData||data.gbfzdm.toLowerCase().includes(searchData.toLowerCase())
-                    ||data.gbfzmc.toLowerCase().includes(searchData.toLowerCase()))
+                  this.tableData2.filter(data=>!searchData2||data.gbfzdm.toLowerCase().includes(searchData2.toLowerCase())
+                    ||data.gbfzmc.toLowerCase().includes(searchData2.toLowerCase()))
                   .slice((currentPage-1)*pagesize,currentPage*pagesize)"
                           :max-height="useTableHeight"
                           key=2
@@ -315,16 +315,13 @@ export default {
       search_dw:'',
       editUrl:'',
       searchData:'',
-       searchData2:'',
+      searchData2:'',
       // peopleNumber: []
       tableData: [],
-      checkListUse: [],
       tableData2:[],
-      fzOrdh: '',
       showPage: true,
       currentPage: 1,
       pagesize: 5,
-      xmOrbh: '',
       addPeopleData: [],
       addPeopleDataReturn: [],
       deleteCheckData: [],
@@ -362,17 +359,16 @@ export default {
   },
   methods: {
     confirm(){
-      tablePostUpdate(this,this.editUrl,form)
-    },
-    returnTo(){
-
-    },
-    search () {
-      
-    },
-    search2() {
-      //对this.fzOrdh进行过滤器操作
-    
+      var temp=''
+      this.addPeopleData.forEach((value,index)=>{
+        temp += ',' +value
+      })
+      temp = temp.substring(1,temp.length)
+      console.log(this.form)
+      this.form.cpxms = temp
+      console.log(this.form)
+      // tablePostUpdate(this,this.editUrl,this.form)
+      tablePostUpdate(this,this.editUrl,this.form)
     },
     async handleSizeChange (val) {
       // console.log(`每页 ${val} 条`);
@@ -428,25 +424,32 @@ export default {
 
 
     },
-    async addUse () {
+    async addUse () { //添加
       this.editUrl = 'add_dxfz'
       this.showPage = false
       this.pagesize = 15
       this.currentPage = 1
-      this.form=""
+      this.form={}
+      this.addPeopleData=[]
+      console.log(this.form)
     },
-    async returnTo () {
+    async returnTo () { //返回
       this.showPage = true
       this.pagesize = 5
       this.currentPage = 1
 
     },
-    async editUse (data) {
+    async editUse (data) { //编辑
       this.editUrl = 'edit_dxfz'
       this.showPage = false
       // this.pagesize = 5
       this.currentPage = 1
       this.form=data
+      var temp = this.form.cpxms
+      var list = temp.split(",")
+      this.addPeopleData=list
+      console.log(list)
+      
 
     },
     deleteUse(data){
