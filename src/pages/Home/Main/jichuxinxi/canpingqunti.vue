@@ -14,6 +14,8 @@
                     :showAddorDelete="true"
                     :showSearch="true"
                     :showCheckbox="false"
+                    useTitle="参评群体"
+                    getName="cpqt"
                     @delete="del" />
 
         </el-row>

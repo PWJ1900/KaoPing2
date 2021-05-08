@@ -67,18 +67,18 @@ export default {
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
           {
-            min: 6,
+            min: 4,
             max: 20,
-            message: "长度在 6 到 20 个字符",
+            message: "长度在 4 到 20 个字符",
             trigger: "blur",
           },
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
           {
-            min: 6,
+            min: 1,
             max: 20,
-            message: "长度在 6 到 20 个字符",
+            message: "长度在 1 到 20 个字符",
             trigger: "blur",
           },
         ],
@@ -107,11 +107,20 @@ export default {
         if (!valid) return;
         console.log("333");
       });
-      if (this.loginForm.username === "adminadmin")
-        if (this.loginForm.password === "123123")
+      if (this.loginForm.username != "")
+        if (this.loginForm.password != "")
           if (this.yzm.toLowerCase() === this.imgCode.toLowerCase()) {
             sessionStorage.setItem("vtf", "1")
-            this.$router.push({ name: "home" });
+            this.$axios.post("login",this.qs.stringify({UserName:this.loginForm.username,Password:this.loginForm.password})).then(
+              (res)=>{
+                if(res.data=="登录成功"){
+                  this.$router.push({ name: "home" });
+                }else{
+                  alert(res.data)
+                }
+              }
+            )
+            
 
           } else {
             alert("验证码输入错误！");

@@ -1,4 +1,6 @@
 const tablePostUpdate = async (the,editUrl,form)=>{
+	console.log(editUrl)
+	console.log(form)
 	the.$axios.post(
 			editUrl,
 			the.qs.stringify( form)

@@ -19,17 +19,17 @@
             <td>指标名称定义:</td>
             <td colspan="2">
               <el-input type="text"
-                        v-model="this.form.b"></el-input>
+                        v-model="form.name"></el-input>
             </td>
             <td>一级指标选择:</td>
             <td>
-              <el-select v-model="value11"
+              <el-select v-model="yjzb"
                          placeholder="请选择单位"
                          id="el-selectUse">
                 <el-option v-for="item in options2"
-                           :key="item.value"
-                           :label="item.label"
-                           :value="item.value">
+                           :key="item.name"
+                           :label="item.name"
+                           :value="item.name">
                 </el-option>
               </el-select>
             </td>
@@ -39,10 +39,10 @@
             <!-- <td :rowspan="this.value1 + 1">指标内容定义:</td> -->
             <td>指标个数:</td>
             <td>
-              <el-select v-model="value1"
+              <el-select v-model="form.col_num"
                          placeholder="请选择单位"
                          id="el-selectUse">
-                <el-option v-for="(item,index) in 21"
+                <el-option v-for="(item,index) in 11"
                            :key="index"
                            :label="index"
                            :value="index">
@@ -53,36 +53,279 @@
             <td>权重</td>
             <td>对应一级指标</td>
           </tr>
-          <tr v-for="i in this.value1"
-              :key="i">
-            <td>指标{{i}}:</td>
+      
+           <tr v-show="form.col_num>=1">
+            <td>指标1:</td>
             <td>
               <!-- 这里的form.d为暂时代替的，后续需改成后台json对应的字段 -->
               <el-input type="text"
-                        v-model="valueUsezb[i]"></el-input>
+                        v-model="form.xm1"></el-input>
             </td>
             <td>
               <el-input type="textarea"
                         style="width:12vw"
-                        v-model="valueUsekpyd[i]"></el-input>
+                        v-model="form.xmm1"></el-input>
             </td>
             <td>
               <el-input type="text"
-                        v-model="valueUseqz[i]"></el-input>
+                        v-model="form.xmp1"></el-input>
             </td>
             <td>
-              <el-select v-model="value2[i]"
+              <el-select v-model="form.nr1"
                          placeholder="请选择单位"
                          id="el-selectUse">
                 <el-option v-for="item in options"
-                           :key="item.value"
-                           :label="item.label"
-                           :value="item.value">
+                           :key="item"
+                           :label="item"
+                           :value="item">
+                </el-option>
+              </el-select>
+            </td>
+          </tr> <tr v-show="form.col_num>=2">
+            <td>指标2:</td>
+            <td>
+              <!-- 这里的form.d为暂时代替的，后续需改成后台json对应的字段 -->
+              <el-input type="text"
+                        v-model="form.xm2"></el-input>
+            </td>
+            <td>
+              <el-input type="textarea"
+                        style="width:12vw"
+                        v-model="form.xmm2"></el-input>
+            </td>
+            <td>
+              <el-input type="text"
+                        v-model="form.xmp2"></el-input>
+            </td>
+            <td>
+              <el-select v-model="form.nr2"
+                         placeholder="请选择单位"
+                         id="el-selectUse">
+                <el-option v-for="item in options"
+                           :key="item"
+                           :label="item"
+                           :value="item">
+                </el-option>
+              </el-select>
+            </td>
+          </tr> <tr v-show="form.col_num>=3">
+            <td>指标3:</td>
+            <td>
+              <!-- 这里的form.d为暂时代替的，后续需改成后台json对应的字段 -->
+              <el-input type="text"
+                        v-model="form.xm3"></el-input>
+            </td>
+            <td>
+              <el-input type="textarea"
+                        style="width:12vw"
+                        v-model="form.xmm3"></el-input>
+            </td>
+            <td>
+              <el-input type="text"
+                        v-model="form.xmp3"></el-input>
+            </td>
+            <td>
+              <el-select v-model="form.nr3"
+                         placeholder="请选择单位"
+                         id="el-selectUse">
+                <el-option v-for="item in options"
+                           :key="item"
+                           :label="item"
+                           :value="item">
+                </el-option>
+              </el-select>
+            </td>
+          </tr> <tr v-show="form.col_num>=4">
+            <td>指标4:</td>
+            <td>
+              <!-- 这里的form.d为暂时代替的，后续需改成后台json对应的字段 -->
+              <el-input type="text"
+                        v-model="form.xm4"></el-input>
+            </td>
+            <td>
+              <el-input type="textarea"
+                        style="width:12vw"
+                        v-model="form.xmm4"></el-input>
+            </td>
+            <td>
+              <el-input type="text"
+                        v-model="form.xmp4"></el-input>
+            </td>
+            <td>
+              <el-select v-model="form.nr4"
+                         placeholder="请选择单位"
+                         id="el-selectUse">
+                <el-option v-for="item in options"
+                           :key="item"
+                           :label="item"
+                           :value="item">
+                </el-option>
+              </el-select>
+            </td>
+          </tr> <tr v-show="form.col_num>=5">
+            <td>指标5:</td>
+            <td>
+              <!-- 这里的form.d为暂时代替的，后续需改成后台json对应的字段 -->
+              <el-input type="text"
+                        v-model="form.xm5"></el-input>
+            </td>
+            <td>
+              <el-input type="textarea"
+                        style="width:12vw"
+                        v-model="form.xmm5"></el-input>
+            </td>
+            <td>
+              <el-input type="text"
+                        v-model="form.xmp5"></el-input>
+            </td>
+            <td>
+              <el-select v-model="form.nr5"
+                         placeholder="请选择单位"
+                         id="el-selectUse">
+                <el-option v-for="item in options"
+                           :key="item"
+                           :label="item"
+                           :value="item">
+                </el-option>
+              </el-select>
+            </td>
+          </tr> <tr v-show="form.col_num>=6">
+            <td>指标6:</td>
+            <td>
+              <!-- 这里的form.d为暂时代替的，后续需改成后台json对应的字段 -->
+              <el-input type="text"
+                        v-model="form.xm6"></el-input>
+            </td>
+            <td>
+              <el-input type="textarea"
+                        style="width:12vw"
+                        v-model="form.xmm6"></el-input>
+            </td>
+            <td>
+              <el-input type="text"
+                        v-model="form.xmp6"></el-input>
+            </td>
+            <td>
+              <el-select v-model="form.nr6"
+                         placeholder="请选择单位"
+                         id="el-selectUse">
+                <el-option v-for="item in options"
+                           :key="item"
+                           :label="item"
+                           :value="item">
+                </el-option>
+              </el-select>
+            </td>
+          </tr> <tr v-show="form.col_num>=7">
+            <td>指标7:</td>
+            <td>
+              <!-- 这里的form.d为暂时代替的，后续需改成后台json对应的字段 -->
+              <el-input type="text"
+                        v-model="form.xm7"></el-input>
+            </td>
+            <td>
+              <el-input type="textarea"
+                        style="width:12vw"
+                        v-model="form.xmm7"></el-input>
+            </td>
+            <td>
+              <el-input type="text"
+                        v-model="form.xmp7"></el-input>
+            </td>
+            <td>
+              <el-select v-model="form.nr7"
+                         placeholder="请选择单位"
+                         id="el-selectUse">
+                <el-option v-for="item in options"
+                           :key="item"
+                           :label="item"
+                           :value="item">
+                </el-option>
+              </el-select>
+            </td>
+          </tr> <tr v-show="form.col_num>=8">
+            <td>指标8:</td>
+            <td>
+              <!-- 这里的form.d为暂时代替的，后续需改成后台json对应的字段 -->
+              <el-input type="text"
+                        v-model="form.xm8"></el-input>
+            </td>
+            <td>
+              <el-input type="textarea"
+                        style="width:12vw"
+                        v-model="form.xmm8"></el-input>
+            </td>
+            <td>
+              <el-input type="text"
+                        v-model="form.xmp8"></el-input>
+            </td>
+            <td>
+              <el-select v-model="form.nr8"
+                         placeholder="请选择单位"
+                         id="el-selectUse">
+                <el-option v-for="item in options"
+                           :key="item"
+                           :label="item"
+                           :value="item">
+                </el-option>
+              </el-select>
+            </td>
+          </tr> <tr v-show="form.col_num>=9">
+            <td>指标9:</td>
+            <td>
+              <!-- 这里的form.d为暂时代替的，后续需改成后台json对应的字段 -->
+              <el-input type="text"
+                        v-model="form.xm9"></el-input>
+            </td>
+            <td>
+              <el-input type="textarea"
+                        style="width:12vw"
+                        v-model="form.xmm9"></el-input>
+            </td>
+            <td>
+              <el-input type="text"
+                        v-model="form.xmp9"></el-input>
+            </td>
+            <td>
+              <el-select v-model="form.nr9"
+                         placeholder="请选择单位"
+                         id="el-selectUse">
+                <el-option v-for="item in options"
+                           :key="item"
+                           :label="item"
+                           :value="item">
+                </el-option>
+              </el-select>
+            </td>
+          </tr><tr v-show="form.col_num>=10">
+            <td>指标10:</td>
+            <td>
+              <!-- 这里的form.d为暂时代替的，后续需改成后台json对应的字段 -->
+              <el-input type="text"
+                        v-model="form.xm10"></el-input>
+            </td>
+            <td>
+              <el-input type="textarea"
+                        style="width:12vw"
+                        v-model="form.xmm10"></el-input>
+            </td>
+            <td>
+              <el-input type="text"
+                        v-model="form.xmp10"></el-input>
+            </td>
+            <td>
+              <el-select v-model="form.nr10"
+                         placeholder="请选择单位"
+                         id="el-selectUse">
+                <el-option v-for="item in options"
+                           :key="item"
+                           :label="item"
+                           :value="item">
                 </el-option>
               </el-select>
             </td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td colspan="6"
                 id="buttonUse">
               <el-button size="small"
@@ -92,84 +335,63 @@
               <el-button size="small">返回</el-button>
 
             </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
-      <!-- <span slot="footer"
+      <span slot="footer"
             class="dialog-footer" style="background-color:white">
         <el-button @click="cancel">取 消</el-button>
         <el-button type="primary"
                    @click="confirmit">确 定</el-button>
-      </span> -->
+      </span>
     </el-dialog>
   </el-row>
 
 </template>
 
 <script>
+import { tablePostUpdate } from '@/api/tablePostUpdate'
+import { tablePostGet } from '@/api/tablePostGet'
+
 export default {
+  created(){
+    
+  },
   props: {
     headerUse: Array,
     form: Object,
     // showDialog: Boolean,
-
+    getEditOrAdd:''
 
   },
-  // created () {
-  //   console.log(this.form)
-  // },
   data () {
     return {
       dialogVisible: true,
-      value1: this.form.d,//把部门信息的最后一个属性弄进来
-      value2: [],
-      valueUsezb: [],
-      valueUsekpyd: [],
-      valueUseqz: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      value3: this.form.d,
-      value4: this.form.d,
-      value5: this.form.d,
-      value6: this.form.d,
-      value7: this.form.d,
-      value8: this.form.d,
-      value9: this.form.d,
-      value10: this.form.d,
-      value11: this.form.d,
-      valueUse: '',
-
-      options: [{
-        value: '选项1',
-        label: '政治建设'
-      }, {
-        value: '选项2',
-        label: '能力建设'
-      }, {
-        value: '选项3',
-        label: '事业发展'
-      }],
-      options2: [{
-        value: '选项1',
-        label: '校领导班子民主测评一级指标'
-      }, {
-        value: '选项2',
-        label: '省管干部民主测评一级指标'
-      }, {
-        value: '选项3',
-        label: '财务主管考核一级指标'
-      },
-      {
-        value: '选项4',
-        label: '集团本部中层以下人员绩效考核一级指标'
-      },
-      {
-        value: '选项5',
-        label: '集团本部中层绩效考核一级指标'
-      },
-      {
-        value: '选项6',
-        label: '企业经营班子考核一级指标'
-      }],
+      options: [],
+      yjzb:'', //记录所选的一级指标
+      options2:[
+   
+], //一級指標
     };
+  },
+  watch:{
+    yjzb:{
+      handler(newval,oldval){
+        console.log(newval)
+        this.$axios.post("getYjzbNames").then(
+          (res)=>{
+            this.options2 = res.data
+          }
+        )
+        //获取新的一级指标 options
+        this.$axios.post("getYjzbByName",this.qs.stringify({name:this.yjzb})).then(
+          (res)=>{
+            this.options = res.data
+          }
+        )
+      },
+      immediate: true
+    }
   },
   methods: {
     cancel () {
@@ -180,6 +402,7 @@ export default {
     },
     confirmit () {
       this.dialogVisible = false
+      tablePostUpdate(this, this.getEditOrAdd, this.form)
       this.$emit("funcEjzb", this.dialogVisible)
       //这里面写后端的edit，delete，create接口
 

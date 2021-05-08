@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-dialog title="一级指标信息更改"
+    <el-dialog title="一级指标信息"
                :modal='true'
                width="70%"
                v-if="form!=undefined"
@@ -17,15 +17,14 @@
             <!-- <td></td> -->
             <td>指标名称定义:</td>
             <td>
-              <el-input type="text"
-                        v-model="this.form.b"></el-input>
+              <el-input type="text" v-model="form.name"></el-input>
             </td>
           </tr>
           <tr>
             <!-- <td :rowspan="value1+1">指标内容定义:</td> -->
             <td>指标个数设置:</td>
             <td>
-              <el-select v-model="value1"
+              <el-select v-model="form.col_num"
                          placeholder="请选择指标"
                          id="el-selectUse">
                 <el-option v-for="(item,index) in 11"
@@ -36,76 +35,110 @@
               </el-select>
             </td>
           </tr>
-          <tr v-for="i in this.value1"
-              :key="i">
-            <td>指标{{i}}:</td>
+          <tr v-show="form.col_num>=1">
+            <td>指标1:</td>
             <td>
-              <el-input type="text"
-                        v-model="valueUse[i]"></el-input>
+              <el-input type="text"  v-model="form.nr1"></el-input>
             </td>
           </tr>
-          <tr>
-            <td colspan="3"
-                id="buttonUse">
-              <el-button type="info"
-                         size="small">复制</el-button>
-              <el-button type="success"
-                         size="small">保存</el-button>
-              <el-button type="warning"
-                         size="small">返回</el-button>
+          <tr  v-show="form.col_num>=2">
+            <td>指标2:</td>
+            <td>
+              <el-input type="text"  v-model="form.nr2"></el-input>
             </td>
           </tr>
+          <tr  v-show="form.col_num>=3">
+            <td>指标3:</td>
+            <td>
+              <el-input type="text"  v-model="form.nr3"></el-input>
+            </td>
+          </tr>
+          <tr  v-show="form.col_num>=4">
+            <td>指标4:</td>
+            <td>
+              <el-input type="text"  v-model="form.nr4"></el-input>
+            </td>
+          </tr>
+          <tr   v-show="form.col_num>=5">
+            <td>指标5:</td>
+            <td>
+              <el-input type="text"  v-model="form.nr5"></el-input>
+            </td>
+          </tr>
+          <tr   v-show="form.col_num>=6">
+            <td>指标6:</td>
+            <td>
+              <el-input type="text"  v-model="form.nr6"></el-input>
+            </td>
+          </tr>
+          <tr  v-show="form.col_num>=7">
+            <td>指标7:</td>
+            <td>
+              <el-input type="text"  v-model="form.nr7"></el-input>
+            </td>
+          </tr>
+          <tr   v-show="form.col_num>=8">
+            <td>指标8:</td>
+            <td>
+              <el-input type="text"  v-model="form.nr8"></el-input>
+            </td>
+          </tr>
+          <tr  v-show="form.col_num>=9">
+            <td>指标9:</td>
+            <td>
+              <el-input type="text"  v-model="form.nr9"></el-input>
+            </td>
+          </tr>
+          <tr  v-show="form.col_num>=10">
+            <td>指标10:</td>
+            <td>
+              <el-input type="text"  v-model="form.nr10"></el-input>
+            </td>
+          </tr>
+         
         </tbody>
       </table>
-      <!-- <span slot="footer"
+      <span slot="footer"
             class="dialog-footer" style="background-color:white">
         <el-button @click="cancel">取 消</el-button>
         <el-button type="primary"
                    @click="confirmit">确 定</el-button>
-      </span> -->
+      </span>
     </el-dialog>
   </el-row>
 
 </template>
 
 <script>
+import { tablePostUpdate } from '@/api/tablePostUpdate'
+
 export default {
   props: {
     headerUse: Array,
-    form: Object,
+    form: {
+        
+    },
     // showDialog: Boolean,
-
-
+    getEditOrAdd:''
   },
-  // created () {
-  //   console.log(this.form)
-  // },
   data () {
     return {
       dialogVisible: true,
-      value1: this.form.d,//把部门信息的最后一个属性弄进来
-      // options: [{
-      //   value: '选项1',
-      //   label: '请选择单位'
-      // }, {
-      //   value: '选项2',
-      //   label: '测试单位'
-      // }],
-      valueUse: []
+      temp: []  //保存一级指标的 nr1、nr2.....
     };
   },
   methods: {
     cancel () {
       this.dialogVisible = false
       this.$emit("funcYjzb", this.dialogVisible)
-
-
     },
     confirmit () {
       this.dialogVisible = false
+      console.log(this.getEditOrAdd)
+      tablePostUpdate(this, this.getEditOrAdd, this.form)
       this.$emit("funcYjzb", this.dialogVisible)
-      //这里面写后端的edit，delete，create接口
 
+      //这里面写后端的edit，delete，create接口
     },
     handleClose (done) {
       this.$confirm('确认关闭？')

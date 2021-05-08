@@ -12,6 +12,8 @@
                     :tableData="this.tableData"
                     :showDialogEjzb="true"
                     :showAddorDelete="true"
+                    useTitle="二级指标"
+                    getName="ejzb"
                     :showSearch="true"
                     :showCheckbox="false"
                     @delete="del" />
@@ -40,16 +42,6 @@ export default {
           label: "指标个数",
           key: "col_num"
         }
-        // {
-        //   label: "调用",
-        //   key: "c"
-        // },
-        // {
-        //   label: "调用2",
-        //   key: "d"
-        // }
-
-
 
       ],
       tableData: [],

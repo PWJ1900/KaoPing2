@@ -182,24 +182,28 @@
     <yjzbDialog v-if="this.showDialogYjzb&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
+                :getEditOrAdd="useDefineEdit"
                 @funcYjzb="getifshow" />
     <!--基础信息-二级指标的dialog -->
     <ejzbDialog v-if="this.showDialogEjzb&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
-                @funcEjzb="getifshow" />
+                @funcEjzb="getifshow" 
+                :getEditOrAdd="useDefineEdit"/>
     <!--基础信息-参评群体的dialog -->
     <cpqtDialog v-if="this.showDialogCpqt&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
-                @funcCpqt="getifshow" />
+                @funcCpqt="getifshow"
+                :getEditOrAdd="useDefineEdit" />
     <!--基础信息-班子信息和干部信息的复用dialog -->
     <gbxxbzxxDialog v-if="this.showDialoggbxxbzxx&&this.showDialog"
                     :headerUse="headerUse"
                     :form="form"
                     :isBZXX="isBZXX"
                     :useTitle="useTitle"
-                    @funcgbxxbzxx="getifshow" />
+                    @funcgbxxbzxx="getifshow" 
+                    :getEditOrAdd="useDefineEdit"/>
     <!--民主评测-用户密码的dialog-->
     <!-- <yhmmDialog v-if="this.showDialogYhmm&&this.showDialog"
                 @funcYhmm="getifshow" /> -->
@@ -288,7 +292,7 @@
 </template>
 <script>
 import useDialog from '@/components/dialog/dialogUse'
-import dwxxDialog from '@/components/dialog/DwxxDialog'
+import dwxxDialog from '@/components/dialog/dwxxDialog'
 import bmxxDialog from '@/components/dialog/bmxxDialog'
 import yjzbDialog from '@/components/dialog/yjzbDialog'
 import ejzbDialog from '@/components/dialog/ejzbDialog'
