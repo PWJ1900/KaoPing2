@@ -446,6 +446,7 @@ export default {
     editUse (value) {
       this.showDialog = true
       this.form = value
+      console.log(this.form)
       this.useDefineEdit = "edit_" + this.Nameuse
 
 

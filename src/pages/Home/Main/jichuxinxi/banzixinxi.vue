@@ -30,7 +30,7 @@ import useTable from '@/components/Table/useTable'
 
 export default {
   async created () {
-    tablePostGet(this, "getData")//根据postman的Api获取数据来测试
+    tablePostGet(this, "gbxx")//根据postman的Api获取数据来测试
   },
   data () {
     return {
@@ -63,16 +63,16 @@ export default {
     useTable
   },
   methods: {
-    del(data){
-      this.$axios.post("del_bzxx",this.qs.stringify({id:data.id}) ).then(
-        (res)=>{
+    del (data) {
+      this.$axios.post("del_bzxx", this.qs.stringify({ id: data.id })).then(
+        (res) => {
           this.$message({
-          type: 'success',
-          message: '删除成功!'
-        });
+            type: 'success',
+            message: '删除成功!'
+          });
         }
       )
-      
+
     }
   }
 }
