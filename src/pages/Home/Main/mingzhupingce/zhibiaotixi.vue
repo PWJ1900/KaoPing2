@@ -12,6 +12,8 @@
                   :showAddorDelete="true"
                   :showdaoru="true"
                   :showSearch="true"
+                  useTitle="指标体系"
+                    getName="cpxh"
                   :showdaochu="true"/>
       </el-main>
     </el-container>

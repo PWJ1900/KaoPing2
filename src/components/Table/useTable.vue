@@ -211,11 +211,13 @@
     <cpxhDialog v-if="this.showDialogCpxh&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
+                :getEditOrAdd="useDefineEdit"
                 @funcCpxh="getifshow" />
     <!--民主评测-指标体系的dialog -->
     <zbtxDialog v-if="this.showDialogZbtx&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
+                :getEditOrAdd="useDefineEdit"
                 @funcZbtx="getifshow" />
 
     <!--中部设计：表格-->
@@ -444,6 +446,7 @@ export default {
     addUse () {
       this.showDialog = true
       this.useDefineEdit = "add_" + this.Nameuse//改的编辑和增加
+      console.log(this.useDefineEdit)
       this.form = {}
 
     },
@@ -451,6 +454,7 @@ export default {
       this.showDialog = true
       this.form = value
       this.useDefineEdit = "edit_" + this.Nameuse
+      console.log(this.useDefineEdit)
 
 
       //把此次修改的值交给后端处理，写后端删除接口，可以设置一个值传入到dialog里面来判断是删除还是修改

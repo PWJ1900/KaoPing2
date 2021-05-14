@@ -33,7 +33,8 @@ export default {
   top: 0%;
 }
 .el-dialog .el-dialog__body {
-  background-color: rgb(178, 240, 219);
+  /* background-color: rgb(178, 240, 219); */
+  margin-top:15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,7 +42,7 @@ export default {
   padding-top: 0;
 }
 .dialog-footer {
-  background-color: rgb(178, 240, 219);
+  /* background-color: rgb(178, 240, 219); */
 }
 .el-main {
   background-color: rgb(246, 252, 252);

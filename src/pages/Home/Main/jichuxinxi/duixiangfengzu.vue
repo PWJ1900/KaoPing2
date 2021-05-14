@@ -11,12 +11,12 @@
           <!-- 新增、批量删除、查询 -->
           <el-card style="margin:1%;">
             <div>
-              <el-button @click="addUse"
+              <!-- <el-button @click="addUse"
                          size="small"
-                         type="success">新增</el-button>
-              <el-button type="danger"
+                         type="success">新增</el-button> -->
+              <!-- <el-button type="danger"
                          size="small"
-                         @click="groupDelete">批量删除</el-button>
+                         @click="groupDelete">批量删除</el-button> -->
 
               &nbsp;&nbsp;&nbsp;&nbsp;
               <span style="font-size:13px"> 请输入分组名称和代号：</span>
@@ -387,6 +387,7 @@ export default {
 
     },
     async addPeople () {
+      console.log("==")
       let def = true
       this.addPeopleDataReturn.forEach((element, index) => {
         this.addPeopleData.forEach(element2 => {
@@ -404,15 +405,6 @@ export default {
     },
     async deleteCheck () {
       let re = []
-      // for (let i in this.addPeopleData) {
-      //   for (let j in this.deleteCheckData) {
-      //     if (this.addPeopleData[i] == this.deleteCheckData[j]) {
-      //       re.push(i)
-      //       // this.addPeopleData.splice(i, 1)
-      //     }
-      //   }
-      // }
-      // console.log(re)
       for (let j in this.deleteCheckData) {
         this.addPeopleData = this.addPeopleData.filter((item) => item !== this.deleteCheckData[j])
       }
@@ -421,8 +413,6 @@ export default {
       console.log(data)
       // 获取表格中复选框值
       this.deleteCheckData = data
-
-
     },
     async addUse () { //添加
       this.editUrl = 'add_dxfz'
@@ -430,8 +420,9 @@ export default {
       this.pagesize = 15
       this.currentPage = 1
       this.form={}
-      this.addPeopleData=[]
+      this.addPeopleData=['人员01']
       console.log(this.form)
+      console.log(this.addPeopleData)
     },
     async returnTo () { //返回
       this.showPage = true
@@ -448,7 +439,7 @@ export default {
       var temp = this.form.cpxms
       var list = temp.split(",")
       this.addPeopleData=list
-      console.log(list)
+      console.log(this.addPeopleData)
       
 
     },

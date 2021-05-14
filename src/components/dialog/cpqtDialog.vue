@@ -1,7 +1,7 @@
 //连接后端需要所做更改1、参评群体的表是统计作用，连接后端后把其总结值带入，dialog中的表格也会随之更改
 <template>
   <el-row>
-    <el-dialog title="提示"
+    <el-dialog title="参评群体"
                :modal='false'
                v-if="form!=undefined"
                :close-on-click-modal='false'

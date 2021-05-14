@@ -14,6 +14,8 @@
                   :showdaoru="true"
                   :showSearch="true"
                   :showdaochu="true"
+                  useTitle="测评序号"
+                    getName="cpxh"
                   @delete="del"  />
       </el-main>
 

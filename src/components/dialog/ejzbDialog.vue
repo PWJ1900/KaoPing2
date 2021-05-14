@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-dialog title="提示"
+    <el-dialog title="二级指标"
                :modal='true'
                width="70%"
                v-if="form!=undefined"

@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-dialog title="提示"
+    <el-dialog title="部门信息"
                width="70%"
                :center="true"
                :visible.sync="dialogVisible"

@@ -25,8 +25,7 @@
             v-model="form.starttime"
             type="datetime"
             placeholder="选择日期时间"
-            align="right"
-            :picker-options="pickerOptions">
+            align="right">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="结束时间">
@@ -35,7 +34,7 @@
             type="datetime"
             placeholder="选择日期时间"
             align="right"
-            :picker-options="pickerOptions">
+            >
     </el-date-picker>
           </el-form-item>
         
@@ -58,7 +57,8 @@ import { tablePostUpdate } from '@/api/tablePostUpdate'
 export default {
   props: {
     headerUse: Array,
-    form: Object
+    form: Object,
+    getEditOrAdd:''
   },
   data () {
     return {
@@ -84,8 +84,8 @@ export default {
     },
     confirmit () {
       this.dialogVisible = false
-      tablePostUpdate(this, "xgbmxx", this.formUse)
-      location.reload();
+      tablePostUpdate(this, this.getEditOrAdd, this.formUse)
+      // location.reload();
       this.$emit("funcCpxh", this.dialogVisible)
       //这里面写后端的edit，delete，create接口
     },
