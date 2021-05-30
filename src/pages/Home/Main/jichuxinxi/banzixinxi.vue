@@ -13,6 +13,7 @@
                       :tableData="this.tableData"
                       :isBZXX="false"
                       useTitle="班子信息"
+                      getName="bzxx"
                       :showDialoggbxxbzxx="true"
                       :showAddorDelete="true"
                       :showdaoru="true"
@@ -30,22 +31,42 @@ import useTable from '@/components/Table/useTable'
 
 export default {
   async created () {
-    tablePostGet(this, "getData")//根据postman的Api获取数据来测试
+    tablePostGet(this, "bzxx")//根据postman的Api获取数据来测试
   },
   data () {
     return {
       headerUse: [
         {
           label: "代码",
-          key: "dm"
+          key: "cpdm"
         },
         {
-          label: "名称",
-          key: "mc"
+          label: "姓名",
+          key: "xm"
         },
         {
-          label: "类型",
-          key: "lx"//这边写错了应该是单位代码为dwdm
+          label: "性别",
+          key: "xb"//这边写错了应该是单位代码为dwdm
+        },
+        {
+          label: "出生年月",
+          key: "csrq"
+        },
+        {
+          label: "职务",
+          key: "zw"
+        },
+        // {
+        //   label: "任职时间",
+        //   key: "rzsj"
+        // },
+        {
+          label: "职级",
+          key: "zj"
+        },
+        {
+          label: "身份",
+          key: "rysfmc"
         },
         {
           label: "单位",
@@ -54,7 +75,7 @@ export default {
         {
           label: "部门",
           key: "bm"
-        },
+        }
       ],
       tableData: [],
     }
@@ -63,16 +84,16 @@ export default {
     useTable
   },
   methods: {
-    del(data){
-      this.$axios.post("del_bzxx",this.qs.stringify({id:data.id}) ).then(
-        (res)=>{
+    del (data) {
+      this.$axios.post("del_bzxx", this.qs.stringify({ id: data.id })).then(
+        (res) => {
           this.$message({
-          type: 'success',
-          message: '删除成功!'
-        });
+            type: 'success',
+            message: '删除成功!'
+          });
         }
       )
-      
+
     }
   }
 }

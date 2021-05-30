@@ -79,13 +79,11 @@ export default {
     cancel () {
       this.dialogVisible = false
       this.$emit("funcCpxh", this.dialogVisible)
-
-
     },
     confirmit () {
       this.dialogVisible = false
-      tablePostUpdate(this, this.getEditOrAdd, this.formUse)
-      // location.reload();
+      console.log(typeof(this.form.starttime))
+      tablePostUpdate(this, this.getEditOrAdd, this.form)
       this.$emit("funcCpxh", this.dialogVisible)
       //这里面写后端的edit，delete，create接口
     },

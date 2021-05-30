@@ -32,19 +32,19 @@
             <td>姓名：</td>
             <td>
               <el-input id="useheight"
-                        v-model="xm"></el-input>
+                        v-model="formUse.xm"></el-input>
             </td>
             <td>代码：</td>
             <td>
               <el-input id="useheight2"
-                        v-model="dm"></el-input>
+                        v-model="formUse.bmdm"></el-input>
             </td>
 
           </tr>
           <tr>
             <td> 单位：</td>
             <td>
-              <el-select v-model="value1"
+              <el-select v-model="formUse.dw"
                          placeholder="请选择单位"
                          id="el-selectUse">
                 <el-option v-for="item in options"
@@ -56,7 +56,7 @@
             </td>
             <td>部门：</td>
             <td>
-              <el-select v-model="value2"
+              <el-select v-model="formUse.bm"
                          placeholder="请选择部门"
                          id="el-selectUse">
                 <el-option v-for="item in options5"
@@ -71,7 +71,7 @@
           <tr v-if="isBZXX">
             <td>性别：</td>
             <td>
-              <el-select v-model="value3"
+              <el-select v-model="formUse.xb"
                          placeholder="请选择"
                          id="el-selectUse">
                 <el-option v-for="item in options2"
@@ -150,7 +150,7 @@
           <tr>
             <td>身份：</td>
             <td>
-              <el-select v-model="value4"
+              <el-select v-model="formUse.rysfmc"
                          placeholder="请选择身份"
                          id="el-selectUse">
                 <el-option v-for="item in options4"
@@ -246,8 +246,8 @@
                 <el-button slot="trigger"
                            size="mini"
                            type="success">选取文件</el-button>
-                <el-button size="mini"
-                           style="margin-left:30vw">打开附件</el-button>
+                <!-- <el-button size="mini"
+                           style="margin-left:30vw">打开附件</el-button> -->
               </el-upload>
 
             </td>
@@ -267,6 +267,10 @@
               <el-button type="success"
                          @click="uploadUse"
                          size="small">保存</el-button>
+              <el-button type="danger"
+                         @click="cancelUse"
+                         size="small">
+                取消</el-button>
               <!-- <el-button type="success"
                          @click="cancel">返回</el-button> -->
             </td>
@@ -293,13 +297,30 @@ import { base64Use } from "@/utils/base64use.js"
 export default {
   props: {
     isBZXX: Boolean,
-    useTitle: String
+    useTitle: String,
+    form: Object
+  },
+  watch: {
+    form: {//子组建向其第一次传值的判断
+      handler (newName, oldName) {
+        let copy = JSON.parse(JSON.stringify(newName))//深复制避免获取同一个地址直接绑定到表上
+        this.formUse = copy
+        // ...
+      },
+      immediate: true
+
+
+
+
+    },
+
   },
   data () {
     return {
       Title: '2435243523',
       showImage: false,
       ImageFirst: true,
+      formUse: {},
       rzsj: '',
       csny: '',
       zjsj: '',
@@ -318,11 +339,11 @@ export default {
       value3: '',
       value4: '',
       value5: '',
-      form: {
-        label: "1",
-        key: "1"
+      // form: {
+      //   label: "1",
+      //   key: "1"
 
-      },
+      // },
       options: [{
         value: '选项1',
         label: '请选择单位'
@@ -532,7 +553,7 @@ export default {
     httpRequest (param) {//思考如何把这两个请求写在一个请求里面
       let formdata = new FormData()
       formdata.append("image", param.file)
-      this.$axios.post("usetranto/useit", formdata).then((response) => {
+      this.$axios.post("uploadimage", formdata).then((response) => {
 
       }).catch((error) => {
         console.log(error)
@@ -556,10 +577,18 @@ export default {
 
 
     uploadUse () {//点击修改按钮全部提交
-      this.$refs.uploadImage.submit();
-      this.$refs.uploadFJ.submit();
-      this.dialogVisible = false
-      this.$emit("funcgbxxbzxx", this.dialogVisible)
+      console.log("dfas")
+      try {
+        this.$refs.uploadImage.submit();
+        this.$refs.uploadFJ.submit();
+        this.dialogVisible = false
+        this.$emit("funcgbxxbzxx", this.dialogVisible)
+      }
+      catch (err) {
+        alert("对不起！照片为空")
+
+      }
+
       //这里面写后端的edit，delete，create接口
     },
     //上传图片方法开始
@@ -577,13 +606,19 @@ export default {
     handleDownload (file) {
       console.log(file);
     },
-    // 上传图片方法结尾
-    uploadUse () {
+    cancelUse () {
+      console.log(this.form)
       this.dialogVisible = false
       this.$emit("funcgbxxbzxx", this.dialogVisible)
 
-
     },
+    // 上传图片方法结尾
+    // uploadUse () {
+    //   this.dialogVisible = false
+    //   this.$emit("funcgbxxbzxx", this.dialogVisible)
+
+
+    // },
     handleClose (done) {
       this.$confirm('确认关闭？')
         .then(_ => {
@@ -597,6 +632,12 @@ export default {
 
 }
 </script>
+<style>
+.el-popper[x-placement^='bottom'] {
+  /* 更改的显示 */
+  z-index: 70000 !important;
+}
+</style>
 <style scoped>
 @import '../../css/tableuse.css';
 </style>
@@ -636,6 +677,6 @@ table td {
 </style>
 <style scoped>
 #thisDialogUse {
-  z-index: 4000 !important;
+  z-index: 60000 !important ;
 }
 </style>

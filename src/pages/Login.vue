@@ -111,7 +111,8 @@ export default {
         if (this.loginForm.password != "")
           if (this.yzm.toLowerCase() === this.imgCode.toLowerCase()) {
             sessionStorage.setItem("vtf", "1")
-            this.$axios.post("login",this.qs.stringify({UserName:this.loginForm.username,Password:this.loginForm.password})).then(
+            this.$axios.post("login",this.qs.stringify({UserName:this.loginForm.username,Password:this.loginForm.password}))
+            .then(
               (res)=>{
                 if(res.data=="登录成功"){
                   this.$router.push({ name: "home" });

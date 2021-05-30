@@ -16,7 +16,8 @@
                     :showdaoru="true"
                     :showdaochu="true"
                     getName="zjxx"
-                    @delete="del" />
+                    @delete="del"
+                    @groupDelete="grpDel" />
 
         </el-row>
       </el-main>
@@ -41,19 +42,11 @@ export default {
         {
           label: "职级信息名称",
           key: "zjmc"
-
-
         }
-
-
-
       ],
       tableData: [],
       searchinfo: '',
       restoretableData: []
-
-
-
     }
   },
   methods: {
@@ -67,7 +60,23 @@ export default {
         }
       )
 
+    },
+    grpDel(data){
+      var list=[]
+      data.forEach(element => {
+        list.push(element.id)
+      })
+      var temp = JSON.stringify(list)
+      temp = temp.substring(1,temp.length-1)
+      console.log(temp)
+      this.$axios.post('dels_zjxx',this.qs.stringify({list:temp}))
+        .then((res)=>{
+          console.log(res)
+        })
     }
+
+
+
 
   }
 

@@ -16,7 +16,8 @@
                     getName="yjzb"
                     :showSearch="true"
                     :showCheckbox="false" 
-                    @delete="del"/>
+                    @delete="del"
+                    @groupDelete="grpDel"/>
 
         </el-row>
       </el-main>
@@ -56,7 +57,19 @@ export default {
         });
         }
       )
-      
+    },
+    grpDel(data){
+      var list=[]
+      data.forEach(element => {
+        list.push(element.id)
+      })
+      var temp = JSON.stringify(list)
+      temp = temp.substring(1,temp.length-1)
+      console.log(temp)
+      this.$axios.post('dels_yjzb',this.qs.stringify({list:temp}))
+        .then((res)=>{
+          console.log(res)
+        })
     }
   }
 

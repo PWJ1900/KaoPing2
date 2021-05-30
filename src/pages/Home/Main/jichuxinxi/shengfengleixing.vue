@@ -16,7 +16,8 @@
                     :showdaoru="true"
                     :showdaochu="true"
                     getName="sflx"
-                    @delete="del" />
+                    @delete="del" 
+                    @groupDelete="grpDel"/>
 
         </el-row>
       </el-main>
@@ -42,16 +43,10 @@ export default {
           label: "身份类型名称",
           key: "rysfmc"
         }
-
-
-
       ],
       tableData: [],
       searchinfo: '',
       restoretableData: []
-
-
-
     }
   },
   methods: {
@@ -65,7 +60,23 @@ export default {
         }
       )
 
+    },
+    grpDel(data){
+      var list=[]
+      data.forEach(element => {
+        list.push(element.id)
+      })
+      var temp = JSON.stringify(list)
+      temp = temp.substring(1,temp.length-1)
+      console.log(temp)
+      this.$axios.post('dels_sflx',this.qs.stringify({list:temp}))
+        .then((res)=>{
+          console.log(res)
+        })
     }
+
+
+
   }
 
 }

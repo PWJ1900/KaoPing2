@@ -18,6 +18,9 @@ module.exports = {
     port: 8081,
     // host: '192.168.1.5',
     host:'localhost',
+    // host:'10.135.40.110',
+    // host:'192.168.118.204',
+
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-  </div>                                         
+  </div>
 </template>
 
 <script>
@@ -19,7 +19,6 @@ export default {
   color: #2c3e50;
   background-size: 100%;
 }
-
 .el-dialog__wrapper {
   margin-left: 11vw;
   margin-top: 11vh;
@@ -30,7 +29,8 @@ export default {
   position: absolute;
   width: 1000px;
   left: 10%;
-  top: 0%;
+  top: 10%;
+  margin-top: 0vh !important;
 }
 .el-dialog .el-dialog__body {
   /* background-color: rgb(178, 240, 219); */
@@ -86,5 +86,12 @@ export default {
 }
 .el-tabs__item {
   font-size: 12px;
+}
+.el-dialog__wrapper[data-v-44b72ee2] {
+  width: 100% !important;
+  z-index: 80000 !important;
+}
+.el-dialog__header {
+  height: 20px;
 }
 </style>

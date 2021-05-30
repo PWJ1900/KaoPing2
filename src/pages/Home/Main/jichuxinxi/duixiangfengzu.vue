@@ -11,12 +11,12 @@
           <!-- 新增、批量删除、查询 -->
           <el-card style="margin:1%;">
             <div>
-              <!-- <el-button @click="addUse"
+              <el-button @click="addUse"
                          size="small"
-                         type="success">新增</el-button> -->
-              <!-- <el-button type="danger"
+                         type="success">新增</el-button>
+              <el-button type="danger"
                          size="small"
-                         @click="groupDelete">批量删除</el-button> -->
+                         @click="grpDel">批量删除</el-button> 
 
               &nbsp;&nbsp;&nbsp;&nbsp;
               <span style="font-size:13px"> 请输入分组名称和代号：</span>
@@ -24,11 +24,11 @@
                         style="width:25%"
                         id="useSearch2"
                         v-model="searchData">
-                <!-- <el-button slot="append"
+                <el-button slot="append"
                            icon="el-icon-search"
                            size="small"
                            style="width:5vw;padding:0;font-size:12px;  background: #23C6C8;color:white"
-                           @click="search">查询</el-button> -->
+                           @click="search">查询</el-button>
               </el-input>
             </div>
           </el-card>
@@ -43,7 +43,7 @@
                         :cell-style="{padding: '1px'}"
                         border
                         key=1
-                        @selection-change="selectionLineChangeHandle"
+                        @selection-change="selectionLineChangeHandle1"
                         style="width: 100%;
                         ">
                 <el-table-column type="selection">
@@ -223,7 +223,7 @@
                           key=2
                           :row-style="{height: '0'}"
                           :cell-style="{padding: '1px'}"
-                          @selection-change="selectionLineChangeHandle"
+                          @selection-change="selectionLineChangeHandle2"
                           style="width:52vw"
                           border
                           :default-sort="{prop: 'date', order: 'descending'}">
@@ -319,6 +319,7 @@ export default {
       // peopleNumber: []
       tableData: [],
       tableData2:[],
+      groupData:[], //批量删除-选中的多个数据
       showPage: true,
       currentPage: 1,
       pagesize: 5,
@@ -364,9 +365,7 @@ export default {
         temp += ',' +value
       })
       temp = temp.substring(1,temp.length)
-      console.log(this.form)
       this.form.cpxms = temp
-      console.log(this.form)
       // tablePostUpdate(this,this.editUrl,this.form)
       tablePostUpdate(this,this.editUrl,this.form)
     },
@@ -378,12 +377,12 @@ export default {
     async handleCurrentChange (val) {
       this.currentPage = val
     },
-    async selectionLineChangeHandle (val) {
-      console.log(val)//把此值交给后groupDelete处理然后交给后端分配处理，交给后端接口
-      this.addPeopleDataReturn = val
-
+    async selectionLineChangeHandle1 (selection) {  
+      this.groupData = selection //批量删除所选中的数组
     },
-    groupDelete () {
+    async selectionLineChangeHandle2 (vaselectionl) {
+      console.log(val)//把此值交给后groupDelete处理然后交给后端分配处理，交给后端接口
+      this.addPeopleDataReturn = selection
 
     },
     async addPeople () {
@@ -453,6 +452,20 @@ export default {
         }
       )
       
+    },
+    grpDel(){
+      console.log(this.groupData)
+      var list=[]
+      this.groupData.forEach(element => {
+        list.push(element.id)
+      })
+      var temp = JSON.stringify(list)
+      temp = temp.substring(1,temp.length-1)
+      console.log(temp)
+      this.$axios.post('dels_dxfz',this.qs.stringify({list:temp}))
+        .then((res)=>{
+          console.log(res)
+        })
     },
     async formatter (row, column) {
       return row.address//格式化指定列的值

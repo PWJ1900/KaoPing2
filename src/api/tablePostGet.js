@@ -17,7 +17,6 @@ const tablePostGet = async (the,addUrl)=>{
 	 */
 	the.$axios.post(addUrl, the.qs.stringify({ nihao: "fdsa" }))
 		.then((response) => {
-			console.log('返回结果！')
 			console.log(response)
 			// the.tableData = JSON.parse(JSON.stringify(response.data))
 

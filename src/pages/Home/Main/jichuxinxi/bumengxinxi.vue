@@ -17,7 +17,10 @@
                     :showdaochu="true"
                     @refreshUseData="SecondGet"
                     getName="bmxx"
-                    @delete="del" />
+                    useTitle="部门信息"
+                    
+                    @delete="del" 
+                    @groupDelete="grpDel"/>
           <!-- 这个里面的查询功能另外写 -->
           <!-- @refreshUseData="SecondGet"  -->
 
@@ -71,16 +74,8 @@ export default {
           label: "使用人",
           key: "UserName"
         }
-
-
-
-
-
       ],
-      tableData: [],
-
-
-
+      tableData: []
     }
   },
   methods: {
@@ -96,7 +91,19 @@ export default {
           });
         }
       )
-
+    },
+    grpDel(data){
+      var list=[]
+      data.forEach(element => {
+        list.push(element.id)
+      })
+      var temp = JSON.stringify(list)
+      temp = temp.substring(1,temp.length-1)
+      console.log(temp)
+      this.$axios.post('dels_bmxx',this.qs.stringify({list:temp}))
+        .then((res)=>{
+          console.log(res)
+        })
     }
 
   }

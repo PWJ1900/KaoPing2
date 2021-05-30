@@ -16,7 +16,8 @@
                   :showdaochu="true"
                   useTitle="测评序号"
                     getName="cpxh"
-                  @delete="del"  />
+                  @delete="del"
+                  @groupDelete="grpDel"  />
       </el-main>
 
   </div>
@@ -73,6 +74,19 @@ export default {
         }
       )
       
+    },
+    grpDel(data){
+      var list=[]
+      data.forEach(element => {
+        list.push(element.id)
+      })
+      var temp = JSON.stringify(list)
+      temp = temp.substring(1,temp.length-1)
+      console.log(temp)
+      this.$axios.post('dels_cpxh',this.qs.stringify({list:temp}))
+        .then((res)=>{
+          console.log(res)
+        })
     }
   }
 }

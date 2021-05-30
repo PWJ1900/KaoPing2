@@ -3,7 +3,7 @@ const tablePostUpdate = async (the,editUrl,form)=>{
 	console.log(form)
 	the.$axios.post(
 			editUrl,
-			the.qs.stringify( form)
+			the.qs.stringify(form)
 		).then((response) => {
 			console.log(response)
 			// the.tableData = JSON.parse(JSON.stringify(response.data))

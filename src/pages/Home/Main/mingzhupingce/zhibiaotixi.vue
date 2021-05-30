@@ -13,70 +13,79 @@
                   :showdaoru="true"
                   :showSearch="true"
                   useTitle="指标体系"
-                    getName="cpxh"
-                  :showdaochu="true"/>
+                  getName="zbtx"
+                  :showdaochu="true"
+                  @delete="del"
+                  @groupDelete="grpDel"/>
       </el-main>
     </el-container>
 
   </div>
 </template>
 <script>
-import { tablePostGet } from '@/api/tablePostGet'
 import useTable from '@/components/Table/useTable'
 
 export default {
   async created () {
-    console.log("指标体系组件-加载完成")
-    // talePostGet(this, "test")//根据postman的Api获取数据来测试
+    this.$axios.post('zbtx').then(
+      res=>{
+        this.tableData=res.data
+      }
+    )
+
   },
   components: {
     useTable
+  },
+  methods:{
+    del(data){
+      this.$axios.post("del_zbtx",this.qs.stringify({id:data.id}) ).then(
+        (res)=>{
+          this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+        }
+      )
+      
+    },
+    grpDel(data){
+      var list=[]
+      data.forEach(element => {
+        list.push(element.id)
+      })
+      var temp = JSON.stringify(list)
+      temp = temp.substring(1,temp.length-1)
+      console.log(temp)
+      this.$axios.post('dels_zbtx',this.qs.stringify({list:temp}))
+        .then((res)=>{
+          console.log(res)
+        })
+    }
   },
   data () {
     return {
       headerUse: [
         {
-          label: "测评序号",
-          key: 'cpxh'
+          label: '指标名称',
+          key: 'itemtype'
         },
         {
-          label: '身份',
-          key: 'sf'
-        }, {
-          label: '指标名称',
-          key: 'zbmc'
-        }, {
+          label: "测评序号",
+          key: 'cpid'
+        },
+        {
+          label: '身份列表',
+          key: 'rysfs'
+        },  {
           label: '指标个数',
-          key: 'zbgs'
+          key: 'col_num'
         }, {
           label: '参评群体数',
-          key: 'cpqts'
+          key: 'cpfv_num'
         }
       ],
-
-      tableData: [
-        {
-          cpxh: 'a',
-          sf: 'b',
-          zbmc: 'c',
-          zbgs: 'd',
-          cpqts: 'e'
-        },
-        {
-          cpxh: 'aa',
-          sf: 'ba',
-          zbmc: 'cd',
-          zbgs: 'da',
-          cpqts: 'eee'
-        },
-        {
-          cpxh: 'aa',
-          sf: 'bb',
-          zbmc: 'cc',
-          zbgs: 'dd',
-          cpqts: 'ee'
-        }
-      ]
+      tableData: []
 
     }
   }

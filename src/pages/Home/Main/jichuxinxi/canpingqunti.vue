@@ -16,7 +16,8 @@
                     :showCheckbox="false"
                     useTitle="参评群体"
                     getName="cpqt"
-                    @delete="del" />
+                    @delete="del"
+                    @groupDelete="grpDel" />
 
         </el-row>
       </el-main>
@@ -60,7 +61,22 @@ export default {
         }
       )
       
+    },
+    grpDel(data){
+      var list=[]
+      data.forEach(element => {
+        list.push(element.id)
+      })
+      var temp = JSON.stringify(list)
+      temp = temp.substring(1,temp.length-1)
+      console.log(temp)
+      this.$axios.post('dels_cpqt',this.qs.stringify({list:temp}))
+        .then((res)=>{
+          console.log(res)
+        })
     }
+
+
   }
 
 }
