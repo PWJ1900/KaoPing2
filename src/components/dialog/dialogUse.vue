@@ -66,10 +66,6 @@ export default {
         // ...
       },
       immediate: true
-
-
-
-
     },
     getEditOrAdd: {//子组建向其第一次传值的判断
       handler (newName, oldName) {
