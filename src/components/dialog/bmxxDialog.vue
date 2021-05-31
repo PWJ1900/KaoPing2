@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-dialog title="提示"
+    <el-dialog title="部门信息"
                width="70%"
                :center="true"
                :visible.sync="dialogVisible"
@@ -75,14 +75,8 @@ export default {
       type: String,
       default: "o"
     }
-    // showDialog: Boolean,
-
-
   },
   computed: {
-    // aaaa () {
-    //   return this.formUse.dwmc;
-    // }
   },
   watch: {
     form: {//子组建向其第一次传值的判断
@@ -93,12 +87,6 @@ export default {
       },
       immediate: true
     },
-    // aaaa: {
-    //   handler (newval, oldval) {
-    //     this.formUse.dwdm = this.dwList[this.formUse.dwmc]
-    //   },
-    //   immediate: true
-    // }
     getEditOrAdd: {//子组建向其第一次传值的判断
       handler (newName, oldName) {
         // let copy = JSON.parse(JSON.stringify(newName))//深复制避免获取同一个地址直接绑定到表上
@@ -106,20 +94,8 @@ export default {
         // ...
       },
       immediate: true
-
-
-
-
     }
-
-
-
-
   },
-
-  // created () {
-  //   console.log(this.form)
-  // },
   data () {
     return {
       dialogVisible: true,
@@ -137,9 +113,6 @@ export default {
       // await tablePostUpdate(this, "edit_bmxx", this.formUse)//异步等待此结果完成在进行下一步获取
       await tablePostUpdate(this, this.useEditOrAdd, this.formUse)//异步等待此结果完成在进行下一步获取
       this.$emit("funcBmxx", this.dialogVisible)
-      //这里面写后端的edit，delete，create接口
-
-
     },
     handleClose (done) {
       this.$confirm('确认关闭？')

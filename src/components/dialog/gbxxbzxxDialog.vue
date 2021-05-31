@@ -37,7 +37,7 @@
             <td>代码：</td>
             <td>
               <el-input id="useheight2"
-                        v-model="formUse.bmdm"></el-input>
+                        v-model="formUse.cpdm"></el-input>
             </td>
 
           </tr>
@@ -50,7 +50,7 @@
                 <el-option v-for="item in options"
                            :key="item.value"
                            :label="item.label"
-                           :value="item.value">
+                           :value="item.label">
                 </el-option>
               </el-select>
             </td>
@@ -62,7 +62,7 @@
                 <el-option v-for="item in options5"
                            :key="item.value"
                            :label="item.label"
-                           :value="item.value">
+                           :value="item.label">
                 </el-option>
               </el-select>
             </td>
@@ -77,7 +77,7 @@
                 <el-option v-for="item in options2"
                            :key="item.value"
                            :label="item.label"
-                           :value="item.value">
+                           :value="item.label">
                 </el-option>
               </el-select>
             </td>
@@ -126,7 +126,7 @@
                 <el-option v-for="item1 in options3"
                            :key="item1.value"
                            :label="item1.label"
-                           :value="item1.value">
+                           :value="item1.label">
                 </el-option>
               </el-select>
             </td>
@@ -155,8 +155,9 @@
                          id="el-selectUse">
                 <el-option v-for="item in options4"
                            :key="item.value"
+                           @click.native="onSelectedDrug(item.value)"
                            :label="item.label"
-                           :value="item.value">
+                           :value="item.label">
                 </el-option>
               </el-select>
             </td>
@@ -294,6 +295,8 @@
 
 <script>
 import { base64Use } from "@/utils/base64use.js"
+import { tablePostUpdate } from '@/api/tablePostUpdate'
+
 export default {
   props: {
     isBZXX: Boolean,
@@ -304,6 +307,20 @@ export default {
     form: {//子组建向其第一次传值的判断
       handler (newName, oldName) {
         let copy = JSON.parse(JSON.stringify(newName))//深复制避免获取同一个地址直接绑定到表上
+        // copy.cpdm = "1"
+        // copy.dwdm = "1"
+        // copy.rysf = "1"
+        // copy.gwdm = "1"
+        // copy.cpdm = "1"
+        // copy.gw = "1"
+        // copy.zjdm = "1"
+        // copy.zj = "1"
+        // copy.cuscon = "1"
+        // copy.csrq = "1"
+        // copy.pic = "1"
+        // copy.pym = "1"
+        // copy.doc = "1"
+        console.log(copy)
         this.formUse = copy
         // ...
       },
@@ -317,10 +334,11 @@ export default {
   },
   data () {
     return {
+      rysf:0,
       Title: '2435243523',
       showImage: false,
       ImageFirst: true,
-      formUse: {},
+      formUse: { },
       rzsj: '',
       csny: '',
       zjsj: '',
@@ -365,39 +383,39 @@ export default {
       }],
       options4: [
         {
-          value: '选项1',
+          value: 1,
           label: '企业负责人(1)'
         },
         {
-          value: '选项2',
+          value: 2,
           label: '企业班子成员(2)'
         },
         {
-          value: '选项3',
+          value: 3,
           label: '集团本部中层正职或部门负责人(3)'
         },
         {
-          value: '选项4',
+          value: 4,
           label: '集团本部中层其他(4)'
         },
         {
-          value: '选项5',
+          value: 5,
           label: '集团本部中层以下(5)'
         },
         {
-          value: '选项6',
+          value: 6,
           label: '财务经理(6)'
         },
         {
-          value: '选项7',
+          value: 7,
           label: '集团本部中层(7)'
         },
         {
-          value: '选项8',
+          value: 8,
           label: '企业领导班子1(8)'
         },
         {
-          value: '选项9',
+          value: 9,
           label: 'AAA(9)'
         }
       ],
@@ -528,6 +546,11 @@ export default {
     }
   },
   methods: {
+    onSelectedDrug(data){
+      //这里获取身份地位的value值
+      this.rysf = data
+
+    },
     handleCloseShowFile () {
       this.dialogVisibleShowFile = false
     },
@@ -576,13 +599,24 @@ export default {
     },
 
 
-    uploadUse () {//点击修改按钮全部提交
+    async uploadUse () {//点击修改按钮全部提交
       console.log("dfas")
+      this.formUse.rysf = this.rysf
       try {
         this.$refs.uploadImage.submit();
         this.$refs.uploadFJ.submit();
+        await this.$axios.post("add_gbxx", this.qs.stringify(this.formUse)).then((response)=>{
+          console.log(response.data)
+        }).catch((error)=>{
+          console.log("错误！")
+        })
         this.dialogVisible = false
         this.$emit("funcgbxxbzxx", this.dialogVisible)
+        console.log(this.formUse)
+     
+        
+
+        
       }
       catch (err) {
         alert("对不起！照片为空")

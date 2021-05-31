@@ -3,37 +3,36 @@
   <div>
     <el-container>
       <el-header>
-        <!-- 用户密码 -->
+<!-- 用户密码 -->
         <headerUse />
       </el-header>
       <el-main>
-        <!-- 顶部 -->
+<!-- 顶部菜单------开始 -->
         <el-card style="margin:1%">
-          <!-- 顶部设计 -->
           <el-row>
-          <!-- 新增、批量删除，由showAddorDelete控制 -->
             <el-col :span="5">
               <el-button type="success"
                      size="small"
                      @click="addUse">新增</el-button>
               <el-button type="danger"
-                     size="small">批量删除</el-button>
+                     size="small" @click="grpDel">批量删除</el-button>
             </el-col>
-            <!-- 第一种查询，通过搜索框筛选 -->
             <el-col :span="8">请输入查询条件：<el-input v-model="searchData" style="width:300px"></el-input></el-col>
             <el-col :span="2" style="margin-left:50px;margin-top:10px">
               <el-button size="small" @click="searchInfo(searchData)">查询</el-button>
             </el-col>
           </el-row>
         </el-card>
-        <!-- 表格 -->
+
+<!-- 表格------开始 -->
           <div style="height:68vh">
             <el-card style="margin:1%;">
             <!-- <el-scrollbar> -->
               <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                   border  style="font-size: 12px"
                   :row-style="{height: '0'}" :cell-style="{padding: '1px'}"
-                  stripe>
+                  stripe
+                  @selection-change="selectChange">
                 <el-table-column type="selection"></el-table-column>
                 <el-table-column label="用户名"  prop="UserName">
                   <template slot-scope="scope"> 
@@ -43,23 +42,22 @@
                 </el-table-column>
                 <el-table-column label="密码" prop="Password">
                   <template slot-scope="scope">
-                     <el-input v-if="scope.row.isEdit"  v-model="scope.row.UserName" placeholder="请输入内容"></el-input> 
+                     <el-input v-if="scope.row.isEdit"  v-model="scope.row.Password" placeholder="请输入内容"></el-input> 
                      <span v-else>{{scope.row.Password}}</span>
                   </template>
                 </el-table-column>
                 <el-table-column label="禁用">
                   <template slot-scope="scope">
-                     <el-checkbox :disabled="!scope.row.isEdit" size="small" v-model="scope.row.jy"></el-checkbox> 
-                     <!-- <span>{{scope.row.jy?'是':'否'}}</span> -->
+                     <el-checkbox :disabled="!scope.row.isEdit" size="small" v-model="scope.row.bcp"></el-checkbox> 
+                     <span>{{scope.row.jy?'是':'否'}}</span>
                   </template>
                 </el-table-column>
                 <el-table-column label="考评序号" prop="cpid"></el-table-column>
                 <el-table-column label="群体类型" prop="cpfv"></el-table-column>
-                <el-table-column label="分组名" prop="fzm"></el-table-column>
-                <el-table-column label="分组码" prop="fzma"></el-table-column>
-                <el-table-column label="操作框" fixed="right" width="300">
+                <el-table-column label="分组名称" prop="gbfzmc"></el-table-column>
+                <el-table-column label="分组代码" prop="gbfzdm"></el-table-column>
+                <el-table-column label="操作框" fixed="right" width="300px">
                   <template slot-scope="scope">
-                    
                       <span v-if="scope.row.isEdit">
                         <el-button size="mini" type="info" @click="editYes(scope)">确定</el-button>
                         <el-button  size="mini" type="info" @click="editNo(scope)">复原</el-button>
@@ -70,9 +68,10 @@
                   </template>
                 </el-table-column>
         </el-table>
+<!-- 表格------结束 -->
         </el-card>
       </div>
-      <!--底部设计：页数组件  -->
+<!-- 分页组件------开始 -->
       <div class="block">
         <el-pagination @size-change="handleSizeChange"
                      @current-change="handleCurrentChange"
@@ -83,8 +82,15 @@
                      :total="tableData.length">
         </el-pagination>
       </div>
-      <!-- 新增的dialog -->
-      <yhmmDialog v-if="this.addDialog" @funcYhmm="getifshow" />
+<!-- 分页组件------结束 -->      
+      
+      
+<!-- 新增触发的dialog -->
+      <yhmmDialog v-if="this.addDialog" @funcYhmm="getifshow" 
+                  :cpxhList="cpxhList"
+                  :dwList="dwList"
+                  :kplxList="kplxList"
+                  :tableData2="tableData2"/>
       </el-main>
     </el-container>
 
@@ -99,7 +105,18 @@ import yhmmDialog from '@/components/dialog/yhmmDialog'
 export default {
   beforeCreate(){
     tablePostGet(this,"yhmm")//根据postman的Api获取数据来测试
+    //加载列表数据
+    this.$axios.post('get_dw').then(res=>{
+      this.dwList=res.data
+    })
+    this.$axios.post('get_cpxh').then(res=>{
+      this.cpxhList=res.data
+    })
+    this.$axios.post('gbxx').then(res=>{
+      this.tableData2=res.data
+    })
   },
+  
   created () {
     
   },
@@ -108,28 +125,33 @@ export default {
   },
   data () {
     return {
-      tableData: [],//后台表格数据
-      tableDataUse:[],//表格用数据
-      currentPage: 1,//当前页
-      pagesize: 5,//每页大小
+      tableData: [],//表格数据
+      tableDataUse:[],//表格暂存数据
+      currentPage: 1,//分页组件的当前页码
+      pagesize: 5,//分页组件的页大小
       searchData:'',//搜索框内容
-      addDialog:false,//新建dialog
-      // editDialog:false,//编辑的dialog（如果采用表内直接修改，则取消此）
+      addDialog:false,//控制新建的dialog
+      selectionList:[], //批量删除列表
+      cpxhList:[],
+      dwList:[],
+      kplxList:['干部考评','一报告两评议'],
     }
   },
   watch:{
     tableData:{
       handler(newval,oldval){
-        console.log(this.tableData)
-
+        //用JSON转一下，可以避免内存地址重复
         let copy = JSON.parse(JSON.stringify(this.tableData))
         this.tableDataUse=copy
-    //☆☆☆  2个数组的内存地址是相同的，修改时会同时修改，所以需要开辟两个不同内容
+    
       },
       immediate:true
     }
   },
   methods : {
+    selectChange(selection){
+      this.selectionList = selection
+    },
     handleSizeChange (val) {
       this.pagesize = val
     },
@@ -145,15 +167,18 @@ export default {
       //修改完成，隐藏（确定、复原），显示“编辑”
       this.tableDataUse[scope.$index].isEdit=! this.tableDataUse[scope.$index].isEdit
       //发送修改请求到后端
+      console.log(scope)
+      this.$axios.post('edit_yhmm',this.qs.stringify(scope.row))
+        .then(res=>{
+          console.log(res)
+        })
 
     },
     editNo(scope){
       //将该行的tableDataUse，用tableData替换  ..scope.$index为当前行值（0开始）
-      console.log("复原前"+this.tableDataUse[scope.$index].mm)
-        this.tableDataUse[scope.$index].mm=this.tableData[scope.$index].mm
-        this.tableDataUse[scope.$index].yhm=this.tableData[scope.$index].yhm
-        this.tableDataUse[scope.$index].jy=this.tableData[scope.$index].jy
-      console.log("复原后"+this.tableDataUse[scope.$index].mm)
+        this.tableDataUse[scope.$index].UserName=this.tableData[scope.$index].UserName
+        this.tableDataUse[scope.$index].Password=this.tableData[scope.$index].Password
+        this.tableDataUse[scope.$index].bcp=this.tableData[scope.$index].bcp
     },
     searchInfo (searchData) {
       let keyUse = []
@@ -194,6 +219,19 @@ export default {
     },
     addUse(){
       this.addDialog=true
+    },
+    grpDel(){
+      var list=[]
+      this.selectionList.forEach(element => {
+        list.push(element.id)
+      })
+      var temp = JSON.stringify(list)
+      temp = temp.substring(1,temp.length-1)
+      console.log(temp)
+      this.$axios.post('dels_yhmm',this.qs.stringify({list:temp}))
+        .then((res)=>{
+          console.log(res)
+        })
     },
     deletea(data){
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {

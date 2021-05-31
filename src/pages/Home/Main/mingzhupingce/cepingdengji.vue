@@ -9,7 +9,8 @@
       <el-main>
 
         <!-- 表格 -->
-        <el-table :data="tableData" border>
+        <div class="cpdj_table">
+        <el-table :data="tableData" border >
           <!-- 测评等级 -->
           <el-table-column prop="name" label="测评等级"></el-table-column>
           <!-- 最低分 -->
@@ -24,31 +25,32 @@
             </template>
           </el-table-column>
         </el-table>
-
+        </div>
         <!-- 两个功能按钮 -->
-        <div style="margin-top:20px">
+        <!-- <div class="cpdj_button">
           <el-button type="primary" @click="cpdjDialogVisible = true">新建测评等级</el-button>
           <el-button type="primary" @click="zfpmDialogVisible = true">显示总分及排名</el-button>
-        </div>
-        <!-- 3个dialog ：修改、新建测评等级、显示总分及排名  -->
+        </div> -->
+<!-- 3个dialog ：修改、新建测评等级、显示总分及排名  -->
         <!-- 1.修改 -->
         <el-dialog  title="修改" :center="true" :visible.sync="editDialogVisible" 
                     :before-close="handleClose" :modal='false'>
 
-          <div>
-            测评等级:<el-input v-model="editData.cpdj" type="text"></el-input>
+          <div style="width:300px">
+            测评等级:<el-input v-model="editData.name" type="text"></el-input>
           </div>
-          <div>
-            最低分:<el-input v-model="editData.zdf" type="number"></el-input>
+          <div style="width:300px">
+            最低分:<el-input v-model="editData.low" type="number"></el-input>
           </div>
-          <div>
-            最高分:<el-input v-model="editData.zgf" type="number"></el-input>
+          <div style="width:300px">
+            最高分:<el-input v-model="editData.high" type="number"></el-input>
           </div>
           <span slot="footer" class="dialog-footer" style="background-color:white">
             <el-button @click="editDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="edit">保存</el-button>
+            <el-button type="primary" @click="editYes">保存</el-button>
           </span>
         </el-dialog>
+
         <!-- 2.新建测评等级的dialog -->
         <el-dialog title="新建测评等级" :visible.sync="cpdjDialogVisible" 
           :before-close="handleClose" :center="true" :modal='false'>
@@ -71,6 +73,7 @@
                        @click="add">保存</el-button>
           </span>
         </el-dialog>
+
 
         <!-- 3.显示总分及排名的dialog -->
         <el-dialog title="总分及排名"
@@ -184,8 +187,17 @@ export default {
         .catch(_ => { });
     },
     // 修改dialog的修改请求
-    edit () {
-      console.log(this.editData)
+    editYes () {
+
+      this.$axios.post('edit_cpdj',this.qs.stringify(this.editData)).then(
+        res=>{
+          if(res.data=='1'){
+            alert('修改成功')
+          }
+        }
+      )
+      // console.log(this.editData)
+      this.editDialogVisible = false
     },
     // 查看dialog的查看请求
     search () {
@@ -205,5 +217,16 @@ export default {
 }
 .el-table {
   width: 100%;
+}
+
+.cpdj_table{
+    margin-top: 100px!important;
+    width: 1000px;
+    margin: auto;
+}
+.cpdj_button{
+  margin-top: 100px!important;
+  width: 300px;
+  margin: auto;
 }
 </style>

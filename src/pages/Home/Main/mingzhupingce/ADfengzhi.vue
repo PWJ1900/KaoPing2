@@ -7,8 +7,8 @@
         <headerUse />
       </el-header>
       <el-main>
-        <!-- 这是main -->
-        <table border="5">
+        <div class="adfz_div">
+        <table border="1" class="adfz_table">
           <caption>分值设定表格</caption>
           <tr>
             <th colspan="2">选项</th>
@@ -44,6 +44,7 @@
             </td>
           </tr>
         </table>
+        </div>
       </el-main>
     </el-container>
 
@@ -66,7 +67,14 @@ export default {
   methods : {
     dataEdit () {
       // 修改A~D分值的方法
-      alert("修改成功！"+this.dataList.A+this.dataList.B+this.dataList.C+this.dataList.D)
+      console.log(this.tableData)
+      this.$axios.post('edit_adfz',this.qs.stringify(this.tableData[0])).then(
+        (res)=>{
+          if(res.data=='1'){
+            alert('修改成功')
+          }
+        }
+      )
     }
   }
 }
@@ -76,20 +84,29 @@ export default {
 .el-main {
   padding: 0;
 }
-table {
-  width: 500px;
+.adfz_div{
+  width:700px;
+  height: 500px;
+  margin:auto;
+}
+.adfz_table {
+  width:700px;
   height: 300px;
-  margin-top: 1%;
-  margin-left: 10%;
+  margin:auto;
+  margin-top:100px!important ; 
+  border-collapse:collapse; 
+  border-radius:25px;
+  border:2px solid #a1a1a1;
+      background-color: #FFF;
+
 }
 table th,table td {
-  height: 50px;
+  height: 35px;
   width: 250px;
+  text-align: center
 }
 input {
   margin: 10px;
 }
-td {
-  text-align: center
-}
+
 </style>

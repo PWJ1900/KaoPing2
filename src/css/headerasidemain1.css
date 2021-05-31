@@ -5,6 +5,6 @@
   width: auto !important;
 }
 .el-main {
-  background: url("../assets/loginbg1.jpg");
-  background-repeat: repeat-x;
+  /* background: url("../assets/loginbg1.jpg"); */
+  /* background-repeat: repeat-x; */
 }

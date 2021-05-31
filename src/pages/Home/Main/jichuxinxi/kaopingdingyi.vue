@@ -81,7 +81,7 @@ export default {
 	<p style="margin: 0cm 0cm 0pt 22.5pt; text-indent: -22.5pt; mso-char-indent-count: -1.5">
 		<span lang="EN-US" style="font-size: 15pt">8</span><span style="font-size: 15pt">、如需中途暂时离开可点击&ldquo;暂时退出&rdquo;菜单，并可在有效时间内再次登录系统继续完成测评工作。</span></p>
 	<p class="MsoNormal">
-		<span style="font-size: 15pt">－－　现在，请开始您的测评工作。</span><a href="datacp/main.aspx"><img alt="" height="24" onclick="alert('请点击左边的被测对象')" src="Upload/image/zqbtncp.gif" width="81" /></a></p>
+		<span style="font-size: 15pt">－－　现在，请开始您的测评工作。</span></p>
 </div>
 <p>
 	&nbsp;</p>
@@ -98,7 +98,7 @@ export default {
 	<p style="margin: 0cm 0cm 0pt 22.5pt; text-indent: -22.5pt; mso-char-indent-count: -1.5">
 		<span lang="EN-US" style="font-size: 15pt">4</span><span style="font-size: 15pt">、如需中途暂时离开可点击&ldquo;暂时退出&rdquo;菜单，并可在有效时间内再次登录系统继续完成测评工作。<span lang="EN-US"><o:p></o:p></span></span></p>
 	<p class="MsoNormal">
-		<span style="font-size: 15pt">－－　现在，请开始您的推荐工作。</span><a href="datatj/gbtjlb.aspx"><img alt="" height="24" onclick="alert('请点击“干部推荐”按钮，开始您的推荐工作')" src="Upload/image/zqbtntj.gif" width="81" /></a></p>
+		<span style="font-size: 15pt">－－　现在，请开始您的推荐工作。</span></p>
 </div>
 <p>
 	&nbsp;</p>

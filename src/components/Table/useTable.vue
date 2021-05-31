@@ -42,9 +42,9 @@
         <!-- 导入excel，由showdaoru控制 -->
         <el-col :span="2"
                 v-show="showdaoru">
-          <el-button type="info"
+          <!-- <el-button type="info"
                      @click="dialogVisibledr=true"
-                     size="small">导入EXCEL</el-button>
+                     size="small">导入EXCEL</el-button> -->
         </el-col>
         <!-- 导出excel，由showdaochu控制 -->
         <el-col :span="3"
@@ -182,24 +182,28 @@
     <yjzbDialog v-if="this.showDialogYjzb&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
+                :getEditOrAdd="useDefineEdit"
                 @funcYjzb="getifshow" />
     <!--基础信息-二级指标的dialog -->
     <ejzbDialog v-if="this.showDialogEjzb&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
-                @funcEjzb="getifshow" />
+                @funcEjzb="getifshow" 
+                :getEditOrAdd="useDefineEdit"/>
     <!--基础信息-参评群体的dialog -->
     <cpqtDialog v-if="this.showDialogCpqt&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
-                @funcCpqt="getifshow" />
+                @funcCpqt="getifshow"
+                :getEditOrAdd="useDefineEdit" />
     <!--基础信息-班子信息和干部信息的复用dialog -->
     <gbxxbzxxDialog v-if="this.showDialoggbxxbzxx&&this.showDialog"
                     :headerUse="headerUse"
                     :form="form"
                     :isBZXX="isBZXX"
                     :useTitle="useTitle"
-                    @funcgbxxbzxx="getifshow" />
+                    @funcgbxxbzxx="getifshow" 
+                    :getEditOrAdd="useDefineEdit"/>
     <!--民主评测-用户密码的dialog-->
     <!-- <yhmmDialog v-if="this.showDialogYhmm&&this.showDialog"
                 @funcYhmm="getifshow" /> -->
@@ -207,35 +211,39 @@
     <cpxhDialog v-if="this.showDialogCpxh&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
+                :getEditOrAdd="useDefineEdit"
                 @funcCpxh="getifshow" />
     <!--民主评测-指标体系的dialog -->
     <zbtxDialog v-if="this.showDialogZbtx&&this.showDialog"
                 :headerUse="headerUse"
                 :form="form"
+                :getEditOrAdd="useDefineEdit"
                 @funcZbtx="getifshow" />
 
     <!--中部设计：表格-->
     <div style="height:68vh">
-      <el-card style="margin:1%;">
+      <el-card style="margin:1%">
         <!-- <el-scrollbar> -->
         <el-table :data="this.tableDataUse.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                   border
                   ref="useTable"
-                  style="font-size: 12px"
+                  style="font-size:12px;table-layout:fixed"
                   :max-height="useTableHeight"
                   :row-style="{height: '0'}"
-                  :cell-style="{padding: '1px'}"
+                  :cell-style="{padding: '0px'}"
                   :row-class-name="rowClassName"
                   v-loading="loading"
-                  @selection-change="selectionLineChangeHandle"
+                  @selection-change="selectChange"
+                  @select="selectOne"
+                  @select-all="selectAll"
                   stripe>
           <el-table-column type="selection"
                            v-if="showCheckbox">
           </el-table-column>
-          <el-table-column label="序号"
+          <!-- <el-table-column label="序号"
                            align="center"
                            prop="xh"
-                           width="50"></el-table-column>
+                           width="50px"></el-table-column> -->
           <template v-for="info in headerUse">
             <el-table-column :key="info.key"
                              :prop="info.key"
@@ -248,7 +256,7 @@
           </template>
           <el-table-column label="操作框"
                            fixed="right"
-                           width="300">
+                           width="300px">
             <template slot-scope="scope">
               <el-button type="info"
                          icon="el-icon-edit"
@@ -288,7 +296,7 @@
 </template>
 <script>
 import useDialog from '@/components/dialog/dialogUse'
-import dwxxDialog from '@/components/dialog/DwxxDialog'
+import dwxxDialog from '@/components/dialog/dwxxDialog'
 import bmxxDialog from '@/components/dialog/bmxxDialog'
 import yjzbDialog from '@/components/dialog/yjzbDialog'
 import ejzbDialog from '@/components/dialog/ejzbDialog'
@@ -396,8 +404,20 @@ export default {
 
   },
   methods: {
-    // changeTri(){
-    // },
+    selectAll(selection){
+      console.log('全选：')
+      console.log(selection)
+    },
+    selectOne(selection,row){ //row是当前行，selection是列表
+      console.log('选择:')
+      // console.log(selection)
+      console.log(row)
+    },
+     selectChange (selection) {
+      console.log('change')
+      console.log(selection)
+      this.groupDeleteData = selection
+    },
     rowClassName ({ row, rowIndex }) {
       row.xh = rowIndex + 1;
     },
@@ -409,7 +429,7 @@ export default {
         return true
       }
     },
-    groupDelete () {
+    groupDelete () { //批量删除方法
       console.log(this.groupDeleteData)
       if (this.groupDeleteData.length === 0) {
         alert("请您选择需要批量删除的数据，目前选择为空！")
@@ -418,15 +438,13 @@ export default {
         // for (let i in this.groupDeleteData) {
         //   this.open(this.groupDeleteData[i])//把删除的数组全部遍历进去
         // }
-        this.open(this.groupDeleteData, 2)//代表list
+        // this.open(this.groupDeleteData, 2)//代表list
+        //触发父组件的grpDel事件
+        this.$emit('groupDelete',this.groupDeleteData)
       }
 
     },
-    selectionLineChangeHandle (val) {
-      console.log(val)//把此值交给后groupDelete处理然后交给后端分配处理，交给后端接口，与groupDelete方法连接
-      this.groupDeleteData = val
-
-    },
+   
     handleSizeChange (val) {
       // console.log(`每页 ${val} 条`);
       this.pagesize = val
@@ -440,7 +458,11 @@ export default {
     addUse () {
       this.showDialog = true
       this.useDefineEdit = "add_" + this.Nameuse//改的编辑和增加
+      console.log(this.useDefineEdit)
       this.form = {}
+      if(this.Nameuse=='zbtx'){
+        this.form.rysfs=['1','2']
+      }
 
     },
     editUse (value) {
@@ -448,6 +470,7 @@ export default {
       this.form = value
       console.log(this.form)
       this.useDefineEdit = "edit_" + this.Nameuse
+      console.log(this.useDefineEdit)
 
 
       //把此次修改的值交给后端处理，写后端删除接口，可以设置一个值传入到dialog里面来判断是删除还是修改
@@ -656,7 +679,6 @@ export default {
       }
     },
     open (data, numU) {//使用的删除弹出
-      console.log(data)
       let useTranslate = {}
       let sumString = ''
       let trUse = []
