@@ -1,7 +1,7 @@
 
 <template>
   <el-row>
-    <el-dialog title="提示"
+    <el-dialog title="单位信息"
                width="70%"
                :destroy-on-close='true'
                :modal='true'

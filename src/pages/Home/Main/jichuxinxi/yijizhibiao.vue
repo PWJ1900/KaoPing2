@@ -12,9 +12,12 @@
                     :tableData="this.tableData"
                     :showDialogYjzb="true"
                     :showAddorDelete="true"
+                    useTitle="一级指标"
+                    getName="yjzb"
                     :showSearch="true"
                     :showCheckbox="false" 
-                    @delete="del"/>
+                    @delete="del"
+                    @groupDelete="grpDel"/>
 
         </el-row>
       </el-main>
@@ -27,12 +30,11 @@ import { tablePostGet } from '@/api/tablePostGet'
 
 export default {
   async created () {
-    tablePostGet(this, "yjzb")//根据postman的Api获取数据来测试
-
+    tablePostGet(this, "yjzb")
   },
   data () {
-    return {//下面的headerUse写的是属性字段//tableData则为调用的json值
-      headerUse: [//此处虚更改与后端提取字段的一致
+    return {
+      headerUse: [
         {
           label: "指标名称",
           key: "name"
@@ -40,16 +42,9 @@ export default {
         {
           label: "指标个数",
           key: "col_num"
-        },
-       
-
-
-
+        }
       ],
       tableData: [],
-
-
-
     }
   },
   methods: {
@@ -62,7 +57,19 @@ export default {
         });
         }
       )
-      
+    },
+    grpDel(data){
+      var list=[]
+      data.forEach(element => {
+        list.push(element.id)
+      })
+      var temp = JSON.stringify(list)
+      temp = temp.substring(1,temp.length-1)
+      console.log(temp)
+      this.$axios.post('dels_yjzb',this.qs.stringify({list:temp}))
+        .then((res)=>{
+          console.log(res)
+        })
     }
   }
 

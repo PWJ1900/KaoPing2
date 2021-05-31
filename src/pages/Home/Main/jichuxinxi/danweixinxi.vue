@@ -17,7 +17,8 @@
                     :showdaochu="true"
                     getName="dwxx"
                     @refreshUseData="SecondGet"
-                    @delete="del" />
+                    @delete="del" 
+                    @groupDelete="grpDel"/>
           <!-- @refreshUseData="SecondGet" 这个为更改传值再次刷新数据 -->
 
         </el-row>
@@ -52,13 +53,6 @@ export default {
       tableData: [],
       searchinfo: '',
       restoretableData: []
-      ,
-
-
-
-
-
-
     }
   },
   methods: {
@@ -74,7 +68,19 @@ export default {
           });
         }
       )
-
+    },
+    grpDel(data){
+      var list=[]
+      data.forEach(element => {
+        list.push(element.id)
+      })
+      var temp = JSON.stringify(list)
+      temp = temp.substring(1,temp.length-1)
+      console.log(temp)
+      this.$axios.post('dels_dwxx',this.qs.stringify({list:temp}))
+        .then((res)=>{
+          console.log(res)
+        })
     }
   }
 }
